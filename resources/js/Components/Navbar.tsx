@@ -12,7 +12,7 @@ const navLinks = [
     },
     {
         name: "About",
-        href: "/About",
+        href: "/about",
     },
     {
         name: "Material Info",

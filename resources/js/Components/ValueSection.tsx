@@ -9,7 +9,7 @@ function ValuesSection() {
                 <TitleSection className={"text-center"}>
                     Top Values
                 </TitleSection>
-                <p className="text-center text-[#332C29] opacity-80 text-[18px]">
+                <p className="text-center text-coklat opacity-80 text-[18px]">
                     Lorem ipsum, dolor sit amet consectetur adipisicing elit.
                     Officiis, pariatur.
                 </p>
