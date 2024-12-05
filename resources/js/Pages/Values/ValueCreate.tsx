@@ -29,7 +29,7 @@ function ValueCreate() {
     });
 
     const onSubmit = (data: z.infer<typeof formSchema>) => {
-        Inertia.post("/posts", form);
+        Inertia.post("/values", data);
     };
 
     return (
