@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\FaqController;
+use App\Http\Controllers\TestimonialController;
 use App\Http\Controllers\ValueController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -22,3 +23,11 @@ Route::get('/faq', [FaqController::class, 'getFaq']);
 Route::post('/faq', [FaqController::class, 'store']);
 Route::put('/faq/{faq}', [FaqController::class, 'update']);
 Route::delete('/faq/{faq}', [FaqController::class, 'delete']);
+
+/* 
+Testimonial
+*/
+Route::get('/testimonial', [TestimonialController::class, 'getTestimonial']);
+Route::post('/testimonial', [TestimonialController::class, 'store']);
+Route::put('/testimonial/{testimonial}', [TestimonialController::class, 'update']);
+Route::delete('/testimonial/{testimonial}', [TestimonialController::class, 'delete']);
