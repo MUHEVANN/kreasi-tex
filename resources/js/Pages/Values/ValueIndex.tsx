@@ -13,6 +13,7 @@ const data = [
 
 function ValueIndex() {
     const handleDelete = (id: number) => {};
+   
     return (
         <AdminLayout>
             <h1 className="text-3xl font-bold">Value Page</h1>
