@@ -1,9 +1,40 @@
 import axios from "axios";
 
-const instance = axios.create({
+const api = axios.create({
     baseURL: "http://127.0.0.1:8000/api/",
-    timeout: 1000,
     headers: { accept: "application/json" },
 });
 
+api.interceptors.request.use(
+    (config) => {
+        const token = localStorage.getItem("token");
+        if (token) {
+            config.headers.Authorization = `Bearer ${token}`;
+        }
+        return config;
+    },
+    (error) => Promise.reject(error)
+);
 
+api.interceptors.response.use(
+    (response) => {
+        if (response.status === 401) {
+            localStorage.removeItem("token");
+            window.location.href = "/login";
+        }
+        return response;
+    },
+    (error) => {
+        return Promise.reject(error);
+    }
+);
+
+const get = (url: string) => api.get(url);
+
+const post = (url: string, data: any = null, config: object = {}) =>
+    api.post(url, data, config);
+
+const put = (url: string, data: any = null, config: object = {}) =>
+    api.put(url, data, config);
+
+const del = (url: string) => api.delete(url);
