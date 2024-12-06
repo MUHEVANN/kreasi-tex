@@ -29,12 +29,12 @@ api.interceptors.response.use(
     }
 );
 
-const get = (url: string) => api.get(url);
+export const get = (url: string) => api.get(url);
 
-const post = (url: string, data: any = null, config: object = {}) =>
+export const post = (url: string, data: any = null, config: object = {}) =>
     api.post(url, data, config);
 
-const put = (url: string, data: any = null, config: object = {}) =>
+export const put = (url: string, data: any = null, config: object = {}) =>
     api.put(url, data, config);
 
-const del = (url: string) => api.delete(url);
+export const del = (url: string) => api.delete(url);
