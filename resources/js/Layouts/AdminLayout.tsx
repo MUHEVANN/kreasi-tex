@@ -43,7 +43,7 @@ function AdminLayout({ children }: { children: React.ReactNode }) {
                         </Breadcrumb>
                     </div>
                 </header>
-                {children}
+                <div className="px-4 lg:px-10">{children}</div>
             </SidebarInset>
         </SidebarProvider>
     );
