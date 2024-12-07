@@ -8,7 +8,7 @@ function Layout({ children }: { children: React.ReactNode }) {
         <div>
             <Navbar />
             <div
-                className="min-h-screen  bg-no-repeat bg-cover relative"
+                className="min-h-screen  bg-no-repeat bg-cover relative bg-fixed"
                 style={{ backgroundImage: "url('hero.jpg')" }}
             >
                 <HeroLogo />

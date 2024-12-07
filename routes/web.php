@@ -31,8 +31,7 @@ Route::get('/values/create', [ValueController::class, 'create']);
 Route::get('/values/{value}/edit', [ValueController::class, 'edit']);
 
 /* value */
-Route::middleware('auth')->get('/values/data', [ValueController::class, 'getValue']);
-
+Route::get('/values/data', [ValueController::class, 'getValue']);
 Route::post('/values', [ValueController::class, 'store']);
 Route::put('/values/{value}', [ValueController::class, 'update']);
 Route::delete('/values/{value}', [ValueController::class, 'delete']);
