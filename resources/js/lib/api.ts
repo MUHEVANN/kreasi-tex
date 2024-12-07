@@ -1,12 +1,12 @@
 import axios from "axios";
 
 const api = axios.create({
-    baseURL: `${import.meta.env.VITE_API_URL}/api/`,
+    baseURL: `${import.meta.env.VITE_API_URL}/`,
     headers: { accept: "application/json" },
 });
 
 api.interceptors.request.use(
-    (config) => {
+    async (config) => {
         const token = localStorage.getItem("token");
         if (token) {
             config.headers.Authorization = `Bearer ${token}`;
@@ -19,7 +19,6 @@ api.interceptors.request.use(
 api.interceptors.response.use(
     (response) => {
         if (response.status === 401) {
-            localStorage.removeItem("token");
             window.location.href = "/login";
         }
         return response;

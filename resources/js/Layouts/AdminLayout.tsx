@@ -16,7 +16,6 @@ import {
 
 function AdminLayout({ children }: { children: React.ReactNode }) {
     const url = window.location.pathname;
-    console.log(url.split("/"));
     return (
         <SidebarProvider>
             <AppSidebar />

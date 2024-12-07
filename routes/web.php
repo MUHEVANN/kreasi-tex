@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\FaqController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TestimonialController;
 use App\Http\Controllers\ValueController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -13,6 +15,10 @@ Route::get('/about', function () {
     return Inertia::render('About');
 });
 
+Route::get('/dashboard', function () {
+    return Inertia::render('Dashboard');
+})->middleware(['auth:sanctum'])->name('dashboard');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -20,10 +26,31 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/values', [ValueController::class, 'index']);
+Route::middleware('auth:sanctum')->get('/values', [ValueController::class, 'index']);
 Route::get('/values/create', [ValueController::class, 'create']);
 Route::get('/values/{value}/edit', [ValueController::class, 'edit']);
 
+/* value */
+Route::middleware('auth')->get('/values/data', [ValueController::class, 'getValue']);
 
+Route::post('/values', [ValueController::class, 'store']);
+Route::put('/values/{value}', [ValueController::class, 'update']);
+Route::delete('/values/{value}', [ValueController::class, 'delete']);
+
+/* 
+    FAQ
+*/
+Route::get('/faq', [FaqController::class, 'getFaq']);
+Route::post('/faq', [FaqController::class, 'store']);
+Route::put('/faq/{faq}', [FaqController::class, 'update']);
+Route::delete('/faq/{faq}', [FaqController::class, 'delete']);
+
+/* 
+Testimonial
+*/
+Route::get('/testimonial', [TestimonialController::class, 'getTestimonial']);
+Route::post('/testimonial', [TestimonialController::class, 'store']);
+Route::put('/testimonial/{testimonial}', [TestimonialController::class, 'update']);
+Route::delete('/testimonial/{testimonial}', [TestimonialController::class, 'delete']);
 
 require __DIR__ . '/auth.php';

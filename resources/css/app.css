@@ -87,7 +87,7 @@
 }
 
 .main__container {
-    @apply py-[3rem] px-[3rem] lg:pb-[6rem] lg:px-[12rem];
+    @apply py-[3rem] px-[3rem] lg:pb-[6rem] xl:px-[12rem];
 }
 
 .triangle {

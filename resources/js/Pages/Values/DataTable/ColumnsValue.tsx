@@ -99,7 +99,6 @@ export const ColumnsValue = (
             );
         },
         cell: ({ row }) => {
-            console.log(row.original);
             const date = new Date(row.original.created_at);
             const day = date.getDate().toString().padStart(2, "0");
             const month = (date.getMonth() + 1).toString().padStart(2, "0");

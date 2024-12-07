@@ -34,7 +34,6 @@ function ValueIndex() {
         try {
             await del(`/values/${id}`);
             setData(data.filter((item) => item.id !== id));
-            console.log("berhasil");
         } catch (error) {
             console.log(error);
         }
