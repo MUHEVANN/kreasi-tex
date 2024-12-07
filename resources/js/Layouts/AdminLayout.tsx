@@ -33,7 +33,10 @@ function AdminLayout({ children }: { children: React.ReactNode }) {
                                     .split("/")
                                     .filter((item) => item !== "")
                                     .map((item, i) => (
-                                        <>
+                                        <div
+                                            className="flex items-center gap-4"
+                                            key={i}
+                                        >
                                             <BreadcrumbItem>
                                                 <BreadcrumbPage>
                                                     {item}
@@ -43,7 +46,7 @@ function AdminLayout({ children }: { children: React.ReactNode }) {
                                                 url.split("/").length - 2 && (
                                                 <BreadcrumbSeparator className="hidden md:block" />
                                             )}
-                                        </>
+                                        </div>
                                     ))}
                             </BreadcrumbList>
                         </Breadcrumb>

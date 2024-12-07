@@ -119,7 +119,7 @@ export function DataTableValue<TData, TValue>({
                         className="ms-3 "
                         disabled={table.getRowCount() === 5}
                     >
-                        <Link href="/values/create">Tambah</Link>
+                        <Link href="/dashboard/values/create">Tambah</Link>
                     </Button>
                 </div>
             </div>

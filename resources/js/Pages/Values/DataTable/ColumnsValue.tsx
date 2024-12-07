@@ -75,6 +75,7 @@ export const ColumnsValue = (
     {
         accessorKey: "icon",
         cell: ({ row }) => {
+            console.log(row);
             return (
                 <div className="flex items-center">
                     <DynamicIcon iconId={row.original.icon} />
@@ -124,7 +125,7 @@ export const ColumnsValue = (
                         <DropdownMenuLabel>Aksi</DropdownMenuLabel>
                         <DropdownMenuSeparator />
                         <DropdownMenuItem className="hover:cursor-pointer">
-                            <Link href={`/values/${value.id}/edit`}>
+                            <Link href={`/dashboard/values/${value.id}/edit`}>
                                 Edit Value
                             </Link>
                         </DropdownMenuItem>

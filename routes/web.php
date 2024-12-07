@@ -26,10 +26,13 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::middleware('auth:sanctum')->get('/values', [ValueController::class, 'index']);
-Route::get('/values/create', [ValueController::class, 'create']);
-Route::get('/values/{value}/edit', [ValueController::class, 'edit']);
 
+Route::prefix('dashboard')->group(function () {
+
+    Route::get('/values', [ValueController::class, 'index']);
+    Route::get('/values/create', [ValueController::class, 'create']);
+    Route::get('/values/{value}/edit', [ValueController::class, 'edit']);
+});
 /* value */
 Route::get('/values/data', [ValueController::class, 'getValue']);
 Route::post('/values', [ValueController::class, 'store']);
@@ -45,11 +48,10 @@ Route::put('/faq/{faq}', [FaqController::class, 'update']);
 Route::delete('/faq/{faq}', [FaqController::class, 'delete']);
 
 /* 
-Testimonial
+    Testimonial
 */
 Route::get('/testimonial', [TestimonialController::class, 'getTestimonial']);
 Route::post('/testimonial', [TestimonialController::class, 'store']);
 Route::put('/testimonial/{testimonial}', [TestimonialController::class, 'update']);
 Route::delete('/testimonial/{testimonial}', [TestimonialController::class, 'delete']);
-
 require __DIR__ . '/auth.php';

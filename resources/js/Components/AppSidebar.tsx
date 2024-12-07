@@ -50,93 +50,68 @@ const data = {
             plan: "Free",
         },
     ],
-    navMain: [
-        {
-            title: "Playground",
-            url: "#",
+
+    /* 
+    field isi sidebar
+     {
+            title: "Bahan",
+            url: "/dashboard/bahan",
             icon: SquareTerminal,
             isActive: true,
-            items: [
-                {
-                    title: "History",
-                    url: "#",
-                },
-                {
-                    title: "Starred",
-                    url: "#",
-                },
-                {
-                    title: "Settings",
-                    url: "#",
-                },
-            ],
+            items? : []
+    },
+    */
+    navHome: [
+        {
+            title: "Value",
+            url: "/dashboard/values",
+            icon: SquareTerminal,
+            isActive: true,
         },
         {
-            title: "Models",
-            url: "#",
-            icon: Bot,
-            items: [
-                {
-                    title: "Genesis",
-                    url: "#",
-                },
-                {
-                    title: "Explorer",
-                    url: "#",
-                },
-                {
-                    title: "Quantum",
-                    url: "#",
-                },
-            ],
-        },
-        {
-            title: "Documentation",
-            url: "#",
-            icon: BookOpen,
-            items: [
-                {
-                    title: "Introduction",
-                    url: "#",
-                },
-                {
-                    title: "Get Started",
-                    url: "#",
-                },
-                {
-                    title: "Tutorials",
-                    url: "#",
-                },
-                {
-                    title: "Changelog",
-                    url: "#",
-                },
-            ],
-        },
-        {
-            title: "Settings",
-            url: "#",
-            icon: Settings2,
-            items: [
-                {
-                    title: "General",
-                    url: "#",
-                },
-                {
-                    title: "Team",
-                    url: "#",
-                },
-                {
-                    title: "Billing",
-                    url: "#",
-                },
-                {
-                    title: "Limits",
-                    url: "#",
-                },
-            ],
+            title: "Faq",
+            url: "/dashboard/faq",
+            icon: SquareTerminal,
+            isActive: true,
         },
     ],
+    navProduct: [
+        {
+            title: "Bahan",
+            url: "/dashboard/bahan",
+            icon: SquareTerminal,
+            isActive: true,
+        },
+        {
+            title: "Produk",
+            url: "/dashboard/produk",
+            icon: SquareTerminal,
+            isActive: true,
+        },
+    ],
+    navAbout: [
+        {
+            title: "Deskripsi",
+            url: "/dashboard/about",
+            icon: SquareTerminal,
+            isActive: true,
+        },
+        {
+            title: "gambar",
+            url: "/dashboard/about-image",
+            icon: SquareTerminal,
+            isActive: true,
+        },
+    ],
+    navMaterial: [
+        {
+            title: "Fun Fact",
+            url: "/dashboard/fun-fact",
+            icon: SquareTerminal,
+            isActive: true,
+        },
+    ],
+
     projects: [
         {
             name: "Design Engineering",
@@ -163,8 +138,10 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                 <TeamSwitcher teams={data.teams} />
             </SidebarHeader>
             <SidebarContent>
-                <NavMain items={data.navMain} />
-                <NavProjects projects={data.projects} />
+                <NavMain items={data.navHome} label="Home" />
+                <NavMain items={data.navProduct} label="Produk" />
+                <NavMain items={data.navAbout} label="About" />
+                <NavMain items={data.navMaterial} label="Material" />
             </SidebarContent>
             <SidebarFooter>
                 <NavUser user={data.user} />
