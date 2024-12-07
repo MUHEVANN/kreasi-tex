@@ -14,17 +14,17 @@ class FaqController extends Controller
 
     public function index()
     {
-        return Inertia::render('Faqs/FaqIndex');
+        return Inertia::render('Faq/FaqIndex');
     }
 
     public function create()
     {
-        return Inertia::render('Faqs/FaqCreate');
+        return Inertia::render('Faq/FaqCreate');
     }
 
     public function edit(Faq $faq)
     {
-        return Inertia::render('Faqs/FaqEdit', [
+        return Inertia::render('Faq/FaqEdit', [
             'faq' => $faq
         ]);
     }

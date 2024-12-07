@@ -38,7 +38,7 @@ interface DataTableProps<TData, TValue> {
     data: TData[];
 }
 
-export function DataTableValue<TData, TValue>({
+export function DataTableFaq<TData, TValue>({
     columns,
     data,
 }: DataTableProps<TData, TValue>) {
@@ -119,7 +119,7 @@ export function DataTableValue<TData, TValue>({
                         className="ms-3 "
                         disabled={table.getRowCount() === 5}
                     >
-                        <Link href="/dashboard/values/create">Tambah</Link>
+                        <Link href="/dashboard/faq/create">Tambah</Link>
                     </Button>
                 </div>
             </div>

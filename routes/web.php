@@ -26,13 +26,30 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-
+/* 
+    WEB
+*/
 Route::prefix('dashboard')->group(function () {
-
+    /*  
+        Value
+    */
     Route::get('/values', [ValueController::class, 'index']);
     Route::get('/values/create', [ValueController::class, 'create']);
     Route::get('/values/{value}/edit', [ValueController::class, 'edit']);
+
+    /*  
+        FAQ
+    */
+    Route::get('/faq', [FaqController::class, 'index']);
+    Route::get('/faq/create', [FaqController::class, 'create']);
+    Route::get('/faq/{faq}/edit', [FaqController::class, 'edit']);
 });
+
+
+
+/* 
+    Api
+*/
 /* value */
 Route::get('/values/data', [ValueController::class, 'getValue']);
 Route::post('/values', [ValueController::class, 'store']);
@@ -42,7 +59,7 @@ Route::delete('/values/{value}', [ValueController::class, 'delete']);
 /* 
     FAQ
 */
-Route::get('/faq', [FaqController::class, 'getFaq']);
+Route::get('/faq/data', [FaqController::class, 'getFaq']);
 Route::post('/faq', [FaqController::class, 'store']);
 Route::put('/faq/{faq}', [FaqController::class, 'update']);
 Route::delete('/faq/{faq}', [FaqController::class, 'delete']);
@@ -54,4 +71,6 @@ Route::get('/testimonial', [TestimonialController::class, 'getTestimonial']);
 Route::post('/testimonial', [TestimonialController::class, 'store']);
 Route::put('/testimonial/{testimonial}', [TestimonialController::class, 'update']);
 Route::delete('/testimonial/{testimonial}', [TestimonialController::class, 'delete']);
+
+
 require __DIR__ . '/auth.php';
