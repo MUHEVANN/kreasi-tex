@@ -22,6 +22,7 @@ Route::middleware('auth')->group(function () {
 
 Route::get('/values', [ValueController::class, 'index']);
 Route::get('/values/create', [ValueController::class, 'create']);
+Route::get('/values/{value}/edit', [ValueController::class, 'edit']);
 
 
 

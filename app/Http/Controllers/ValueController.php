@@ -14,9 +14,15 @@ class ValueController extends Controller
     {
         return Inertia::render('Values/ValueIndex');
     }
+
     public function create()
     {
         return Inertia::render('Values/ValueCreate');
+    }
+
+    public function edit(Value $value)
+    {
+        return Inertia::render('Values/ValueEdit', ['value' => $value]);
     }
 
     /* 

@@ -15,6 +15,8 @@ import {
 } from "@/Components/ui/sidebar";
 
 function AdminLayout({ children }: { children: React.ReactNode }) {
+    const url = window.location.pathname;
+    console.log(url.split("/"));
     return (
         <SidebarProvider>
             <AppSidebar />
@@ -28,17 +30,22 @@ function AdminLayout({ children }: { children: React.ReactNode }) {
                         />
                         <Breadcrumb>
                             <BreadcrumbList>
-                                <BreadcrumbItem className="hidden md:block">
-                                    <BreadcrumbLink href="#">
-                                        Building Your Application
-                                    </BreadcrumbLink>
-                                </BreadcrumbItem>
-                                <BreadcrumbSeparator className="hidden md:block" />
-                                <BreadcrumbItem>
-                                    <BreadcrumbPage>
-                                        Data Fetching
-                                    </BreadcrumbPage>
-                                </BreadcrumbItem>
+                                {url
+                                    .split("/")
+                                    .filter((item) => item !== "")
+                                    .map((item, i) => (
+                                        <>
+                                            <BreadcrumbItem>
+                                                <BreadcrumbPage>
+                                                    {item}
+                                                </BreadcrumbPage>
+                                            </BreadcrumbItem>
+                                            {i !==
+                                                url.split("/").length - 2 && (
+                                                <BreadcrumbSeparator className="hidden md:block" />
+                                            )}
+                                        </>
+                                    ))}
                             </BreadcrumbList>
                         </Breadcrumb>
                     </div>

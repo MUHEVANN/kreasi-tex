@@ -1,23 +1,61 @@
 import AdminLayout from "@/Layouts/AdminLayout";
 import { DataTableValue } from "./DataTable/DataTableValue";
 import { ColumnsValue } from "./DataTable/ColumnsValue";
-const data = [
-    {
-        title: "tedkjandwa",
-        icon: "Value 1",
-        name: "Description 1",
-        id: 1,
-        created_at: "2024-10-10",
-    },
-];
+import { useEffect, useState } from "react";
+import { del, get } from "@/lib/api";
+import { Skeleton } from "@/Components/ui/skeleton";
+import DynamicIcon from "@/Components/DynamicIcon";
+type ValueColumn = {
+    id: number;
+    title: string;
+    desc: string;
+    icon: string;
+    created_at: string;
+};
+
+const getData = async () => {
+    const res = await get("/values/data");
+    return res.data.data;
+};
 
 function ValueIndex() {
-    const handleDelete = (id: number) => {};
-   
+    const [isLoading, setIsLoading] = useState<boolean>(true);
+    const [data, setData] = useState<ValueColumn[]>([]);
+    useEffect(() => {
+        async function fetchData() {
+            const res = await getData();
+            setData(res);
+            setIsLoading(false);
+        }
+
+        fetchData();
+    }, []);
+    const handleDelete = async (id: number) => {
+        try {
+            await del(`/values/${id}`);
+            setData(data.filter((item) => item.id !== id));
+            console.log("berhasil");
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
     return (
         <AdminLayout>
             <h1 className="text-3xl font-bold">Value Page</h1>
-            <DataTableValue columns={ColumnsValue(handleDelete)} data={data} />
+            {isLoading ? (
+                <div className="mt-4">
+                    <Skeleton className="h-8 w-96 mb-2" />
+                    <Skeleton className="h-8 w-full mb-2" />
+                    <Skeleton className="h-8 w-full mb-2" />
+                    <Skeleton className="h-8 w-full mb-2" />
+                </div>
+            ) : (
+                <DataTableValue
+                    columns={ColumnsValue(handleDelete)}
+                    data={data}
+                />
+            )}
         </AdminLayout>
     );
 }

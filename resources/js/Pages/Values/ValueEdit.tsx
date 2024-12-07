@@ -12,7 +12,7 @@ import {
 } from "@/Components/ui/form";
 import { Input } from "@/Components/ui/input";
 import AdminLayout from "@/Layouts/AdminLayout";
-import { post } from "@/lib/api";
+import { post, put } from "@/lib/api";
 import { router } from "@inertiajs/react";
 const formSchema = z.object({
     title: z.string().min(1, { message: "Title is required" }),
@@ -20,26 +20,32 @@ const formSchema = z.object({
     icon: z.string().min(1, { message: "Icon is required" }),
 });
 
-function ValueCreate() {
+type ValueProps = {
+    id: number;
+    title: string;
+    desc: string;
+    icon: string;
+    created_at: string;
+};
+
+function ValueEdit({ value }: { value: ValueProps }) {
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            title: "",
-            desc: "",
-            icon: "",
+            title: value.title,
+            desc: value.desc,
+            icon: value.icon,
         },
     });
 
     const onSubmit = async (data: z.infer<typeof formSchema>) => {
         try {
-            await post("/values", data);
-
+            await put(`/values/${value.id}`, data);
             router.visit("/values");
         } catch (error) {
             console.log(error);
         }
     };
-
     return (
         <AdminLayout>
             <h1 className="text-3xl font-bold mb-3">Create Value Page</h1>
@@ -94,10 +100,7 @@ function ValueCreate() {
                                     </a>
                                 </FormLabel>
                                 <FormControl>
-                                    <Input
-                                        placeholder="copas nama icon"
-                                        {...field}
-                                    />
+                                    <Input placeholder="tes dulu" {...field} />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -110,4 +113,4 @@ function ValueCreate() {
     );
 }
 
-export default ValueCreate;
+export default ValueEdit;

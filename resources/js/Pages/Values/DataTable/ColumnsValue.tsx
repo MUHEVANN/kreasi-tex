@@ -15,10 +15,10 @@ import {
 } from "@/Components/ui/dropdown-menu";
 import { Link } from "@inertiajs/react";
 import { Checkbox } from "@/Components/ui/checkbox";
+import DynamicIcon from "@/Components/DynamicIcon";
 
 export type ArtikelColumn = {
     id: number;
-    name: string;
     title: string;
     icon: string;
     created_at: string;
@@ -52,9 +52,37 @@ export const ColumnsValue = (
         enableHiding: false,
     },
     {
-        accessorKey: "name",
-        header: "Nama",
+        accessorKey: "title",
+        header: "title",
+        cell: ({ row }) => {
+            function capitalizeFirstLetter(text: string): string {
+                return (
+                    text.charAt(0).toUpperCase() + text.slice(1).toLowerCase()
+                );
+            }
+            return (
+                <h1 className="normal-case">
+                    {capitalizeFirstLetter(row.getValue("title"))}
+                </h1>
+            );
+        },
     },
+
+    {
+        accessorKey: "desc",
+        header: "desc",
+    },
+    {
+        accessorKey: "icon",
+        cell: ({ row }) => {
+            return (
+                <div className="flex items-center">
+                    <DynamicIcon iconId={row.original.icon} />
+                </div>
+            );
+        },
+    },
+
     {
         accessorKey: "created_at",
         header: ({ column }) => {
@@ -71,6 +99,7 @@ export const ColumnsValue = (
             );
         },
         cell: ({ row }) => {
+            console.log(row.original);
             const date = new Date(row.original.created_at);
             const day = date.getDate().toString().padStart(2, "0");
             const month = (date.getMonth() + 1).toString().padStart(2, "0");
@@ -82,7 +111,7 @@ export const ColumnsValue = (
     {
         id: "actions",
         cell: ({ row }) => {
-            const artikel = row.original;
+            const value = row.original;
 
             return (
                 <DropdownMenu>
@@ -95,15 +124,16 @@ export const ColumnsValue = (
                     <DropdownMenuContent align="end">
                         <DropdownMenuLabel>Aksi</DropdownMenuLabel>
                         <DropdownMenuSeparator />
-                        <DropdownMenuItem>
-                            <Link href={`/pengurus/artikel/${artikel.id}/edit`}>
-                                Edit Artikel
+                        <DropdownMenuItem className="hover:cursor-pointer">
+                            <Link href={`/values/${value.id}/edit`}>
+                                Edit Value
                             </Link>
                         </DropdownMenuItem>
                         <DropdownMenuItem
-                            onClick={() => handleDelete(artikel.id)}
+                            onClick={() => handleDelete(value.id)}
+                            className="hover:cursor-pointer"
                         >
-                            Hapus Artikel
+                            Hapus Value
                         </DropdownMenuItem>
                     </DropdownMenuContent>
                 </DropdownMenu>
