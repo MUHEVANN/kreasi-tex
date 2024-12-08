@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AboutController;
 use App\Http\Controllers\FaqController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TestimonialController;
@@ -50,6 +51,12 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
     Route::get('/testimonial', [TestimonialController::class, 'index']);
     Route::get('/testimonial/create', [TestimonialController::class, 'create']);
     Route::get('/testimonial/{testimonial}/edit', [TestimonialController::class, 'edit']);
+
+    /*  
+        About
+    */
+    Route::get('/about', [AboutController::class, 'index']);
+    Route::get('/about/{about}/edit', [AboutController::class, 'edit']);
 });
 
 
@@ -77,8 +84,16 @@ Route::middleware('auth')->group(function () {
     Route::post('/testimonial', [TestimonialController::class, 'store']);
     Route::delete('/testimonial/{testimonial}', [TestimonialController::class, 'delete']);
     Route::post('/testimonial/{testimonial}', [TestimonialController::class, 'update']);
+
+    /* 
+    About
+    */
+    Route::post('/about', [AboutController::class, 'store']);
+    Route::delete('/about/{about}', [AboutController::class, 'delete']);
+    Route::put('/about/{about}', [AboutController::class, 'update']);
 });
 
+Route::get('/about/data', [AboutController::class, 'getAbout']);
 Route::get('/values/data', [ValueController::class, 'getValue']);
 Route::get('/testimonial/data', [TestimonialController::class, 'getTestimonial']);
 Route::get('/faq/data', [FaqController::class, 'getFaq']);

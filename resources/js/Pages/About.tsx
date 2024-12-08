@@ -1,6 +1,25 @@
 import Layout from "@/Layouts/Layout";
+import { getData } from "@/lib/api";
+import { useEffect, useState } from "react";
+
+type AboutColumn = {
+    id: number;
+    title: string;
+    desc: string;
+    icon: string;
+    created_at: string;
+};
 
 function About() {
+    const [data, setData] = useState<AboutColumn[]>([]);
+    useEffect(() => {
+        async function fetchData() {
+            const res = await getData("/about/data");
+
+            setData(res);
+        }
+        fetchData();
+    }, []);
     return (
         <Layout>
             <div className="main__container">
@@ -8,22 +27,14 @@ function About() {
                     <h3 className="text-coklat text-[24px] font-bold">
                         About us
                     </h3>
-                    <div className="col-span-2 xl:col-span-3">
-                        <h1 className="text-[35px] md:text-[50px]  leading-[50px] text-coklat font-bold font-secondary">
-                            Lorem ipsum dolor sit amet consectetur adipisicing
-                            elit. Itaque beatae nobis maiores eligendi assumenda
-                            repellat doloremque qui distinctio ipsa esse optio
-                            officiis nam earum commodi nulla cumque quis sequi
-                            numquam explicabo deserunt molestiae a,
-                        </h1>
-                        <p className="text-2xl mt-6">
-                            Lorem ipsum dolor sit, amet consectetur adipisicing
-                            elit. Cupiditate cumque hic inventore vitae magnam
-                            in quidem aliquam repellat velit sequi voluptas
-                            culpa provident perspiciatis rem, possimus, id
-                            exercitationem tenetur eaque.
-                        </p>
-                    </div>
+                    {data.map((item, i) => (
+                        <div className="col-span-2 xl:col-span-3" key={i}>
+                            <h1 className="text-[35px] md:text-[50px]  leading-[50px] text-coklat font-bold font-secondary">
+                                {item.title}
+                            </h1>
+                            <p className="text-2xl mt-6">{item.desc}</p>
+                        </div>
+                    ))}
                 </div>
 
                 <div className="grid grid-cols-3 gap-4">
