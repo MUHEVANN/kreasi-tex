@@ -37,3 +37,9 @@ export const put = (url: string, data: any = null, config: object = {}) =>
     api.put(url, data, config);
 
 export const del = (url: string) => api.delete(url);
+
+export const getData = async (url: string) => {
+    const res = await get(url);
+    console.log(res.data);
+    return res.data.data;
+};

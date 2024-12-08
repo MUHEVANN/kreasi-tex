@@ -3,9 +3,12 @@ import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 type TestimoniProps = {
     x: string;
     y: string;
+    comment: string;
+    name: string;
+    profile: string;
 };
 
-function TestimoniCard({ x, y }: TestimoniProps) {
+function TestimoniCard({ x, y, comment, profile, name }: TestimoniProps) {
     return (
         <div
             className={`absolute  top-0 left-0 bg-white max-w-[420px] px-5 py-5 shadow-xl rounded-lg shadow-gray-100`}
@@ -13,18 +16,15 @@ function TestimoniCard({ x, y }: TestimoniProps) {
                 transform: `translate(${x}, ${y})`,
             }}
         >
-            <p className="text-xl opacity-75">
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                Repudiandae, maiores!
-            </p>
+            <p className="text-xl opacity-75">{comment}</p>
 
             <div className="flex items-center gap-4 capitalize mt-[2rem]">
                 <Avatar>
-                    <AvatarImage src="https://github.com/shadcn.png" />
+                    <AvatarImage src={`/storage/${profile}`} />
                     <AvatarFallback>CN</AvatarFallback>
                 </Avatar>
                 <span className="font-semibold text-md tracking-[-1px]">
-                    Evan
+                    {name}
                 </span>
             </div>
 

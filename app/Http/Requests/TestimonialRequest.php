@@ -24,7 +24,7 @@ class TestimonialRequest extends FormRequest
         return [
             "name" => "required|string",
             "comment" => "required|string",
-            "profile" => "required|image",
+            "profile" => 'nullable',
         ];
     }
 }

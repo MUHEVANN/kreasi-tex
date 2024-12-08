@@ -23,16 +23,16 @@ class TestimonialController extends Controller
         return Inertia::render('Testimonial/TestimonialCreate');
     }
 
-    public function edit()
+    public function edit(Testimonial $testimonial)
     {
-        return Inertia::render('Testimonial/TestimonialEdit');
+        return Inertia::render('Testimonial/TestimonialEdit', ['testimonial' => $testimonial]);
     }
 
     /* 
         API
     */
 
-    public function getTestimoni()
+    public function getTestimonial()
     {
         $testimonials = Testimonial::all();
 
@@ -54,13 +54,24 @@ class TestimonialController extends Controller
 
     public function update(TestimonialRequest $request, Testimonial $testimonial)
     {
-        $testimonial->update($request->all());
+        $path = $testimonial->profile;
+
+        if ($request['profile']) {
+            unlink(public_path('storage/' . $path));
+            $path = $request['profile']->store('testimonial', 'public');
+        }
+        $testimonial->update([
+            'name' => $request['name'],
+            'comment' => $request['comment'],
+            'profile' => $path
+        ]);
 
         return $this->res("Success Updated!", 201, $testimonial);
     }
 
     public function delete(Testimonial $testimonial)
     {
+        unlink(public_path('storage/' . $testimonial->profile));
         $testimonial->delete();
 
         return $this->res("Success Deleted!", 201, $testimonial);

@@ -8,8 +8,36 @@ import {
     CarouselNext,
     CarouselPrevious,
 } from "./ui/carousel";
+import { useEffect, useState } from "react";
+import { getData } from "@/lib/api";
+import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+
+type TestimonialProps = {
+    id: number;
+    name: string;
+    comment: string;
+    profile: string;
+    created_at: string;
+};
+
+const sumbu = [
+    { x: "500px", y: "100px" },
+    { x: "200px", y: "450px" },
+    { x: "700px", y: "500px" },
+    { x: "500px", y: "400px" },
+    { x: "600px", y: "250px" },
+];
 
 function Testimoni() {
+    const [data, setData] = useState<TestimonialProps[]>([]);
+    useEffect(() => {
+        const fetchData = async () => {
+            setData(await getData("/testimonial/data"));
+        };
+        fetchData();
+    }, []);
+
+    console.log(data);
     return (
         <div className=" main__container">
             <TitleSection className="text-center">Testimonial</TitleSection>
@@ -24,109 +52,48 @@ function Testimoni() {
                 />
 
                 <div className="hidden lg:block">
-                    <TestimoniCard x="500px" y="100px" />
-                    <TestimoniCard x="200px" y="450px" />
-                    <TestimoniCard x="700px" y="500px" />
-                    <TestimoniCard x="100px" y="220px" />
-                    <TestimoniCard x="500px" y="400px" />
-                    <TestimoniCard x="600px" y="250px" />
+                    {data.map((item, i) => (
+                        <TestimoniCard
+                            key={i}
+                            x={sumbu[i].x}
+                            y={sumbu[i].y}
+                            name={item.name}
+                            profile={item.profile}
+                            comment={item.comment}
+                        />
+                    ))}
                 </div>
 
                 <div className="px-[4rem] block lg:hidden">
                     <Carousel>
                         <CarouselContent className="max-w-[350px] mx-auto md:max-w-[500px]">
-                            <CarouselItem className="py-[3rem]">
-                                <div
-                                    className={`bg-white px-5 py-5 shadow-xl  rounded-lg shadow-gray-100`}
-                                >
-                                    <p className="text-xl opacity-75">
-                                        Lorem ipsum dolor sit amet consectetur,
-                                        adipisicing elit. Repudiandae, maiores!
-                                    </p>
+                            {data.map((item, i) => (
+                                <CarouselItem className="py-[3rem]" key={i}>
+                                    <div
+                                        className={`bg-white px-5 py-5 shadow-xl  rounded-lg shadow-gray-100`}
+                                    >
+                                        <p className="text-xl opacity-75">
+                                            {item.comment}
+                                        </p>
 
-                                    <div className="flex items-center gap-4 capitalize mt-[2rem]">
-                                        <img
-                                            src=""
-                                            alt=""
-                                            className="w-[40px] h-[40px] rounded-full object-cover object-center"
-                                        />
-                                        <span className="font-semibold text-md tracking-[-1px]">
-                                            Evan
-                                        </span>
+                                        <div className="flex items-center gap-4 capitalize mt-[2rem]">
+                                            <Avatar>
+                                                <AvatarImage
+                                                    src={`/storage/${item.profile}`}
+                                                />
+                                                <AvatarFallback>
+                                                    CN
+                                                </AvatarFallback>
+                                            </Avatar>
+                                            <span className="font-semibold text-md tracking-[-1px]">
+                                                {item.name}
+                                            </span>
+                                        </div>
+
+                                        <div className="triangle absolute right-[3rem] rotate-180 -bottom-[1.5rem]"></div>
                                     </div>
-
-                                    <div className="triangle absolute right-[3rem] rotate-180 -bottom-[1.5rem]"></div>
-                                </div>
-                            </CarouselItem>
-                            <CarouselItem className="py-[3rem]">
-                                <div
-                                    className={`bg-white px-5 py-5 shadow-xl  rounded-lg shadow-gray-100`}
-                                >
-                                    <p className="text-xl opacity-75">
-                                        Lorem ipsum dolor sit amet consectetur,
-                                        adipisicing elit. Repudiandae, maiores!
-                                    </p>
-
-                                    <div className="flex items-center gap-4 capitalize mt-[2rem]">
-                                        <img
-                                            src=""
-                                            alt=""
-                                            className="w-[40px] h-[40px] rounded-full object-cover object-center"
-                                        />
-                                        <span className="font-semibold text-md tracking-[-1px]">
-                                            Evan
-                                        </span>
-                                    </div>
-
-                                    <div className="triangle absolute right-[3rem] rotate-180 -bottom-[1.5rem]"></div>
-                                </div>
-                            </CarouselItem>
-                            <CarouselItem className="py-[3rem]">
-                                <div
-                                    className={`bg-white  px-5 py-5 shadow-xl  rounded-lg shadow-gray-100`}
-                                >
-                                    <p className="text-xl opacity-75">
-                                        Lorem ipsum dolor sit amet consectetur,
-                                        adipisicing elit. Repudiandae, maiores!
-                                    </p>
-
-                                    <div className="flex items-center gap-4 capitalize mt-[2rem]">
-                                        <img
-                                            src=""
-                                            alt=""
-                                            className="w-[40px] h-[40px] rounded-full object-cover object-center"
-                                        />
-                                        <span className="font-semibold text-md tracking-[-1px]">
-                                            Evan
-                                        </span>
-                                    </div>
-
-                                    <div className="triangle absolute right-[3rem] rotate-180 -bottom-[1.5rem]"></div>
-                                </div>
-                            </CarouselItem>
-                            <CarouselItem className="py-[3rem]">
-                                <div
-                                    className={`bg-white  px-5 py-5 shadow-xl  rounded-lg shadow-gray-100`}
-                                >
-                                    <p className="text-xl opacity-75">
-                                        Lorem ipsum dolor sit amet consectetur,
-                                        adipisicing elit. Repudiandae, maiores!
-                                    </p>
-
-                                    <div className="flex items-center gap-4 capitalize mt-[2rem]">
-                                        <img
-                                            src=""
-                                            alt=""
-                                            className="w-[40px] h-[40px] rounded-full object-cover object-center"
-                                        />
-                                        <span className="font-semibold text-md tracking-[-1px]">
-                                            Evan
-                                        </span>
-                                    </div>
-
-                                    <div className="triangle absolute right-[3rem] rotate-180 -bottom-[1.5rem]"></div>
-                                </div>
-                            </CarouselItem>
+                                </CarouselItem>
+                            ))}
                         </CarouselContent>
                         <CarouselPrevious />
                         <CarouselNext />

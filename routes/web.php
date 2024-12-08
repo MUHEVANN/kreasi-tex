@@ -29,7 +29,7 @@ Route::middleware('auth')->group(function () {
 /* 
     WEB
 */
-Route::prefix('dashboard')->group(function () {
+Route::prefix('dashboard')->middleware('auth')->group(function () {
     /*  
         Value
     */
@@ -43,6 +43,13 @@ Route::prefix('dashboard')->group(function () {
     Route::get('/faq', [FaqController::class, 'index']);
     Route::get('/faq/create', [FaqController::class, 'create']);
     Route::get('/faq/{faq}/edit', [FaqController::class, 'edit']);
+
+    /*  
+        Testimonial
+    */
+    Route::get('/testimonial', [TestimonialController::class, 'index']);
+    Route::get('/testimonial/create', [TestimonialController::class, 'create']);
+    Route::get('/testimonial/{testimonial}/edit', [TestimonialController::class, 'edit']);
 });
 
 
@@ -50,27 +57,30 @@ Route::prefix('dashboard')->group(function () {
 /* 
     Api
 */
-/* value */
-Route::get('/values/data', [ValueController::class, 'getValue']);
-Route::post('/values', [ValueController::class, 'store']);
-Route::put('/values/{value}', [ValueController::class, 'update']);
-Route::delete('/values/{value}', [ValueController::class, 'delete']);
 
-/* 
+Route::middleware('auth')->group(function () {
+    /* value */
+    Route::post('/values', [ValueController::class, 'store']);
+    Route::put('/values/{value}', [ValueController::class, 'update']);
+    Route::delete('/values/{value}', [ValueController::class, 'delete']);
+
+    /* 
     FAQ
-*/
-Route::get('/faq/data', [FaqController::class, 'getFaq']);
-Route::post('/faq', [FaqController::class, 'store']);
-Route::put('/faq/{faq}', [FaqController::class, 'update']);
-Route::delete('/faq/{faq}', [FaqController::class, 'delete']);
+    */
+    Route::post('/faq', [FaqController::class, 'store']);
+    Route::put('/faq/{faq}', [FaqController::class, 'update']);
+    Route::delete('/faq/{faq}', [FaqController::class, 'delete']);
 
-/* 
+    /* 
     Testimonial
-*/
-Route::get('/testimonial', [TestimonialController::class, 'getTestimonial']);
-Route::post('/testimonial', [TestimonialController::class, 'store']);
-Route::put('/testimonial/{testimonial}', [TestimonialController::class, 'update']);
-Route::delete('/testimonial/{testimonial}', [TestimonialController::class, 'delete']);
+    */
+    Route::post('/testimonial', [TestimonialController::class, 'store']);
+    Route::delete('/testimonial/{testimonial}', [TestimonialController::class, 'delete']);
+    Route::post('/testimonial/{testimonial}', [TestimonialController::class, 'update']);
+});
 
+Route::get('/values/data', [ValueController::class, 'getValue']);
+Route::get('/testimonial/data', [TestimonialController::class, 'getTestimonial']);
+Route::get('/faq/data', [FaqController::class, 'getFaq']);
 
 require __DIR__ . '/auth.php';

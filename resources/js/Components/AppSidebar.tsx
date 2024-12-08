@@ -74,6 +74,12 @@ const data = {
             icon: SquareTerminal,
             isActive: true,
         },
+        {
+            title: "Testimoni",
+            url: "/dashboard/testimonial",
+            icon: SquareTerminal,
+            isActive: true,
+        },
     ],
     navProduct: [
         {

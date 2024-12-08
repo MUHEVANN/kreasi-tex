@@ -15,19 +15,19 @@ import {
 } from "@/Components/ui/dropdown-menu";
 import { Link } from "@inertiajs/react";
 import { Checkbox } from "@/Components/ui/checkbox";
-import DynamicIcon from "@/Components/DynamicIcon";
 import { capitalizeFirstLetter } from "@/lib/text";
 
-export type FaqColumn = {
+export type TestimonialColumn = {
     id: number;
-    title: string;
-    icon: string;
+    name: string;
+    comment: string;
+    profile: string;
     created_at: string;
 };
 
-export const ColumnsFaq = (
+export const ColumnsTestimonial = (
     handleDelete: (id: number) => void
-): ColumnDef<FaqColumn>[] => [
+): ColumnDef<TestimonialColumn>[] => [
     {
         id: "select",
         header: ({ table }) => (
@@ -53,20 +53,33 @@ export const ColumnsFaq = (
         enableHiding: false,
     },
     {
-        accessorKey: "question",
-        header: "Question",
+        accessorKey: "name",
+        header: "Name",
         cell: ({ row }) => {
             return (
                 <h1 className="normal-case">
-                    {capitalizeFirstLetter(row.getValue("question"))}
+                    {capitalizeFirstLetter(row.getValue("name"))}
                 </h1>
             );
         },
     },
 
     {
-        accessorKey: "answer",
-        header: "Jawaban",
+        accessorKey: "comment",
+        header: "Komen",
+    },
+    {
+        accessorKey: "profile",
+        header: "Profile",
+        cell: ({ row }) => {
+            return (
+                <img
+                    src={`/storage/${row.getValue("profile")}`}
+                    alt="profile"
+                    className="h-10 w-10 rounded-full"
+                />
+            );
+        },
     },
 
     {
@@ -96,7 +109,7 @@ export const ColumnsFaq = (
     {
         id: "actions",
         cell: ({ row }) => {
-            const faq = row.original;
+            const testimonial = row.original;
 
             return (
                 <DropdownMenu>
@@ -110,15 +123,17 @@ export const ColumnsFaq = (
                         <DropdownMenuLabel>Aksi</DropdownMenuLabel>
                         <DropdownMenuSeparator />
                         <DropdownMenuItem className="hover:cursor-pointer">
-                            <Link href={`/dashboard/faq/${faq.id}/edit`}>
-                                Edit Faq
+                            <Link
+                                href={`/dashboard/testimonial/${testimonial.id}/edit`}
+                            >
+                                Edit Testimonial
                             </Link>
                         </DropdownMenuItem>
                         <DropdownMenuItem
-                            onClick={() => handleDelete(faq.id)}
+                            onClick={() => handleDelete(testimonial.id)}
                             className="hover:cursor-pointer"
                         >
-                            Hapus Faq
+                            Hapus Testimonial
                         </DropdownMenuItem>
                     </DropdownMenuContent>
                 </DropdownMenu>
