@@ -39,7 +39,7 @@ function Testimoni() {
 
     console.log(data);
     return (
-        <div className=" main__container">
+        <div className=" main__container pt-[3rem]">
             <TitleSection className="text-center">Testimonial</TitleSection>
             <div className="lg:min-h-[80vh] min-h-[40vh] 2xl:mx-[10rem] rounded-lg relative flex items-center justify-center">
                 <Quote

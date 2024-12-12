@@ -9,21 +9,28 @@ type AboutColumn = {
     icon: string;
     created_at: string;
 };
+type GambarColumn = {
+    id: number;
+    gambar: string;
+};
 
 function About() {
     const [data, setData] = useState<AboutColumn[]>([]);
+    const [gambar, setGambar] = useState<GambarColumn[]>([]);
     useEffect(() => {
         async function fetchData() {
             const res = await getData("/about/data");
-
+            const res2 = await getData("/gambar-about/data");
             setData(res);
+            setGambar(res2);
         }
         fetchData();
     }, []);
+
     return (
         <Layout>
             <div className="main__container">
-                <div className="grid md:grid-cols-3 xl:grid-cols-4">
+                <div className="grid md:grid-cols-3 xl:grid-cols-4 py-[3rem]">
                     <h3 className="text-coklat text-[24px] font-bold">
                         About us
                     </h3>
@@ -38,9 +45,14 @@ function About() {
                 </div>
 
                 <div className="grid grid-cols-3 gap-4">
-                    <img src="hero.jpg" alt="" />
-                    <img src="hero.jpg" alt="" />
-                    <img src="hero.jpg" alt="" />
+                    {gambar.map((item) => (
+                        <img
+                            src={`/storage/${item.gambar}`}
+                            alt=""
+                            key={item.id}
+                            className="w-full h-[400px] object-cover"
+                        />
+                    ))}
                 </div>
             </div>
         </Layout>

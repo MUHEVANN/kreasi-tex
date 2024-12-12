@@ -4,9 +4,11 @@ import { Button } from "./ui/button";
 import { Link } from "@inertiajs/react";
 function ProductPreview() {
     return (
-        <div className="main__container">
-            <TitleSection className={"mb-16"}>Choose Your Product</TitleSection>
-            <div className="grid grid-cols-1 xl:grid-cols-3 2xl:grid-cols-4 md:grid-cols-2 sm:grid-cols-2 gap-4 ">
+        <div className="main__container pb-[2rem]">
+            <TitleSection className={"mb-3 lg:mb-10"}>
+                Choose Your Product
+            </TitleSection>
+            <div className="grid grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 sm:grid-cols-2 gap-4 ">
                 <CardPreview />
                 <CardPreview />
                 <CardPreview />

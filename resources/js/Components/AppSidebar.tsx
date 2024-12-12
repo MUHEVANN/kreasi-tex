@@ -104,7 +104,7 @@ const data = {
         },
         {
             title: "gambar",
-            url: "/dashboard/about-image",
+            url: "/dashboard/gambar-about",
             icon: SquareTerminal,
             isActive: true,
         },

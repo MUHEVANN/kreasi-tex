@@ -41,7 +41,7 @@ function ValueIndex() {
 
     return (
         <AdminLayout>
-            <h1 className="text-3xl font-bold">Value Page</h1>
+            <h1 className="text-3xl font-bold">About Page</h1>
             {isLoading ? (
                 <div className="mt-4">
                     <Skeleton className="h-8 w-96 mb-2" />

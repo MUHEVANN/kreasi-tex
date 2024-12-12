@@ -17,7 +17,9 @@ function ValueCard({ icon, title, desc }: ValueCardProps) {
                 <h1 className="text-center text-xl font-semibold mb-2 capitalize">
                     {title}
                 </h1>
-                <p className="text-center opacity-75">{desc}</p>
+                <p className="text-center opacity-75 text-[14px] md:text-[16px] ">
+                    {desc}
+                </p>
             </div>
         </div>
     );
