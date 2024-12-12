@@ -5,11 +5,12 @@ import { get, getData } from "@/lib/api";
 import React, { useEffect, useState } from "react";
 
 const MaterialInfo = () => {
-    const [titleDesc, setTitleDesc] = useState("Polyester");
+    const [titleDesc, setTitleDesc] = useState("");
     const [desc, setDesc] = useState();
     const [activeButton, setActiveButton] = useState(0);
 
     const [data, setData] = useState([]);
+    const [dataFunfact, setDataFunfact] = useState([]);
 
     // const data = [
     //     {
@@ -41,26 +42,29 @@ const MaterialInfo = () => {
     };
 
     useEffect(() => {
-        const fetchData = async() => {
+        const fetchData = async () => {
             const res = await getData("/bahan/data");
             setData(res);
-            setTitleDesc(res[0].nama)
-            setDesc(res[0].deskripsi)
-        }
+            setTitleDesc(res[0].nama);
+            setDesc(res[0].deskripsi);
+
+            const resFunfact = await getData("/funfact/data");
+            setDataFunfact(resFunfact);
+        };
 
         fetchData();
-    }, [])
+    }, []);
 
     return (
         <Layout>
-            <div className="bg-white py-40 rounded-3xl relative -top-5">
+            <div className="bg-white py-10 lg:py-40 rounded-3xl relative -top-5">
                 <div className="m-10 flex justify-center">
                     <h1 className="text-3xl font-semibold">
                         Kategory Jenis Bahan
                     </h1>
                 </div>
                 <div className="flex justify-center">
-                    <div className="grid grid-cols-3 items-center text-center gap-x-10 gap-y-5">
+                    <div className="grid grid-cols-3 items-center text-center gap-x-5 md:gap-x-10 gap-y-5">
                         {data.map((e, index) => (
                             <button
                                 key={index}
@@ -69,14 +73,14 @@ const MaterialInfo = () => {
                                     activeButton == index
                                         ? "bg-[#FDDD38]"
                                         : "bg-[#D9D9D9]"
-                                } rounded-full px-10 py-4`}
+                                } rounded-full lg:px-10 px-3 lg:py-4 py-2`}
                             >
                                 <p
                                     className={`${
                                         activeButton == index
                                             ? "font-bold"
                                             : "font-medium"
-                                    } text-xl`}
+                                    } lg:text-xl`}
                                 >
                                     {e.nama}
                                 </p>
@@ -91,62 +95,40 @@ const MaterialInfo = () => {
                     </div>
                 </div>
                 <div className="text-center my-10">
-                    <p className="text-5xl font-thin">Apakah Kamu Tahu?</p>
+                    <p className="lg:text-5xl text-3xl font-thin">Apakah Kamu Tahu?</p>
                 </div>
-                <div className="lg:grid flex flex-col grid-cols-5 gap-10 mx-24">
-                    <div></div>
-                    <div className="flex flex-col gap-10 col-span-2">
-                        <div className="bg-[#FFFBDF] p-10 rounded-3xl">
-                            <p>
-                                Lorem ipsum dolor sit amet consectetur
-                                adipisicing elit. Non ipsum corporis velit
-                                magnam, suscipit placeat, doloremque odio vel
-                                porro alias blanditiis? Pariatur iste eligendi
-                                optio veniam. Tenetur doloremque dicta quidem!
-                            </p>
-                        </div>
-                        <div className="bg-[#E8E6E2] p-10 rounded-3xl">
-                            <p>
-                                Lorem ipsum dolor sit amet consectetur
-                                adipisicing elit. Non ipsum corporis velit
-                                magnam, suscipit placeat, doloremque odio vel
-                                porro alias blanditiis? Pariatur iste eligendi
-                                optio veniam. Tenetur doloremque dicta quidem!
-                            </p>
-                        </div>
+                {dataFunfact.map((data, index) => (
+                <div className="flex justify-center xl:mx-[500px] lg:mx-44 mx-10 my-10">
+                    <div className="lg:grid flex flex-col grid-cols-3 gap-10">
+                            <div className="flex flex-col gap-10 col-span-2">
+                                <div className="bg-[#FFFBDF] p-10 rounded-3xl">
+                                    <p>
+                                        Lorem ipsum dolor sit amet consectetur
+                                        adipisicing elit. Non ipsum corporis velit
+                                        magnam, suscipit placeat, doloremque odio
+                                        vel porro alias blanditiis? Pariatur iste
+                                        eligendi optio veniam. Tenetur doloremque
+                                        dicta quidem!
+                                    </p>
+                                </div>
+                                <div className="bg-[#E8E6E2] p-10 rounded-3xl">
+                                    <p>
+                                        Lorem ipsum dolor sit amet consectetur
+                                        adipisicing elit. Non ipsum corporis velit
+                                        magnam, suscipit placeat, doloremque odio
+                                        vel porro alias blanditiis? Pariatur iste
+                                        eligendi optio veniam. Tenetur doloremque
+                                        dicta quidem!
+                                    </p>
+                                </div>
+                            </div>
+                            <div
+                                style={{ backgroundImage: `url('/storage/${data.image}')` }}
+                                className={`w-full lg:h-full bg-cover bg-center ${index % 2 == 0 ? 'lg:order-first' : ''} rounded-3xl h-48 md:h-72`}
+                            ></div>
                     </div>
-                    <div
-                        style={{ backgroundImage: "url('hero.jpg')" }}
-                        className="w-full lg:h-full bg-cover rounded-3xl h-48"
-                    ></div>
-                    <div></div>
-                    <div></div>
-                    <div
-                        style={{ backgroundImage: "url('hero.jpg')" }}
-                        className="w-full lg:h-full bg-cover rounded-3xl h-48"
-                    ></div>
-                    <div className="flex flex-col gap-10 col-span-2">
-                        <div className="bg-[#FFFBDF] p-10 rounded-3xl">
-                            <p>
-                                Lorem ipsum dolor sit amet consectetur
-                                adipisicing elit. Non ipsum corporis velit
-                                magnam, suscipit placeat, doloremque odio vel
-                                porro alias blanditiis? Pariatur iste eligendi
-                                optio veniam. Tenetur doloremque dicta quidem!
-                            </p>
-                        </div>
-                        <div className="bg-[#E8E6E2] p-10 rounded-3xl">
-                            <p>
-                                Lorem ipsum dolor sit amet consectetur
-                                adipisicing elit. Non ipsum corporis velit
-                                magnam, suscipit placeat, doloremque odio vel
-                                porro alias blanditiis? Pariatur iste eligendi
-                                optio veniam. Tenetur doloremque dicta quidem!
-                            </p>
-                        </div>
-                    </div>
-                    <div></div>
                 </div>
+                ))}
             </div>
         </Layout>
     );
