@@ -2,10 +2,12 @@ import React from "react";
 import { Facebook, Instagram, Linkedin, Twitter } from "lucide-react";
 function Footer() {
     return (
-        <div className="p-[2rem] md:p-[4rem] bg-black rounded-[25px] md:rounded-t-[50px] text-white">
+        <div className="p-[2rem] md:p-[4rem] bg-black rounded-t-[25px] md:rounded-t-[50px] text-white">
             <div className="flex justify-between border-b pb-[3rem] gap-8 flex-wrap">
                 <div>
-                    <h1 className="text-3xl font-bold mb-3">Logo</h1>
+                    {/* <h1 className="text-3xl font-bold mb-3">Logo</h1> */}
+                    <div style={{backgroundImage: "url('kreasitex_logo.png')"}} className="h-16 w-52 md:w-64 bg-cover bg-center">
+                    </div>
                     <p className="w-[250px] tracking-[-1px] text-[18px]">
                         Elevating Experience & Seize Control Of Your Smart Home
                     </p>

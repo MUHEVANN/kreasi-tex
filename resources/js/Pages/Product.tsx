@@ -29,7 +29,7 @@ function Product() {
             <div className="bg-white py-40 rounded-3xl relative -top-5">
                 <div className="flex justify-center my-20">
                     <div
-                        className="flex flex-col justify-center lg:px-28 h-96 w-1/2 overflow-hidden rounded-2xl"
+                        className="flex flex-col bg-center justify-center lg:px-28 h-96 w-1/2 overflow-hidden rounded-2xl"
                         style={{ backgroundImage: "url(/fabric-image.jpg)" }}
                     >
                         <p className="font-light text-4xl">SHINING</p>
