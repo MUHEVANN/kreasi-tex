@@ -51,7 +51,7 @@ const data = {
         },
     ],
 
-    /* 
+    /*
     field isi sidebar
      {
             title: "Bahan",
@@ -90,7 +90,7 @@ const data = {
         },
         {
             title: "Produk",
-            url: "/dashboard/produk",
+            url: "/dashboard/product",
             icon: SquareTerminal,
             isActive: true,
         },
@@ -112,7 +112,7 @@ const data = {
     navMaterial: [
         {
             title: "Fun Fact",
-            url: "/dashboard/fun-fact",
+            url: "/dashboard/funfact",
             icon: SquareTerminal,
             isActive: true,
         },

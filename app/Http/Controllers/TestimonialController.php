@@ -9,7 +9,7 @@ use Inertia\Inertia;
 
 class TestimonialController extends Controller
 {
-    /* 
+    /*
         WEB
     */
 
@@ -28,7 +28,7 @@ class TestimonialController extends Controller
         return Inertia::render('Testimonial/TestimonialEdit', ['testimonial' => $testimonial]);
     }
 
-    /* 
+    /*
         API
     */
 
