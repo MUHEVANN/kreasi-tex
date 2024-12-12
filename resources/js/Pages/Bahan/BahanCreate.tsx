@@ -28,7 +28,7 @@ const BahanCreate = () => {
         try {
             await post("/bahan", data);
 
-            router.visit("/bahan");
+            router.visit("/dashboard/bahan");
         } catch (error) {
             console.log(error);
         }

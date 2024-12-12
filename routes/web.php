@@ -3,6 +3,7 @@
 use App\Http\Controllers\BahanController;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\FaqController;
+use App\Http\Controllers\FunfactController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TestimonialController;
@@ -16,6 +17,14 @@ Route::get('/', function () {
 
 Route::get('/about', function () {
     return Inertia::render('About');
+});
+
+Route::get('/product', function () {
+    return Inertia::render('Product');
+});
+
+Route::get('/material-info', function () {
+    return Inertia::render('MaterialInfo');
 });
 
 Route::get('/dashboard', function () {
@@ -59,6 +68,21 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
     */
     Route::get('/about', [AboutController::class, 'index']);
     Route::get('/about/{about}/edit', [AboutController::class, 'edit']);
+
+    // Web Product
+    Route::get('/product', [ProductController::class, 'index']);
+    Route::get('/product/create', [ProductController::class, 'create']);
+    Route::get('/product/{product}/edit', [ProductController::class, 'edit']);
+
+    // Web Bahan
+    Route::get('/bahan', [BahanController::class, 'index']);
+    Route::get('/bahan/create', [BahanController::class, 'create']);
+    Route::get('/bahan/{value}/edit', [BahanController::class, 'edit']);
+
+    // Web Bahan
+    Route::get('/funfact', [FunfactController::class, 'index']);
+    Route::get('/funfact/create', [FunfactController::class, 'create']);
+    Route::get('/funfact/{funfact}/edit', [FunfactController::class, 'edit']);
 });
 
 
@@ -100,10 +124,6 @@ Route::get('/values/data', [ValueController::class, 'getValue']);
 Route::get('/testimonial/data', [TestimonialController::class, 'getTestimonial']);
 Route::get('/faq/data', [FaqController::class, 'getFaq']);
 
-// Web Bahan
-Route::middleware('auth:sanctum')->get('/bahan', [BahanController::class, 'index']);
-Route::get('/bahan/create', [BahanController::class, 'create']);
-Route::get('/bahan/{value}/edit', [BahanController::class, 'edit']);
 
 // API Bahan
 Route::get('/bahan/data', [BahanController::class, 'getBahan']);
@@ -112,16 +132,19 @@ Route::put('/bahan/{bahan}', [BahanController::class, 'update']);
 Route::delete('/bahan/{bahan}', [BahanController::class, 'delete']);
 //
 
-// Web Product
-Route::middleware('auth:sanctum')->get('/product', [ProductController::class, 'index']);
-Route::get('/product/create', [ProductController::class, 'create']);
-Route::get('/product/{product}/edit', [ProductController::class, 'edit']);
-
 // API Product
 Route::get('/product/data', [ProductController::class, 'getProduct']);
+Route::get('/product/category/{id}', [ProductController::class, 'getProductByCategory']);
 Route::post('/product', [ProductController::class, 'store']);
-Route::put('/product/{product}', [ProductController::class, 'update']);
+Route::post('/product/{product}', [ProductController::class, 'update']);
 Route::delete('/product/{product}', [ProductController::class, 'delete']);
+//
+
+// API Funfact
+Route::get('/funfact/data', [FunfactController::class, 'getFunfact']);
+Route::post('/funfact', [FunfactController::class, 'store']);
+Route::post('/funfact/{funfact}', [FunfactController::class, 'update']);
+Route::delete('/funfact/{funfact}', [FunfactController::class, 'delete']);
 //
 
 require __DIR__ . '/auth.php';

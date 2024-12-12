@@ -47,13 +47,31 @@ class ProductController extends Controller
 
     public function update(ProductRequest $req, Product $product)
     {
-        $product->update($req->all());
+        $path = $product->gambar;
+        $isView = filter_var($req->input('is_view'), FILTER_VALIDATE_BOOLEAN);
 
-        return $this->res('Product updated successfully', 200, $product);
+        if ($req['gambar']) {
+            unlink(public_path('storage/'.$path));
+            $path = $req['profile']->store('product', 'public');
+        }
+
+
+        $data = $product->update([
+            'nama' => $req['nama'],
+            'gambar' => $path,
+            'is_view' => $isView,
+            'count_star' => $req['count_star'],
+            'deskripsi' => $req['deskripsi'],
+            'harga' => $req['harga'],
+            'bahan_id' => $req['bahan_id'],
+        ]);
+
+        return $this->res('Product updated successfully', 200, $data);
     }
 
     public function delete(Product $product)
     {
+        unlink(public_path('storage/' . $product->gambar));
         $product->delete();
 
         return $this->res('Product deleted successfully', 200, $product);
@@ -63,6 +81,12 @@ class ProductController extends Controller
     {
         $product = Product::all();
 
-        return $this->res('Bahan fetched successfully', 200, $product);
+        return $this->res('Product fetched successfully', 200, $product);
+    }
+
+    public function getProductByCategory(int $id)
+    {
+        $product = Product::where("bahan_id", $id)->get();
+        return $this->res("OK", 200, $product);
     }
 }

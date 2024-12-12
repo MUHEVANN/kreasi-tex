@@ -1,43 +1,55 @@
 import Footer from "@/Components/Footer";
 import HeroLogo from "@/Components/HeroLogo";
 import Layout from "@/Layouts/Layout";
-import React, { useState } from "react";
+import { get, getData } from "@/lib/api";
+import React, { useEffect, useState } from "react";
 
 const MaterialInfo = () => {
     const [titleDesc, setTitleDesc] = useState("Polyester");
-    const [desc, setDesc] = useState(
-        "Polyester adalah bahan sintetis yang terbuat dari serat buatan yang dihasilkan dari polimer. Bahan ini dikenal karena ketahanan dan kekuatannya terhadap kerutan, sehingga sangat cocok untuk pakaian sehari-hari yang memerlukan perawatan rendah. Selain itu, polyester memiliki sifat cepat kering, menjadikannya pilihan utama untuk pakaian olahraga dan aktivitas luar ruangan. Namun, karena sifatnya yang kurang bernapas dibandingkan dengan bahan alami, polyester sering dicampur dengan kain lain untuk meningkatkan kenyamanan. Dalam dunia tekstil, polyester juga banyak digunakan untuk produk seperti tirai, kain pelapis, dan bahkan tas."
-    );
+    const [desc, setDesc] = useState();
     const [activeButton, setActiveButton] = useState(0);
 
-    const data = [
-        {
-            bahan: "Polyester",
-            deskripsi:
-                "Polyester adalah bahan sintetis yang terbuat dari serat buatan yang dihasilkan dari polimer. Bahan ini dikenal karena ketahanan dan kekuatannya terhadap kerutan, sehingga sangat cocok untuk pakaian sehari-hari yang memerlukan perawatan rendah. Selain itu, polyester memiliki sifat cepat kering, menjadikannya pilihan utama untuk pakaian olahraga dan aktivitas luar ruangan. Namun, karena sifatnya yang kurang bernapas dibandingkan dengan bahan alami, polyester sering dicampur dengan kain lain untuk meningkatkan kenyamanan. Dalam dunia tekstil, polyester juga banyak digunakan untuk produk seperti tirai, kain pelapis, dan bahkan tas.",
-        },
-        {
-            bahan: "CVC / Katun Lokal",
-            deskripsi:
-                "CVC (Chief Value Cotton) adalah jenis kain campuran yang menggabungkan serat katun alami dengan serat poliester. Dengan kandungan katun yang lebih dominan, CVC menawarkan keseimbangan antara kenyamanan dan daya tahan. Katun lokal yang digunakan biasanya lebih lembut, nyaman di kulit, dan memiliki kemampuan menyerap keringat yang baik, sehingga sangat cocok untuk iklim tropis seperti di Indonesia. Kombinasi ini membuat CVC tahan lama, tidak mudah melar, dan mudah dirawat. Bahan ini sering digunakan untuk pakaian kasual seperti kaos, seragam, dan pakaian sehari-hari yang memerlukan kenyamanan dan kepraktisan.",
-        },
-        {
-            bahan: "Full Cotton",
-            deskripsi:
-                "Full Cotton adalah bahan yang terbuat dari 100% serat katun alami tanpa campuran sintetis. Kain ini dikenal karena kelembutannya yang sangat nyaman di kulit dan kemampuannya menyerap keringat dengan baik, membuatnya ideal untuk cuaca panas dan lembap. Full Cotton juga memiliki sifat hipoalergenik, yang berarti tidak menyebabkan iritasi pada kulit sensitif. Namun, bahan ini cenderung lebih mudah kusut dan membutuhkan perawatan ekstra seperti penyetrikaan. Karena sifatnya yang ramah lingkungan dan biodegradable, katun sepenuhnya juga menjadi pilihan bagi mereka yang peduli terhadap dampak lingkungan.",
-        },
-        {
-            bahan: "Tencel",
-            deskripsi:
-                "Tencel adalah bahan modern yang dihasilkan dari serat kayu seperti eukaliptus, beech, atau pohon lainnya melalui proses ramah lingkungan. Kain ini dikenal sangat lembut, halus, dan memiliki tampilan yang elegan. Selain itu, Tencel memiliki kemampuan bernapas yang baik, sehingga menjaga tubuh tetap sejuk saat cuaca panas dan hangat saat cuaca dingin. Bahan ini juga memiliki sifat antibakteri alami, menjadikannya pilihan yang baik untuk mereka yang memiliki kulit sensitif. Tidak hanya nyaman, Tencel juga sangat kuat dan tahan lama, baik dalam kondisi basah maupun kering. Karena proses produksinya yang berkelanjutan, bahan ini sering dipilih oleh merek yang peduli lingkungan.",
-        },
-    ];
+    const [data, setData] = useState([]);
+
+    // const data = [
+    //     {
+    //         bahan: "Polyester",
+    //         deskripsi:
+    //             "Polyester adalah bahan sintetis yang terbuat dari serat buatan yang dihasilkan dari polimer. Bahan ini dikenal karena ketahanan dan kekuatannya terhadap kerutan, sehingga sangat cocok untuk pakaian sehari-hari yang memerlukan perawatan rendah. Selain itu, polyester memiliki sifat cepat kering, menjadikannya pilihan utama untuk pakaian olahraga dan aktivitas luar ruangan. Namun, karena sifatnya yang kurang bernapas dibandingkan dengan bahan alami, polyester sering dicampur dengan kain lain untuk meningkatkan kenyamanan. Dalam dunia tekstil, polyester juga banyak digunakan untuk produk seperti tirai, kain pelapis, dan bahkan tas.",
+    //     },
+    //     {
+    //         bahan: "CVC / Katun Lokal",
+    //         deskripsi:
+    //             "CVC (Chief Value Cotton) adalah jenis kain campuran yang menggabungkan serat katun alami dengan serat poliester. Dengan kandungan katun yang lebih dominan, CVC menawarkan keseimbangan antara kenyamanan dan daya tahan. Katun lokal yang digunakan biasanya lebih lembut, nyaman di kulit, dan memiliki kemampuan menyerap keringat yang baik, sehingga sangat cocok untuk iklim tropis seperti di Indonesia. Kombinasi ini membuat CVC tahan lama, tidak mudah melar, dan mudah dirawat. Bahan ini sering digunakan untuk pakaian kasual seperti kaos, seragam, dan pakaian sehari-hari yang memerlukan kenyamanan dan kepraktisan.",
+    //     },
+    //     {
+    //         bahan: "Full Cotton",
+    //         deskripsi:
+    //             "Full Cotton adalah bahan yang terbuat dari 100% serat katun alami tanpa campuran sintetis. Kain ini dikenal karena kelembutannya yang sangat nyaman di kulit dan kemampuannya menyerap keringat dengan baik, membuatnya ideal untuk cuaca panas dan lembap. Full Cotton juga memiliki sifat hipoalergenik, yang berarti tidak menyebabkan iritasi pada kulit sensitif. Namun, bahan ini cenderung lebih mudah kusut dan membutuhkan perawatan ekstra seperti penyetrikaan. Karena sifatnya yang ramah lingkungan dan biodegradable, katun sepenuhnya juga menjadi pilihan bagi mereka yang peduli terhadap dampak lingkungan.",
+    //     },
+    //     {
+    //         bahan: "Tencel",
+    //         deskripsi:
+    //             "Tencel adalah bahan modern yang dihasilkan dari serat kayu seperti eukaliptus, beech, atau pohon lainnya melalui proses ramah lingkungan. Kain ini dikenal sangat lembut, halus, dan memiliki tampilan yang elegan. Selain itu, Tencel memiliki kemampuan bernapas yang baik, sehingga menjaga tubuh tetap sejuk saat cuaca panas dan hangat saat cuaca dingin. Bahan ini juga memiliki sifat antibakteri alami, menjadikannya pilihan yang baik untuk mereka yang memiliki kulit sensitif. Tidak hanya nyaman, Tencel juga sangat kuat dan tahan lama, baik dalam kondisi basah maupun kering. Karena proses produksinya yang berkelanjutan, bahan ini sering dipilih oleh merek yang peduli lingkungan.",
+    //     },
+    // ];
 
     const changeDesc = (data, index) => {
-        setTitleDesc(data.bahan);
+        setTitleDesc(data.nama);
         setDesc(data.deskripsi);
         setActiveButton(index);
     };
+
+    useEffect(() => {
+        const fetchData = async() => {
+            const res = await getData("/bahan/data");
+            setData(res);
+            setTitleDesc(res[0].nama)
+            setDesc(res[0].deskripsi)
+        }
+
+        fetchData();
+    }, [])
 
     return (
         <Layout>
@@ -66,7 +78,7 @@ const MaterialInfo = () => {
                                             : "font-medium"
                                     } text-xl`}
                                 >
-                                    {e.bahan}
+                                    {e.nama}
                                 </p>
                             </button>
                         ))}

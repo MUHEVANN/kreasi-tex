@@ -117,9 +117,8 @@ export function DataTableProduct<TData, TValue>({
                     </DropdownMenu>
                     <Button
                         className="ms-3 "
-                        disabled={table.getRowCount() === 5}
                     >
-                        <Link href="/product/create">Tambah</Link>
+                        <Link href="/dashboard/product/create">Tambah</Link>
                     </Button>
                 </div>
             </div>

@@ -36,7 +36,7 @@ const BahanEdit = ({ bahan }: { bahan: BahanProps }) => {
         try {
             await put(`/bahan/${bahan.id}`, data);
 
-            router.visit("/bahan");
+            router.visit("/dashboard/bahan");
         } catch (error) {
             console.log(error);
         }

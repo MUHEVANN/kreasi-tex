@@ -38,7 +38,7 @@ interface DataTableProps<TData, TValue> {
     data: TData[];
 }
 
-export function DataTableBahan<TData, TValue>({
+export function DataTableFunfact<TData, TValue>({
     columns,
     data,
 }: DataTableProps<TData, TValue>) {
@@ -118,7 +118,7 @@ export function DataTableBahan<TData, TValue>({
                     <Button
                         className="ms-3 "
                     >
-                        <Link href="/dashboard/bahan/create">Tambah</Link>
+                        <Link href="/dashboard/funfact/create">Tambah</Link>
                     </Button>
                 </div>
             </div>

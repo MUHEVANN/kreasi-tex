@@ -31,7 +31,7 @@ const formSchema = z.object({
             {
                 message: "File harus berupa gambar!",
             }
-        ),
+        ).optional(),
     harga: z.string().min(1, { message: "Harga wajib diisi!" }),
     is_view: z.boolean().default(false),
     count_star: z.string().min(1, { message: "Bintang wajib diisi!" }),
@@ -51,24 +51,37 @@ type ProductProps = {
 
 const ProductEdit = ({ product }: { product: ProductProps }) => {
     const [bahanList, setBahanList] = useState([]);
+    const [gambar, setGambar] = useState<string | null>(null);
 
+    console.log(product.bahan_id);
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
             nama: product.nama,
             deskripsi: product.deskripsi,
-            bahan_id: product.bahan_id,
+            bahan_id: product.bahan_id.toString(),
             harga: product.harga,
-            is_view: product.is_view,
+            is_view: !!(product.is_view),
             count_star: product.count_star,
         },
     });
 
     const onSubmit = async (data: z.infer<typeof formSchema>) => {
         try {
-            await put(`/product/${product.id}`, data);
+            const formData = new FormData();
+            formData.append("nama", data.nama);
+            formData.append("bahan_id", data.bahan_id);
+            formData.append("count_star", data.count_star);
+            formData.append("deskripsi", data.deskripsi);
+            formData.append("harga", data.harga);
+            if(data.gambar) {
+                formData.append("gambar", data.gambar[0]);
+            }
+            formData.append("is_view", data.is_view.toString());
 
-            router.visit("/product");
+            await post(`/product/${product.id}`, formData);
+
+            router.visit("/dashboard/product");
         } catch (error) {
             console.log(error);
         }
@@ -85,6 +98,7 @@ const ProductEdit = ({ product }: { product: ProductProps }) => {
         }
 
         fetchBahan();
+        setGambar(`/storage/${product.gambar}`);
     }, []);
 
     return (
@@ -128,8 +142,8 @@ const ProductEdit = ({ product }: { product: ProductProps }) => {
                                 Bahan
                             </FormLabel>
                             <Select
-                                value={product.bahan_id.toString()}
-                                onValueChange={(value) => field.onChange(value)}
+                                value={field.value}
+                                onValueChange={field.onChange}
                             >
                                 <FormControl>
                                     <SelectTrigger className="w-[180px]">
@@ -147,6 +161,9 @@ const ProductEdit = ({ product }: { product: ProductProps }) => {
                         </FormItem>
                     )}
                 />
+                <div className="w-[50px] h-[50px] bg-black rounded-sm overflow-hidden">
+                    <img src={gambar} className="w-full h-full" alt="" />
+                </div>
                 <FormField
                     control={form.control}
                     name="gambar"
@@ -188,7 +205,7 @@ const ProductEdit = ({ product }: { product: ProductProps }) => {
                         <FormItem>
                             <FormLabel>Tampilkan</FormLabel>
                             <FormControl>
-                                <Checkbox {...field} />
+                                <Checkbox checked={field.value} onCheckedChange={field.onChange}/>
                             </FormControl>
                             <FormMessage />
                         </FormItem>

@@ -114,7 +114,7 @@ export const ColumnsBahan = (
                         <DropdownMenuLabel>Aksi</DropdownMenuLabel>
                         <DropdownMenuSeparator />
                         <DropdownMenuItem className="hover:cursor-pointer">
-                            <Link href={`/bahan/${value.id}/edit`}>
+                            <Link href={`/dashboard/bahan/${value.id}/edit`}>
                                 Edit Value
                             </Link>
                         </DropdownMenuItem>

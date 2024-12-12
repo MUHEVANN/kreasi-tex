@@ -17,20 +17,16 @@ import { Link } from "@inertiajs/react";
 import { Checkbox } from "@/Components/ui/checkbox";
 import DynamicIcon from "@/Components/DynamicIcon";
 
-export type ProductColumn = {
+export type FunfactColumn = {
     id: number;
-    nama: string;
-    deskripsi: string;
-    harga: number;
-    is_view: boolean;
-    count_start: string;
-    gambar: string;
+    text: string;
+    image: string;
     created_at: string;
 };
 
-export const ColumnsProduct = (
+export const ColumnsFunfact = (
     handleDelete: (id: number) => void
-): ColumnDef<ProductColumn>[] => [
+): ColumnDef<FunfactColumn>[] => [
     {
         id: "select",
         header: ({ table }) => (
@@ -56,8 +52,8 @@ export const ColumnsProduct = (
         enableHiding: false,
     },
     {
-        accessorKey: "nama",
-        header: "nama",
+        accessorKey: "text",
+        header: "text",
         cell: ({ row }) => {
             function capitalizeFirstLetter(text: string): string {
                 return (
@@ -66,30 +62,20 @@ export const ColumnsProduct = (
             }
             return (
                 <h1 className="normal-case">
-                    {capitalizeFirstLetter(row.getValue("nama"))}
+                    {capitalizeFirstLetter(row.getValue("text"))}
                 </h1>
             );
         },
     },
 
     {
-        accessorKey: "deskripsi",
-        header: "deskripsi",
-    },
-
-    {
-        accessorKey: "harga",
-        header: "harga",
-    },
-
-    {
-        accessorKey: "gambar",
-        header: "gambar",
+        accessorKey: "image",
+        header: "image",
         cell: ({ row }) =>{
             return (
                 <img
-                    src={`/storage/${row.getValue("gambar")}`}
-                    alt="gambar"
+                    src={`/storage/${row.getValue("image")}`}
+                    alt="image"
                     className="h-10 w-10 rounded-md"
                 />
             )
@@ -137,7 +123,7 @@ export const ColumnsProduct = (
                         <DropdownMenuLabel>Aksi</DropdownMenuLabel>
                         <DropdownMenuSeparator />
                         <DropdownMenuItem className="hover:cursor-pointer">
-                            <Link href={`/dashboard/product/${value.id}/edit`}>
+                            <Link href={`/dashboard/funfact/${value.id}/edit`}>
                                 Edit Value
                             </Link>
                         </DropdownMenuItem>

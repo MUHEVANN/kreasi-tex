@@ -34,7 +34,7 @@ const formSchema = z.object({
     is_view: z.boolean().default(false),
     count_star: z.string().min(1, { message: "Bintang wajib diisi!" }),
 });
-const BahanCreate = () => {
+const ProductCreate = () => {
     const [bahanList, setBahanList] = useState([]);
 
     const form = useForm<z.infer<typeof formSchema>>({
@@ -61,10 +61,9 @@ const BahanCreate = () => {
             formData.append("gambar", data.gambar[0]);
             formData.append("is_view", data.is_view.toString());
 
-            console.log(formData.values());
             await post("/product", formData);
 
-            router.visit("/product");
+            router.visit("/dashboard/product");
         } catch (error) {
             console.log(error);
         }
@@ -209,4 +208,4 @@ const BahanCreate = () => {
     );
 };
 
-export default BahanCreate;
+export default ProductCreate;
