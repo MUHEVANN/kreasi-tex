@@ -79,14 +79,20 @@ class ProductController extends Controller
 
     public function getProduct()
     {
-        $product = Product::all();
+        $product = Product::join("bahans", "bahans.id", "=", "products.bahan_id")
+            ->select("products.*", "bahans.nama as bahan_nama")
+            ->get();
 
         return $this->res('Product fetched successfully', 200, $product);
     }
 
     public function getProductByCategory(int $id)
     {
-        $product = Product::where("bahan_id", $id)->get();
+        $product = Product::join("bahans", "bahans.id", "=", "products.bahan_id")
+            ->where("products.bahan_id", $id)
+            ->select("products.*", "bahans.nama as bahan_nama")
+            ->get();
+
         return $this->res("OK", 200, $product);
     }
 }

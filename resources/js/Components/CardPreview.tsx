@@ -1,6 +1,7 @@
 import React from "react";
 import { ArrowRight, Star } from "lucide-react";
 import { ProductColumn } from "./ProductPreview";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "./ui/dialog";
 
 function CardPreview({ props }: { props: ProductColumn }) {
     const formatPrice = (price: string) => {
@@ -18,9 +19,9 @@ function CardPreview({ props }: { props: ProductColumn }) {
                     alt=""
                     className="w-full h-full rounded-[15px] "
                 />
-                <div className="absolute top-4 right-4 flex gap-2 items-center backdrop-blur-xl text-white rounded-full px-6 py-1">
+                <div className="absolute top-4 right-4 flex gap-2 items-center backdrop-blur-xl rounded-full px-6 py-1">
                     <span className="text-xl">{props.count_star}</span>
-                    <Star />
+                    <Star color="#F3C158" fill="#F3C158"/>
                 </div>
             </div>
             <div className="pt-2 md:pt-5 pb-3 px-4 flex justify-between md:items-center">
@@ -32,13 +33,40 @@ function CardPreview({ props }: { props: ProductColumn }) {
                         <span className="text-xl md:text-2xl text-coklat font-bold">
                             {formatPrice(props.harga)}
                         </span>
-                        <span className="textxl md:text-2xl">/</span>
-                        <span className="text-sm">person</span>
+                        <span className="textxl md:text-2xl"></span>
                     </p>
                 </div>
-                <div className="bg-black h-7 w-[31px] md:h-[35px] md:w-[35px] flex justify-center items-center rounded-full">
-                    <ArrowRight className="text-white w-5 h-5" />
-                </div>
+                <Dialog>
+                    <DialogTrigger asChild>
+                        <button className="bg-black h-7 w-[31px] md:h-[35px] md:w-[35px] flex justify-center items-center rounded-full">
+                            <ArrowRight className="text-white w-5 h-5" />
+                        </button>
+                    </DialogTrigger>
+                    <DialogContent className="sm:max-w-[625px]">
+                        <DialogHeader>
+                            <DialogTitle>Detail Produk</DialogTitle>
+                        </DialogHeader>
+                        <div className="flex">
+                            <div style={{backgroundImage: `url(/storage/${props.gambar})`}} className="w-[200px] h-[200px] bg-center bg-cover border-solid border-2 rounded-md">
+                            </div>
+                            <div className="ml-4">
+                                <p className="font-semibold text-xl">{props.nama}</p>
+                                <ul>
+                                    <li>Bahan : {props.bahan_nama}</li>
+                                    <li>Deskripsi : {props.deskripsi}</li>
+                                    <li>Harga : {formatPrice(props.harga)}</li>
+                                    <li>
+                                        <div className="flex">
+                                            {Array.from({ length: parseInt(props.count_star) }).map((_, index) => (
+                                                <Star key={index} color="#F3C158" fill="#F3C158"/>
+                                            ))}
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </DialogContent>
+                </Dialog>
             </div>
         </div>
     );

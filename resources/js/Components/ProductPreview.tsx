@@ -20,12 +20,16 @@ function ProductPreview() {
     useEffect(() => {
         const fetchData = async () => {
             const res = await getData("/product/data");
-            setData(res);
+            let data =  res.filter((r) => r.is_view == 1);
+            if(!data) {
+                setData(res);
+            } else {
+                setData(data);
+            }
         };
 
         fetchData();
     }, []);
-    console.log(data);
     return (
         <div className="main__container pb-[2rem]">
             <TitleSection className={"mb-3 lg:mb-10"}>
@@ -37,7 +41,7 @@ function ProductPreview() {
                 ))}
             </div>
             <div className="flex justify-center mt-[2.5rem]">
-                <Link href="/">
+                <Link href="/product">
                     <Button
                         className="rounded-full px-16 border-slate-700 text-xl tracking-[-1px] h-[50px] "
                         variant={"outline"}
