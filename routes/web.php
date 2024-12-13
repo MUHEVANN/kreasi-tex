@@ -137,7 +137,6 @@ Route::middleware('auth')->group(function () {
     //
 
     // API Product
-    Route::get('/product/category/{id}', [ProductController::class, 'getProductByCategory']);
     Route::post('/product', [ProductController::class, 'store']);
     Route::post('/product/{product}', [ProductController::class, 'update']);
     Route::delete('/product/{product}', [ProductController::class, 'delete']);
@@ -149,6 +148,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/funfact/{funfact}', [FunfactController::class, 'delete']);
 });
 
+Route::get('/product/category/{id}', [ProductController::class, 'getProductByCategory']);
 Route::get('/gambar-about/data', [GambarAboutController::class, 'getGambar']);
 Route::get('/bahan/data', [BahanController::class, 'getBahan']);
 Route::get('/product/data', [ProductController::class, 'getProduct']);

@@ -71,7 +71,7 @@ export function DataTableValue<TData, TValue>({
         <div className="w-full">
             <div className="flex items-center py-4 justify-between">
                 <Input
-                    placeholder="Filter emails..."
+                    placeholder="Filter title..."
                     value={
                         (table
                             .getColumn("title")

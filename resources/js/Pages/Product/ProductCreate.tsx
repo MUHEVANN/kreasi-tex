@@ -10,6 +10,7 @@ import { get, post } from "@/lib/api";
 import { router } from "@inertiajs/react";
 import Checkbox from "@/Components/Checkbox";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/Components/ui/select";
+import AdminLayout from "@/Layouts/AdminLayout";
 
 const formSchema = z.object({
     nama: z.string().min(1, { message: "Nama wajib diisi!" }),
@@ -83,128 +84,131 @@ const ProductCreate = () => {
     }, []);
 
     return (
-        <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-                <FormField
-                    control={form.control}
-                    name="nama"
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>Nama</FormLabel>
-                            <FormControl>
-                                <Input placeholder="Katun" {...field} />
-                            </FormControl>
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                />
-                <FormField
-                    control={form.control}
-                    name="deskripsi"
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>Deskripsi</FormLabel>
-                            <FormControl>
-                                <Input
-                                    placeholder="Katun Jepang"
-                                    {...field}
-                                />
-                            </FormControl>
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                />
-                <FormField
-                    control={form.control}
-                    name="bahan_id"
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>
-                                Bahan
-                            </FormLabel>
-                            <Select onValueChange={field.onChange} defaultValue={field.value}>
+        <AdminLayout>
+            <h1 className="text-3xl font-bold mb-3">Create Product Page</h1>
+            <Form {...form}>
+                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+                    <FormField
+                        control={form.control}
+                        name="nama"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Nama</FormLabel>
                                 <FormControl>
-                                    <SelectTrigger className="w-[180px]">
-                                        <SelectValue placeholder="Pilih Bahan" />
-                                    </SelectTrigger>
+                                    <Input placeholder="Katun" {...field} />
                                 </FormControl>
-                                <SelectContent>
-                                    {bahanList.map((bahan) => (
-                                        <SelectItem key={bahan.id} value={bahan.id.toString()}>
-                                            {bahan.nama}
-                                        </SelectItem>
-                                    ))}
-                                </SelectContent>
-                            </Select>
-                        </FormItem>
-                    )}
-                />
-                <FormField
-                    control={form.control}
-                    name="gambar"
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>Gambar</FormLabel>
-                            <FormControl>
-                                <Input
-                                    type="file"
-                                    onChange={(e) => {
-                                        field.onChange(e.target.files);
-                                    }}
-                                />
-                            </FormControl>
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                />
-                <FormField
-                    control={form.control}
-                    name="harga"
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>Harga</FormLabel>
-                            <FormControl>
-                                <Input
-                                    placeholder="10000"
-                                    {...field}
-                                />
-                            </FormControl>
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                />
-                <FormField
-                    control={form.control}
-                    name="is_view"
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>Tampilkan</FormLabel>
-                            <FormControl>
-                                <Checkbox {...field} />
-                            </FormControl>
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                />
-                <FormField
-                    control={form.control}
-                    name="count_star"
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>Bintang</FormLabel>
-                            <FormControl>
-                                <Input
-                                    placeholder="10000"
-                                    {...field}
-                                />
-                            </FormControl>
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                />
-                <Button type="submit">Submit</Button>
-            </form>
-        </Form>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                    <FormField
+                        control={form.control}
+                        name="deskripsi"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Deskripsi</FormLabel>
+                                <FormControl>
+                                    <Input
+                                        placeholder="Katun Jepang"
+                                        {...field}
+                                    />
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                    <FormField
+                        control={form.control}
+                        name="bahan_id"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>
+                                    Bahan
+                                </FormLabel>
+                                <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                    <FormControl>
+                                        <SelectTrigger className="w-[180px]">
+                                            <SelectValue placeholder="Pilih Bahan" />
+                                        </SelectTrigger>
+                                    </FormControl>
+                                    <SelectContent>
+                                        {bahanList.map((bahan) => (
+                                            <SelectItem key={bahan.id} value={bahan.id.toString()}>
+                                                {bahan.nama}
+                                            </SelectItem>
+                                        ))}
+                                    </SelectContent>
+                                </Select>
+                            </FormItem>
+                        )}
+                    />
+                    <FormField
+                        control={form.control}
+                        name="gambar"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Gambar</FormLabel>
+                                <FormControl>
+                                    <Input
+                                        type="file"
+                                        onChange={(e) => {
+                                            field.onChange(e.target.files);
+                                        }}
+                                    />
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                    <FormField
+                        control={form.control}
+                        name="harga"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Harga</FormLabel>
+                                <FormControl>
+                                    <Input
+                                        placeholder="10000"
+                                        {...field}
+                                    />
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                    <FormField
+                        control={form.control}
+                        name="is_view"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Tampilkan</FormLabel>
+                                <FormControl>
+                                    <Checkbox {...field} />
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                    <FormField
+                        control={form.control}
+                        name="count_star"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Bintang</FormLabel>
+                                <FormControl>
+                                    <Input
+                                        placeholder="5"
+                                        {...field}
+                                    />
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                    <Button type="submit">Submit</Button>
+                </form>
+            </Form>
+        </AdminLayout>
     );
 };
 

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger("bahan_id");
             $table->foreign("bahan_id")->references("id")->on("bahans")->onDelete("cascade");
             $table->string("nama");
-            $table->string("deskripsi");
+            $table->text("deskripsi");
             $table->string("gambar");
             $table->string("harga");
             $table->boolean("is_view");

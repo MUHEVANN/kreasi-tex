@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('funfacts', function (Blueprint $table) {
             $table->id();
-            $table->string("text");
+            $table->text("text");
             $table->string("image");
             $table->timestamps();
         });
