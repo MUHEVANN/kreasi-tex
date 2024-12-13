@@ -27,7 +27,7 @@ function ValueItem() {
     }, []);
 
     return (
-        <div className="flex items-center justify-center lg:justify-around gap-[2rem]  lg:gap-0 flex-wrap">
+        <div className="flex items-center justify-center lg:gap-10 gap-[2rem]  lg:gap-0 flex-wrap">
             {data.map((item, index) => (
                 <ValueCard
                     key={index}
