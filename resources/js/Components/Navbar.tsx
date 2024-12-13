@@ -25,7 +25,7 @@ function Navbar() {
     const [isOpen, setIsOpen] = React.useState(false);
     return (
         <div className="w-full fixed top-0 z-[999]">
-            <div className="md:px-[5rem] lg:px-[15rem] 2xl:px-[30rem] hidden">
+            <div className="md:px-[5rem] lg:px-[15rem] 2xl:px-[30rem] hidden md:block">
                 <div className=" flex justify-between py-8 border-b border-black backdrop-blur-sm">
                     {navLinks.map((link, index) => (
                         <Link
@@ -38,11 +38,14 @@ function Navbar() {
                     ))}
                 </div>
             </div>
-            <div className="px-4 py-5" onClick={() => setIsOpen(true)}>
+            <div
+                className="px-4 py-5 md:hidden"
+                onClick={() => setIsOpen(true)}
+            >
                 <AlignJustify className="hover:cursor-pointer" />
             </div>
             <div
-                className={`fixed top-0 w-[70%] h-full bg-white z-[999] transition-all duration-300 ease-in-out ${
+                className={`fixed top-0 w-[70%] h-full bg-white z-[999] transition-all duration-300 ease-in-out md:hidden ${
                     isOpen ? "left-0" : "-left-full"
                 }`}
             >

@@ -2,7 +2,29 @@ import TitleSection from "./TitleSection";
 import CardPreview from "@/Components/CardPreview";
 import { Button } from "./ui/button";
 import { Link } from "@inertiajs/react";
+import { useEffect, useState } from "react";
+import { getData } from "@/lib/api";
+type ProductColumn = {
+    id: number;
+    nama: string;
+    deskripsi: string;
+    gambar: string;
+    harga: string;
+    is_view: boolean;
+    count_star: string;
+    created_at: string;
+};
+
 function ProductPreview() {
+    const [data, setData] = useState<ProductColumn[]>([]);
+    useEffect(() => {
+        const fetchData = async () => {
+            const res = await getData("/about/data");
+            setData(res);
+        };
+
+        fetchData();
+    }, []);
     return (
         <div className="main__container pb-[2rem]">
             <TitleSection className={"mb-3 lg:mb-10"}>
