@@ -71,15 +71,15 @@ export function DataTableTestimonial<TData, TValue>({
         <div className="w-full">
             <div className="flex items-center py-4 justify-between">
                 <Input
-                    placeholder="Filter emails..."
+                    placeholder="Filter name..."
                     value={
                         (table
-                            .getColumn("comment")
+                            .getColumn("name")
                             ?.getFilterValue() as string) ?? ""
                     }
                     onChange={(event) =>
                         table
-                            .getColumn("comment")
+                            .getColumn("name")
                             ?.setFilterValue(event.target.value)
                     }
                     className="max-w-sm"

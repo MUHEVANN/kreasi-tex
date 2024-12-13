@@ -97,38 +97,31 @@ const MaterialInfo = () => {
                 <div className="text-center my-10">
                     <p className="lg:text-5xl text-3xl font-thin">Apakah Kamu Tahu?</p>
                 </div>
-                {dataFunfact.map((data, index) => (
-                <div className="flex justify-center xl:mx-[500px] lg:mx-44 mx-10 my-10">
-                    <div className="lg:grid flex flex-col grid-cols-3 gap-10">
-                            <div className="flex flex-col gap-10 col-span-2">
-                                <div className="bg-[#FFFBDF] p-10 rounded-3xl">
-                                    <p>
-                                        Lorem ipsum dolor sit amet consectetur
-                                        adipisicing elit. Non ipsum corporis velit
-                                        magnam, suscipit placeat, doloremque odio
-                                        vel porro alias blanditiis? Pariatur iste
-                                        eligendi optio veniam. Tenetur doloremque
-                                        dicta quidem!
-                                    </p>
+                {dataFunfact.map((data, index) => {
+                    const valText = data.text.split(".");
+                    return (
+                    <div className="flex justify-center xl:mx-[500px] lg:mx-44 mx-10 my-10">
+                        <div className="lg:grid flex flex-col grid-cols-3 gap-10">
+                                <div className="flex flex-col gap-10 col-span-2">
+                                    <div className="bg-[#FFFBDF] p-10 rounded-3xl">
+                                        <p>
+                                            {valText[0]}
+                                        </p>
+                                    </div>
+                                    <div className="bg-[#E8E6E2] p-10 rounded-3xl">
+                                        <p>
+                                            {valText[1]}
+                                        </p>
+                                    </div>
                                 </div>
-                                <div className="bg-[#E8E6E2] p-10 rounded-3xl">
-                                    <p>
-                                        Lorem ipsum dolor sit amet consectetur
-                                        adipisicing elit. Non ipsum corporis velit
-                                        magnam, suscipit placeat, doloremque odio
-                                        vel porro alias blanditiis? Pariatur iste
-                                        eligendi optio veniam. Tenetur doloremque
-                                        dicta quidem!
-                                    </p>
-                                </div>
-                            </div>
-                            <div
-                                style={{ backgroundImage: `url('/storage/${data.image}')` }}
-                                className={`w-full lg:h-full bg-cover bg-center ${index % 2 == 0 ? 'lg:order-first' : ''} rounded-3xl h-48 md:h-72`}
-                            ></div>
+                                <div
+                                    style={{ backgroundImage: `url('/storage/${data.image}')` }}
+                                    className={`w-full lg:h-full bg-cover bg-center ${index % 2 == 0 ? 'lg:order-first' : ''} rounded-3xl h-48 md:h-72`}
+                                ></div>
+                        </div>
                     </div>
-                </div>
-                ))}
+                    )
+                })}
             </div>
         </Layout>
     );

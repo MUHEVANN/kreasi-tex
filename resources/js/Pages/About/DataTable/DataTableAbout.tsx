@@ -70,15 +70,15 @@ export function DataTableAbout<TData, TValue>({
         <div className="w-full">
             <div className="flex items-center py-4 justify-between">
                 <Input
-                    placeholder="Filter emails..."
+                    placeholder="Filter deskripsi header..."
                     value={
                         (table
-                            .getColumn("title")
+                            .getColumn("Deskripsi Header")
                             ?.getFilterValue() as string) ?? ""
                     }
                     onChange={(event) =>
                         table
-                            .getColumn("title")
+                            .getColumn("Deskripsi Header")
                             ?.setFilterValue(event.target.value)
                     }
                     className="max-w-sm"
