@@ -29,6 +29,8 @@ function TestimoniCard({ x, y, comment, profile, name }: TestimoniProps) {
             </div>
 
             <div className="triangle absolute right-[3rem] rotate-180 -bottom-[1.5rem]"></div>
+
+            <div className="absolute inset-0 md:bg-transparent md:backdrop-blur-[1.5px] hover:backdrop-blur-0"></div>
         </div>
     );
 }
