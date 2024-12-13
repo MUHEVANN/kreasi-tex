@@ -4,7 +4,7 @@ import { Button } from "./ui/button";
 import { Link } from "@inertiajs/react";
 import { useEffect, useState } from "react";
 import { getData } from "@/lib/api";
-type ProductColumn = {
+export type ProductColumn = {
     id: number;
     nama: string;
     deskripsi: string;
@@ -19,22 +19,22 @@ function ProductPreview() {
     const [data, setData] = useState<ProductColumn[]>([]);
     useEffect(() => {
         const fetchData = async () => {
-            const res = await getData("/about/data");
+            const res = await getData("/product/data");
             setData(res);
         };
 
         fetchData();
     }, []);
+    console.log(data);
     return (
         <div className="main__container pb-[2rem]">
             <TitleSection className={"mb-3 lg:mb-10"}>
                 Choose Your Product
             </TitleSection>
             <div className="grid grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 sm:grid-cols-2 gap-4 ">
-                <CardPreview />
-                <CardPreview />
-                <CardPreview />
-                <CardPreview />
+                {data.map((item, i) => (
+                    <CardPreview key={i} props={item} />
+                ))}
             </div>
             <div className="flex justify-center mt-[2.5rem]">
                 <Link href="/">

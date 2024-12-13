@@ -1,28 +1,36 @@
 import React from "react";
 import { ArrowRight, Star } from "lucide-react";
+import { ProductColumn } from "./ProductPreview";
 
-function CardPreview() {
+function CardPreview({ props }: { props: ProductColumn }) {
+    const formatPrice = (price: string) => {
+        return new Intl.NumberFormat("id-ID", {
+            style: "currency",
+            currency: "IDR",
+            minimumFractionDigits: 0,
+        }).format(parseInt(price));
+    };
     return (
         <div className="border border-black/15 rounded-[15px] shadow">
             <div className="h-[150px] sm:h-[200px] md:h-[350px] w-full relative overflow-hidden">
                 <img
-                    src="hero.jpg"
+                    src={"/storage/" + props.gambar}
                     alt=""
                     className="w-full h-full rounded-[15px] "
                 />
                 <div className="absolute top-4 right-4 flex gap-2 items-center backdrop-blur-xl text-white rounded-full px-6 py-1">
-                    <span className="text-xl">4</span>
+                    <span className="text-xl">{props.count_star}</span>
                     <Star />
                 </div>
             </div>
             <div className="pt-2 md:pt-5 pb-3 px-4 flex justify-between md:items-center">
                 <div>
                     <h1 className="text-[16px] md:text-xl text-coklat font-semibold">
-                        Alone with nature
+                        {props.nama}
                     </h1>
                     <p>
                         <span className="text-xl md:text-2xl text-coklat font-bold">
-                            $100
+                            {formatPrice(props.harga)}
                         </span>
                         <span className="textxl md:text-2xl">/</span>
                         <span className="text-sm">person</span>
