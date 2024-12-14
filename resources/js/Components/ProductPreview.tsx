@@ -19,13 +19,8 @@ function ProductPreview() {
     const [data, setData] = useState<ProductColumn[]>([]);
     useEffect(() => {
         const fetchData = async () => {
-            const res = await getData("/product/data");
-            let data =  res.filter((r) => r.is_view == 1);
-            if(!data) {
-                setData(res);
-            } else {
-                setData(data);
-            }
+            const res = await getData("/product/data-view");
+            setData(res);
         };
 
         fetchData();

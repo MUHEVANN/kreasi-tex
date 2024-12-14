@@ -1,7 +1,13 @@
 import React from "react";
 import { ArrowRight, Star } from "lucide-react";
 import { ProductColumn } from "./ProductPreview";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "./ui/dialog";
+import {
+    Dialog,
+    DialogContent,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+} from "./ui/dialog";
 
 function CardPreview({ props }: { props: ProductColumn }) {
     const formatPrice = (price: string) => {
@@ -20,8 +26,10 @@ function CardPreview({ props }: { props: ProductColumn }) {
                     className="w-full h-full rounded-[15px] "
                 />
                 <div className="absolute top-4 right-4 flex gap-2 items-center backdrop-blur-xl rounded-full px-6 py-1">
-                    <span className="text-xl">{props.count_star}</span>
-                    <Star color="#F3C158" fill="#F3C158"/>
+                    <span className="text-xl text-[#F3C158]">
+                        {props.count_star}
+                    </span>
+                    <Star color="#F3C158" fill="#F3C158" />
                 </div>
             </div>
             <div className="pt-2 md:pt-5 pb-3 px-4 flex justify-between md:items-center">
@@ -47,18 +55,32 @@ function CardPreview({ props }: { props: ProductColumn }) {
                             <DialogTitle>Detail Produk</DialogTitle>
                         </DialogHeader>
                         <div className="flex">
-                            <div style={{backgroundImage: `url(/storage/${props.gambar})`}} className="w-[200px] h-[200px] bg-center bg-cover border-solid border-2 rounded-md">
-                            </div>
+                            <div
+                                style={{
+                                    backgroundImage: `url(/storage/${props.gambar})`,
+                                }}
+                                className="w-[200px] h-[200px] bg-center bg-cover border-solid border-2 rounded-md"
+                            ></div>
                             <div className="ml-4">
-                                <p className="font-semibold text-xl">{props.nama}</p>
+                                <p className="font-semibold text-xl">
+                                    {props.nama}
+                                </p>
                                 <ul>
                                     <li>Bahan : {props.bahan_nama}</li>
                                     <li>Deskripsi : {props.deskripsi}</li>
                                     <li>Harga : {formatPrice(props.harga)}</li>
                                     <li>
                                         <div className="flex">
-                                            {Array.from({ length: parseInt(props.count_star) }).map((_, index) => (
-                                                <Star key={index} color="#F3C158" fill="#F3C158"/>
+                                            {Array.from({
+                                                length: parseInt(
+                                                    props.count_star
+                                                ),
+                                            }).map((_, index) => (
+                                                <Star
+                                                    key={index}
+                                                    color="#F3C158"
+                                                    fill="#F3C158"
+                                                />
                                             ))}
                                         </div>
                                     </li>

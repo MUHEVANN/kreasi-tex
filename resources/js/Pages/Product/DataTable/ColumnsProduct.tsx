@@ -2,7 +2,12 @@
 import * as React from "react";
 
 import { ColumnDef } from "@tanstack/react-table";
-import { MoreHorizontal, ArrowUpDown } from "lucide-react";
+import {
+    MoreHorizontal,
+    ArrowUpDown,
+    CircleCheck,
+    CircleX,
+} from "lucide-react";
 
 import { Button } from "@/Components/ui/button";
 import {
@@ -85,14 +90,25 @@ export const ColumnsProduct = (
     {
         accessorKey: "gambar",
         header: "gambar",
-        cell: ({ row }) =>{
+        cell: ({ row }) => {
             return (
                 <img
                     src={`/storage/${row.getValue("gambar")}`}
                     alt="gambar"
                     className="h-10 w-10 rounded-md"
                 />
-            )
+            );
+        },
+    },
+    {
+        accessorKey: "is_view",
+        header: "Tampil Home",
+        cell: ({ row }) => {
+            return row.getValue("is_view") ? (
+                <CircleCheck className="text-green-400" />
+            ) : (
+                <CircleX className="text-red-400" />
+            );
         },
     },
 

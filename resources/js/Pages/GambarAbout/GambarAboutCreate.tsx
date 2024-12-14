@@ -14,9 +14,12 @@ import { Input } from "@/Components/ui/input";
 import AdminLayout from "@/Layouts/AdminLayout";
 import { post } from "@/lib/api";
 import { router } from "@inertiajs/react";
+import { useState } from "react";
 const formSchema = z.object({
     gambar: z
-        .instanceof(FileList)
+        .instanceof(FileList, {
+            message: "File tidak boleh kosong dan harus gambar",
+        })
         .refine(
             (files) =>
                 [
@@ -29,10 +32,14 @@ const formSchema = z.object({
             {
                 message: "File must be an image",
             }
-        ),
+        )
+        .refine((files) => files[0].size >= 2 * 1024 * 1024, {
+            message: "ukuran maximal 2 mb",
+        }),
 });
 
 function GambarAboutCreate() {
+    const [err, setErr] = useState("");
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -47,7 +54,9 @@ function GambarAboutCreate() {
             await post("/gambar-about", formData);
 
             router.visit("/dashboard/gambar-about");
-        } catch {}
+        } catch (err) {
+            setErr(err.response.data.message);
+        }
     };
 
     return (
@@ -74,6 +83,11 @@ function GambarAboutCreate() {
                                         }}
                                     />
                                 </FormControl>
+                                {err && (
+                                    <span className="text-red-500 text-sm">
+                                        {err}
+                                    </span>
+                                )}
                                 <FormMessage />
                             </FormItem>
                         )}

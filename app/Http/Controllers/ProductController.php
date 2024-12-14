@@ -51,7 +51,7 @@ class ProductController extends Controller
         $isView = filter_var($req->input('is_view'), FILTER_VALIDATE_BOOLEAN);
 
         if ($req['gambar']) {
-            unlink(public_path('storage/'.$path));
+            unlink(public_path('storage/' . $path));
             $path = $req['profile']->store('product', 'public');
         }
 
@@ -79,7 +79,7 @@ class ProductController extends Controller
 
     public function getProduct()
     {
-        $product = Product::join("bahans", "bahans.id", "=", "products.bahan_id")
+        $product = Product::join("bahans", "bahans.id", "=", "products.bahan_id")->orderBy('is_view', 'desc')
             ->select("products.*", "bahans.nama as bahan_nama")
             ->get();
 
@@ -93,6 +93,12 @@ class ProductController extends Controller
             ->select("products.*", "bahans.nama as bahan_nama")
             ->get();
 
+        return $this->res("OK", 200, $product);
+    }
+
+    public function getProductView()
+    {
+        $product = Product::where('is_view', true)->limit(4)->get();
         return $this->res("OK", 200, $product);
     }
 }

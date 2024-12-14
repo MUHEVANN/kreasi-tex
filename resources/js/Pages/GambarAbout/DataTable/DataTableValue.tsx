@@ -102,10 +102,7 @@ export function DataTableValue<TData, TValue>({
                                 })}
                         </DropdownMenuContent>
                     </DropdownMenu>
-                    <Button
-                        className="ms-3 "
-                        disabled={table.getRowCount() === 5}
-                    >
+                    <Button className="ms-3 ">
                         <Link href="/dashboard/gambar-about/create">
                             Tambah
                         </Link>

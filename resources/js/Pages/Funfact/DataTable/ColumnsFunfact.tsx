@@ -15,7 +15,6 @@ import {
 } from "@/Components/ui/dropdown-menu";
 import { Link } from "@inertiajs/react";
 import { Checkbox } from "@/Components/ui/checkbox";
-import DynamicIcon from "@/Components/DynamicIcon";
 
 export type FunfactColumn = {
     id: number;

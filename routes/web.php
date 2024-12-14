@@ -148,6 +148,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/funfact/{funfact}', [FunfactController::class, 'delete']);
 });
 
+Route::get('/product/data-view', [ProductController::class, 'getProductView']);
 Route::get('/product/category/{id}', [ProductController::class, 'getProductByCategory']);
 Route::get('/gambar-about/data', [GambarAboutController::class, 'getGambar']);
 Route::get('/bahan/data', [BahanController::class, 'getBahan']);

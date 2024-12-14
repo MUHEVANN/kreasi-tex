@@ -73,9 +73,8 @@ export function DataTableFunfact<TData, TValue>({
                 <Input
                     placeholder="Filter text..."
                     value={
-                        (table
-                            .getColumn("text")
-                            ?.getFilterValue() as string) ?? ""
+                        (table.getColumn("text")?.getFilterValue() as string) ??
+                        ""
                     }
                     onChange={(event) =>
                         table
@@ -115,9 +114,7 @@ export function DataTableFunfact<TData, TValue>({
                                 })}
                         </DropdownMenuContent>
                     </DropdownMenu>
-                    <Button
-                        className="ms-3 "
-                    >
+                    <Button className="ms-3 ">
                         <Link href="/dashboard/funfact/create">Tambah</Link>
                     </Button>
                 </div>

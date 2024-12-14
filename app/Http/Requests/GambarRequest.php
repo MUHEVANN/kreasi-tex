@@ -25,4 +25,11 @@ class GambarRequest extends FormRequest
             'gambar' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'gambar.max' => "maximal gambar 2 mb"
+        ];
+    }
 }

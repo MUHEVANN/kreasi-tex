@@ -73,9 +73,8 @@ export function DataTableTestimonial<TData, TValue>({
                 <Input
                     placeholder="Filter name..."
                     value={
-                        (table
-                            .getColumn("name")
-                            ?.getFilterValue() as string) ?? ""
+                        (table.getColumn("name")?.getFilterValue() as string) ??
+                        ""
                     }
                     onChange={(event) =>
                         table
@@ -117,7 +116,7 @@ export function DataTableTestimonial<TData, TValue>({
                     </DropdownMenu>
                     <Button
                         className="ms-3 "
-                        disabled={table.getRowCount() === 5}
+                        disabled={table.getRowCount() === 8}
                     >
                         <Link href="/dashboard/testimonial/create">Tambah</Link>
                     </Button>

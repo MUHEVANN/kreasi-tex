@@ -34,7 +34,7 @@ function ValueCreate() {
         try {
             await post("/values", data);
 
-            router.visit("/values");
+            router.visit("/dashboard/values");
         } catch (error) {
             console.log(error);
         }
