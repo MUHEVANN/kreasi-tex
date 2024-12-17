@@ -12,6 +12,7 @@ export type ProductColumn = {
     harga: string;
     is_view: boolean;
     count_star: string;
+    bahan_nama : string;
     created_at: string;
 };
 

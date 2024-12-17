@@ -1,4 +1,5 @@
 import Faq from "@/Components/Faq";
+import Gmap from "@/Components/Gmap";
 import ProductPreview from "@/Components/ProductPreview";
 import Testimoni from "@/Components/Testimoni";
 import ValuesSection from "@/Components/ValueSection";
@@ -10,6 +11,7 @@ function Home() {
             <ProductPreview />
             <Faq />
             <Testimoni />
+            <Gmap />
         </Layout>
     );
 }

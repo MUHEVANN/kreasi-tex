@@ -38,7 +38,7 @@ interface DataTableProps<TData, TValue> {
     data: TData[];
 }
 
-export function DataTableFaq<TData, TValue>({
+export function DataTableGmap<TData, TValue>({
     columns,
     data,
 }: DataTableProps<TData, TValue>) {
@@ -71,15 +71,15 @@ export function DataTableFaq<TData, TValue>({
         <div className="w-full">
             <div className="flex items-center py-4 justify-between">
                 <Input
-                    placeholder="Filter question..."
+                    placeholder="Filter title..."
                     value={
                         (table
-                            .getColumn("question")
+                            .getColumn("title")
                             ?.getFilterValue() as string) ?? ""
                     }
                     onChange={(event) =>
                         table
-                            .getColumn("question")
+                            .getColumn("title")
                             ?.setFilterValue(event.target.value)
                     }
                     className="max-w-sm"
@@ -116,10 +116,10 @@ export function DataTableFaq<TData, TValue>({
                         </DropdownMenuContent>
                     </DropdownMenu>
                     <Button
-                        className="ms-3"
-                        disabled={table.getRowCount() === 4}
+                        className="ms-3 "
+                        disabled={table.getRowCount() === 5}
                     >
-                        <Link href="/dashboard/faq/create">Tambah</Link>
+                        <Link href="/dashboard/g-map/create">Tambah</Link>
                     </Button>
                 </div>
             </div>
