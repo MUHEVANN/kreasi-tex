@@ -102,3 +102,20 @@
     font-optical-sizing: auto;
     font-style: normal;
 }
+
+.swiper-pagination-bullet {
+    transition: all 0.3s ease !important;
+}
+
+.swiper-pagination-bullet-active {
+    background: black !important;
+    width: 30px !important;
+    border-radius: 10px !important;
+}
+
+.swiper-pagination-fraction,
+.swiper-pagination-custom,
+.swiper-horizontal > .swiper-pagination-bullets,
+.swiper-pagination-bullets.swiper-pagination-horizontal {
+    bottom: -5px !important;
+}

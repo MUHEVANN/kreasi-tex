@@ -3,10 +3,12 @@ import { GmapProps } from "@/Pages/Gmap/GmapEdit";
 import React, { useEffect, useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Swiper as SwiperCore } from "swiper";
+import { Pagination } from "swiper/modules";
+import { HousePlus, MapPin } from "lucide-react";
 
 function Gmap() {
     const swiperRef = useRef<SwiperCore | null>(null);
-    const swiperCoba = useRef<SwiperCore | null>(null);
+    const [indexActive, setIndexActive] = useState(0);
     const [data, setData] = useState<GmapProps[]>([]);
     const [loading, setLoading] = useState(true); // State untuk loading
     const [error, setError] = useState<string | null>(null); // State untuk error
@@ -45,26 +47,48 @@ function Gmap() {
 
     return (
         <div className="main__container my-[3rem]">
-            <div className="mx-[15rem] bg-gray-200 pt-3 px-3 translate-y-[50%] relative z-[999]">
+            <div className="mx-[1rem] sm:mx-[5rem] md:mx-[10rem] xl:mx-[15rem] bg-slate-100 py-3 pt-3 px-3 sm:translate-y-[50%] relative z-[999]">
                 <Swiper
                     spaceBetween={20}
                     slidesPerView={3}
-                    onSwiper={(swiper) => (swiperCoba.current = swiper)}
+                    breakpoints={{
+                        0: {
+                            slidesPerView: 1,
+                            spaceBetween: 5,
+                        },
+                        768: {
+                            slidesPerView: 2,
+                            spaceBetween: 10,
+                        },
+                        1024: {
+                            slidesPerView: 3,
+                            spaceBetween: 20,
+                        },
+                    }}
+                    modules={[Pagination]}
+                    pagination={{ clickable: true }}
                 >
                     {data.map((item, index) => (
                         <SwiperSlide
                             key={item.id}
-                            className="cursor-pointer mb-4 p-4 border border-gray-200 bg-white rounded-lg shadow hover:bg-gray-100"
+                            className={`cursor-pointer mb-4 p-4 border border-gray-200 bg-white rounded hover:bg-gray-100 ${
+                                indexActive === index && "shadow-lg"
+                            }`}
                             onClick={() => {
+                                setIndexActive(index);
                                 if (swiperRef.current) {
                                     swiperRef.current.slideTo(index);
                                 }
                             }}
                         >
-                            <h1 className="text-3xl font-bold capitalize">
+                            <h1 className="text-3xl font-bold capitalize flex items-center gap-x-4">
+                                <HousePlus />
                                 {item.title}
                             </h1>
-                            <p className="mt-4 text-gray-600">{item.desc}</p>
+                            <p className="mt-4 text-gray-600 flex items-center gap-x-2">
+                                <MapPin size={14} />
+                                {item.desc}
+                            </p>
                         </SwiperSlide>
                     ))}
                 </Swiper>

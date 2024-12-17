@@ -1,6 +1,9 @@
 import "../css/app.css";
 import "./bootstrap";
+
 import "swiper/css";
+import "swiper/css/pagination";
+
 import { createInertiaApp } from "@inertiajs/react";
 import { resolvePageComponent } from "laravel-vite-plugin/inertia-helpers";
 import { createRoot } from "react-dom/client";
