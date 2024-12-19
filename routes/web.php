@@ -5,6 +5,7 @@ use App\Http\Controllers\AboutController;
 use App\Http\Controllers\FaqController;
 use App\Http\Controllers\FunfactController;
 use App\Http\Controllers\GambarAboutController;
+use App\Http\Controllers\GmapController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TestimonialController;
@@ -89,6 +90,11 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
     Route::get('/gambar-about', [GambarAboutController::class, 'index']);
     Route::get('/gambar-about/create', [GambarAboutController::class, 'create']);
     Route::get('/gambar-about/{gambar}/edit', [GambarAboutController::class, 'edit']);
+
+    // Web G map
+    Route::get('/g-map', [GmapController::class, 'index']);
+    Route::get('/g-map/create', [GmapController::class, 'create']);
+    Route::get('/g-map/{gmap}/edit', [GmapController::class, 'edit']);
 });
 
 
@@ -146,11 +152,18 @@ Route::middleware('auth')->group(function () {
     Route::post('/funfact', [FunfactController::class, 'store']);
     Route::post('/funfact/{funfact}', [FunfactController::class, 'update']);
     Route::delete('/funfact/{funfact}', [FunfactController::class, 'delete']);
+
+    // API G Map
+    Route::post('/g-map', [GmapController::class, 'store']);
+    Route::put('/g-map/{gmap}', [GmapController::class, 'update']);
+    Route::delete('/g-map/{gmap}', [GmapController::class, 'delete']);
 });
 
+Route::get('/product/data-view', [ProductController::class, 'getProductView']);
 Route::get('/product/category/{id}', [ProductController::class, 'getProductByCategory']);
 Route::get('/gambar-about/data', [GambarAboutController::class, 'getGambar']);
 Route::get('/bahan/data', [BahanController::class, 'getBahan']);
+Route::get('/g-map/data', [GmapController::class, 'getGmap']);
 Route::get('/product/data', [ProductController::class, 'getProduct']);
 Route::get('/funfact/data', [FunfactController::class, 'getFunfact']);
 Route::get('/about/data', [AboutController::class, 'getAbout']);

@@ -44,6 +44,7 @@
         "embla-carousel-react": "^8.5.1",
         "lucide-react": "^0.466.0",
         "react-hook-form": "^7.53.2",
+        "swiper": "^11.1.15",
         "tailwind-merge": "^2.5.5",
         "tailwindcss-animate": "^1.0.7",
         "vaul": "^1.1.1",

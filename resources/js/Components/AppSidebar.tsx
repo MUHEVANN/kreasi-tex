@@ -80,6 +80,12 @@ const data = {
             icon: SquareTerminal,
             isActive: true,
         },
+        {
+            title: "Google Map",
+            url: "/dashboard/g-map",
+            icon: SquareTerminal,
+            isActive: true,
+        },
     ],
     navProduct: [
         {
@@ -149,9 +155,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                 <NavMain items={data.navAbout} label="About" />
                 <NavMain items={data.navMaterial} label="Material" />
             </SidebarContent>
-            <SidebarFooter>
-                {/* <NavUser user={data.user} /> */}
-            </SidebarFooter>
+            <SidebarFooter>{/* <NavUser user={data.user} /> */}</SidebarFooter>
             <SidebarRail />
         </Sidebar>
     );

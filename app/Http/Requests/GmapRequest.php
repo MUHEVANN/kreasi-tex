@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class GambarRequest extends FormRequest
+class GmapRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,14 +22,9 @@ class GambarRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'gambar' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
-        ];
-    }
-
-    public function messages()
-    {
-        return [
-            'gambar.max' => "maximal gambar 2 mb"
+            'title' => ['required', 'string'],
+            'desc' => ['required', 'string'],
+            'link' => ['required', 'string'],
         ];
     }
 }

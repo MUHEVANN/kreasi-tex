@@ -16,16 +16,16 @@ import {
 import { Link } from "@inertiajs/react";
 import { Checkbox } from "@/Components/ui/checkbox";
 
-export type FunfactColumn = {
+export type ArtikelColumn = {
     id: number;
-    text: string;
-    image: string;
+    title: string;
+    icon: string;
     created_at: string;
 };
 
-export const ColumnsFunfact = (
+export const ColumnsGmap = (
     handleDelete: (id: number) => void
-): ColumnDef<FunfactColumn>[] => [
+): ColumnDef<ArtikelColumn>[] => [
     {
         id: "select",
         header: ({ table }) => (
@@ -51,8 +51,8 @@ export const ColumnsFunfact = (
         enableHiding: false,
     },
     {
-        accessorKey: "text",
-        header: "text",
+        accessorKey: "title",
+        header: "title",
         cell: ({ row }) => {
             function capitalizeFirstLetter(text: string): string {
                 return (
@@ -61,24 +61,19 @@ export const ColumnsFunfact = (
             }
             return (
                 <h1 className="normal-case">
-                    {capitalizeFirstLetter(row.getValue("text"))}
+                    {capitalizeFirstLetter(row.getValue("title"))}
                 </h1>
             );
         },
     },
 
     {
-        accessorKey: "image",
-        header: "image",
-        cell: ({ row }) =>{
-            return (
-                <img
-                    src={`/storage/${row.getValue("image")}`}
-                    alt="image"
-                    className="h-10 w-10 rounded-md"
-                />
-            )
-        },
+        accessorKey: "desc",
+        header: "desc",
+    },
+    {
+        accessorKey: "link",
+        header: "Link Google Map",
     },
 
     {
@@ -122,7 +117,7 @@ export const ColumnsFunfact = (
                         <DropdownMenuLabel>Aksi</DropdownMenuLabel>
                         <DropdownMenuSeparator />
                         <DropdownMenuItem className="hover:cursor-pointer">
-                            <Link href={`/dashboard/funfact/${value.id}/edit`}>
+                            <Link href={`/dashboard/g-map/${value.id}/edit`}>
                                 Edit Value
                             </Link>
                         </DropdownMenuItem>

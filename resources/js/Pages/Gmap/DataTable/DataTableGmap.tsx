@@ -38,7 +38,7 @@ interface DataTableProps<TData, TValue> {
     data: TData[];
 }
 
-export function DataTableFunfact<TData, TValue>({
+export function DataTableGmap<TData, TValue>({
     columns,
     data,
 }: DataTableProps<TData, TValue>) {
@@ -71,14 +71,15 @@ export function DataTableFunfact<TData, TValue>({
         <div className="w-full">
             <div className="flex items-center py-4 justify-between">
                 <Input
-                    placeholder="Filter text..."
+                    placeholder="Filter title..."
                     value={
-                        (table.getColumn("text")?.getFilterValue() as string) ??
-                        ""
+                        (table
+                            .getColumn("title")
+                            ?.getFilterValue() as string) ?? ""
                     }
                     onChange={(event) =>
                         table
-                            .getColumn("text")
+                            .getColumn("title")
                             ?.setFilterValue(event.target.value)
                     }
                     className="max-w-sm"
@@ -114,8 +115,11 @@ export function DataTableFunfact<TData, TValue>({
                                 })}
                         </DropdownMenuContent>
                     </DropdownMenu>
-                    <Button className="ms-3 ">
-                        <Link href="/dashboard/funfact/create">Tambah</Link>
+                    <Button
+                        className="ms-3 "
+                        disabled={table.getRowCount() === 5}
+                    >
+                        <Link href="/dashboard/g-map/create">Tambah</Link>
                     </Button>
                 </div>
             </div>
@@ -177,24 +181,26 @@ export function DataTableFunfact<TData, TValue>({
                     {table.getFilteredSelectedRowModel().rows.length} of{" "}
                     {table.getFilteredRowModel().rows.length} row(s) selected.
                 </div>
-                {/* <div className="space-x-2">
-                    <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={() => table.previousPage()}
-                        disabled={!table.getCanPreviousPage()}
-                    >
-                        Previous
-                    </Button>
-                    <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={() => table.nextPage()}
-                        disabled={!table.getCanNextPage()}
-                    >
-                        Next
-                    </Button>
-                </div> */}
+                {table.getRowCount() > 10 && (
+                    <div className="space-x-2">
+                        <Button
+                            variant="outline"
+                            size="sm"
+                            onClick={() => table.previousPage()}
+                            disabled={!table.getCanPreviousPage()}
+                        >
+                            Previous
+                        </Button>
+                        <Button
+                            variant="outline"
+                            size="sm"
+                            onClick={() => table.nextPage()}
+                            disabled={!table.getCanNextPage()}
+                        >
+                            Next
+                        </Button>
+                    </div>
+                )}
             </div>
         </div>
     );

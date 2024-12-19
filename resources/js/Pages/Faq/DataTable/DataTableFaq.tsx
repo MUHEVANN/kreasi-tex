@@ -116,8 +116,8 @@ export function DataTableFaq<TData, TValue>({
                         </DropdownMenuContent>
                     </DropdownMenu>
                     <Button
-                        className="ms-3 "
-                        disabled={table.getRowCount() === 5}
+                        className="ms-3"
+                        disabled={table.getRowCount() === 4}
                     >
                         <Link href="/dashboard/faq/create">Tambah</Link>
                     </Button>
