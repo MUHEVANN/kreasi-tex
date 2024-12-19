@@ -54,12 +54,12 @@ function CardPreview({ props }: { props: ProductColumn }) {
                         <DialogHeader>
                             <DialogTitle>Detail Produk</DialogTitle>
                         </DialogHeader>
-                        <div className="flex">
+                        <div className="grid grid-cols-2">
                             <div
                                 style={{
                                     backgroundImage: `url(/storage/${props.gambar})`,
                                 }}
-                                className="w-[200px] h-[200px] bg-center bg-cover border-solid border-2 rounded-md"
+                                className="bg-center bg-cover border-solid border-2 rounded-md"
                             ></div>
                             <div className="ml-4">
                                 <p className="font-semibold text-xl">

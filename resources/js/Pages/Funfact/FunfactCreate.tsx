@@ -13,39 +13,27 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import AdminLayout from "@/Layouts/AdminLayout";
 
 const formSchema = z.object({
-    text: z.string().min(1, { message: "Text wajib diisi!" }),
-    image: z
-        .instanceof(FileList)
-        .refine(
-            (files) =>
-                [
-                    "image/jpeg",
-                    "image/png",
-                    "image/jpg",
-                    "image/webp",
-                    "image/svg",
-                ].includes(files[0].type),
-            {
-                message: "File harus berupa gambar!",
-            }
-        ),
+    title1: z.string().min(1, { message: "Title 1 wajib diisi!" }),
+    title2: z.string().min(1, { message: "Title 2 wajib diisi!" }),
+    text1: z.string().min(1, { message: "Text 1 wajib diisi!" }),
+    text2: z.string().min(1, { message: "Text 2 wajib diisi!" }),
+    link_instagram: z.string().min(1, { message: "Link reel Instagram wajib diisi!" }),
 });
 const FunfactCreate = () => {
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            text: "",
-            image: undefined,
+            title1 : "",
+            title2 : "",
+            text1 : "",
+            text2 : "",
+            link_instagram : "",
         },
     });
 
     const onSubmit = async (data: z.infer<typeof formSchema>) => {
         try {
-            const formData = new FormData();
-            formData.append("text", data.text);
-            formData.append("image", data.image[0]);
-
-            await post("/funfact", formData);
+            await post("/funfact", data);
 
             router.visit("/dashboard/funfact");
         } catch (error) {
@@ -60,10 +48,10 @@ const FunfactCreate = () => {
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
                     <FormField
                         control={form.control}
-                        name="text"
+                        name="title1"
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel>Text</FormLabel>
+                                <FormLabel>Title 1</FormLabel>
                                 <FormControl>
                                     <Input placeholder="Tahukah kamu ... " {...field} />
                                 </FormControl>
@@ -73,17 +61,51 @@ const FunfactCreate = () => {
                     />
                     <FormField
                         control={form.control}
-                        name="image"
+                        name="text1"
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel>Gambar</FormLabel>
+                                <FormLabel>Deskripsi 1</FormLabel>
                                 <FormControl>
-                                    <Input
-                                        type="file"
-                                        onChange={(e) => {
-                                            field.onChange(e.target.files);
-                                        }}
-                                    />
+                                    <Input placeholder="Deskripsi ..." {...field} />
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                    <FormField
+                        control={form.control}
+                        name="title2"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Title 2</FormLabel>
+                                <FormControl>
+                                    <Input placeholder="Tahukah kamu ... " {...field} />
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                    <FormField
+                        control={form.control}
+                        name="text2"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Deskripsi 2</FormLabel>
+                                <FormControl>
+                                    <Input placeholder="Deskripsi ..." {...field} />
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                    <FormField
+                        control={form.control}
+                        name="link_instagram"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Link Reel Instagram</FormLabel>
+                                <FormControl>
+                                    <Input placeholder="https://www.instagram.com/reel/....." {...field} />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>

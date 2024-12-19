@@ -5,6 +5,7 @@ import { del, get } from "@/lib/api";
 import { Skeleton } from "@/Components/ui/skeleton";
 import DynamicIcon from "@/Components/DynamicIcon";
 import { ColumnsFunfact } from "./DataTable/ColumnsFunfact";
+import { InstagramEmbed } from "react-social-media-embed";
 
 type FunfactColumn = {
     id: number;
