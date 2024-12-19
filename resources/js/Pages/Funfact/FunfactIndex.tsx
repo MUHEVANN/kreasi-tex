@@ -15,7 +15,7 @@ type FunfactColumn = {
 };
 
 const getData = async () => {
-    const res = await get("/funfact/data");
+    const res = await get("/funfact/data?page=1&size=999");
     return res.data.data;
 };
 
@@ -25,7 +25,7 @@ function FunfactIndex() {
     useEffect(() => {
         async function fetchData() {
             const res = await getData();
-            setData(res);
+            setData(res.data);
             setIsLoading(false);
         }
 

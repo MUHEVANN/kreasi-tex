@@ -34,8 +34,9 @@ class FunfactController extends Controller
 
     public function getFunfact(Request $request)
     {
-        $page = $request->input('page', 1);  // Default ke halaman 1 jika tidak ada parameter `page`
-        $funfact = Funfact::paginate(3, ['*'], 'page', $page);
+        $page = $request->input('page', 1);
+        $size = $request->input('size', 3);
+        $funfact = Funfact::paginate($size, ['*'], 'page', $page);
 
         return $this->res("Success Get!", 200, $funfact);
     }

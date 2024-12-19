@@ -89,16 +89,16 @@ const MaterialInfo = () => {
                 </div>
                 {dataFunfact.map((data, index) => {
                     return (
-                        <div className="lg:mx-72 my-10 mx-24 text-[#4F4F51]">
+                        <div className="lg:mx-72 my-10 mx-24 text-white">
                             <div className="grid md:grid-cols-1 lg:grid-cols-3 gap-10">
                                 <div style={{ display: 'flex', justifyContent: 'center', zIndex: 99 }} className={index % 2 == 0 ? "order-first" : "order-last"}>
                                     <InstagramEmbed url={data.link_instagram} width={328} hideCaption={true} />
                                 </div>
-                                <div className="rounded-3xl bg-[#FFFBDF] p-10">
+                                <div className="rounded-3xl bg-[#FDDC06] p-10 text-black">
                                     <p className="text-3xl font-thin mb-5">{data.title1}</p>
                                     <p>{data.text1}</p>
                                 </div>
-                                <div className="rounded-3xl bg-[#E8E6E2] p-10">
+                                <div className="rounded-3xl bg-[#342c2b] p-10">
                                     <p className="text-3xl font-thin mb-5">{data.title2}</p>
                                     <p>{data.text2}</p>
                                 </div>

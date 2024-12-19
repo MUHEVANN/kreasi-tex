@@ -90,33 +90,41 @@ function Product() {
                                 return (
                                     <Dialog>
                                         <DialogTrigger asChild>
-                                            <button className="rounded-xl overflow-hidden bg-[#F5F5F5]">
-                                                <div
-                                                    className="m-2 lg:h-80 h-64 bg-cover bg-center rounded-xl"
-                                                    style={{
-                                                        backgroundImage:
-                                                            `url(/storage/${e.gambar})`,
-                                                    }}
-                                                ></div>
-                                                <div className="h-10 text-xl font-medium">
-                                                    <p>{e.nama}</p>
-                                                </div>
-                                            </button>
+                                        <button className="rounded-xl overflow-hidden bg-[#F5F5F5]">
+                                            <div
+                                                className="m-2 w-64 h-64 bg-cover bg-center rounded-xl"
+                                                style={{
+                                                    backgroundImage: `url(/storage/${e.gambar})`,
+                                                }}
+                                            ></div>
+                                            <div className="h-10 text-xl font-medium">
+                                                <p>{e.nama}</p>
+                                            </div>
+                                        </button>
                                         </DialogTrigger>
-                                        <DialogContent className="sm:max-w-[625px]">
+                                        <DialogContent className="sm:max-w-[625px] p-6">
                                             <DialogHeader>
-                                                <DialogTitle>Detail Produk</DialogTitle>
+                                                <DialogTitle className="text-center font-bold text-2xl">Detail Produk</DialogTitle>
                                             </DialogHeader>
-                                            <div className="grid grid-cols-2">
-                                                <div style={{backgroundImage: `url(/storage/${e.gambar})`}} className=" bg-center bg-cover border-solid border-2 rounded-md">
+                                            <div className="grid sm:grid-cols-2 gap-6">
+                                                {/* Product Image Section */}
+                                                <div
+                                                    className="relative bg-center bg-cover rounded-md overflow-hidden shadow-lg"
+                                                    style={{ backgroundImage: `url(/storage/${e.gambar})`, height: '300px' }}
+                                                >
+                                                    {/* Optional: Add a dark overlay to improve readability of text if needed */}
+                                                    {/* <div className="absolute inset-0 bg-black opacity-40"></div> */}
                                                 </div>
-                                                <div className="ml-4">
-                                                    <p className="font-semibold text-xl">{e.nama}</p>
-                                                    <ul>
-                                                        <li>Bahan : {e.bahan_nama}</li>
-                                                        <li>Deskripsi : {e.deskripsi}</li>
-                                                        <li>Harga : {formatPrice(e.harga)}</li>
-                                                        <li>
+
+                                                {/* Product Information Section */}
+                                                <div className="ml-4 flex flex-col justify-between">
+                                                    <p className="font-semibold text-2xl text-gray-800">{e.nama}</p>
+                                                    <ul className="text-gray-600 mt-4 space-y-2">
+                                                        <li className="text-sm"><strong>Bahan:</strong> {e.bahan_nama}</li>
+                                                        <li className="text-sm"><strong>Deskripsi:</strong> {e.deskripsi}</li>
+                                                        <li className="text-sm"><strong>Harga:</strong> {formatPrice(e.harga)}</li>
+                                                        <li className="flex items-center text-sm">
+                                                            {/* Display the stars dynamically */}
                                                             <div className="flex">
                                                                 {Array.from({ length: parseInt(e.count_star) }).map((_, index) => (
                                                                     <Star key={index} color="#F3C158" fill="#F3C158"/>
