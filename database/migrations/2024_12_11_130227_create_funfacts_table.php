@@ -13,8 +13,11 @@ return new class extends Migration
     {
         Schema::create('funfacts', function (Blueprint $table) {
             $table->id();
-            $table->text("text");
-            $table->string("image");
+            $table->text("title1");
+            $table->text("title2");
+            $table->text("text1");
+            $table->text("text2");
+            $table->string("link_instagram");
             $table->timestamps();
         });
     }

@@ -32,37 +32,25 @@ class FunfactController extends Controller
         API
     */
 
-    public function getFunfact()
+    public function getFunfact(Request $request)
     {
-        $funfact = Funfact::all();
+        $page = $request->input('page', 1);
+        $size = $request->input('size', 3);
+        $funfact = Funfact::paginate($size, ['*'], 'page', $page);
 
         return $this->res("Success Get!", 200, $funfact);
     }
 
     public function store(FunfactRequest $request)
     {
-        $path = $request['image']->store('funfact', 'public');
-
-        $data = Funfact::create([
-            'text' => $request['text'],
-            'image' => $path
-        ]);
+        $data = Funfact::create($request->all());
 
         return $this->res("Success Create!", 201, $data);
     }
 
     public function update(FunfactRequest $request, Funfact $funfact)
     {
-        $path = $funfact->image;
-
-        if ($request['image']) {
-            unlink(public_path('storage/' . $path));
-            $path = $request['image']->store('funfact', 'public');
-        }
-        $funfact->update([
-            'text' => $request['text'],
-            'image' => $path
-        ]);
+        $funfact->update($request->all());
 
         return $this->res("Success Updated!", 200, $funfact);
     }

@@ -10,6 +10,18 @@ function Product() {
     const [dataProduk, setDataProduk] = useState([]);
     const [dataKategory, setDataKategory] = useState([]);
     const [isType, setIsType] = useState("");
+    const [isTypeId, setIsTypeId] = useState(0);
+    const [showSeeAll, setShowSeeAll] = useState(true);
+    const [pageProduct, setPageProduct] = useState(2);
+
+    const paginateDataProduct = async () => {
+        const resProduct = await getData(`/product/category/${isTypeId}?page=` + pageProduct);
+        setDataProduk(prevData => [...prevData, ...resProduct.data]);
+        setPageProduct(prevPage => prevPage + 1);
+        if(resProduct.data.length < 6) {
+            setShowSeeAll(false);
+        }
+    }
 
     useEffect(() => {
         async function fetchData() {
@@ -17,15 +29,23 @@ function Product() {
             setDataKategory(resDataBahan);
             const resDataProduk = await getData(`/product/category/${resDataBahan[0].id}`);
             setIsType(resDataBahan[0].nama)
-            setDataProduk(resDataProduk);
+            setDataProduk(resDataProduk.data);
+            if(resDataProduk.data.length < 6) {
+                setShowSeeAll(false);
+            }
         }
         fetchData();
     }, []);
 
     const changeData = async(type) => {
         const newDataProduk = await getData(`/product/category/${type.id}`)
-        setIsType(type.nama)
-        setDataProduk(newDataProduk)
+        setIsType(type.nama);
+        setIsTypeId(type.id);
+        setDataProduk(newDataProduk.data)
+        setShowSeeAll(false);
+        if(newDataProduk.data.length == 6) {
+            setShowSeeAll(true);
+        }
     };
 
     const formatPrice = (price: string) => {
@@ -39,25 +59,6 @@ function Product() {
     return (
         <Layout>
             <div className="bg-white py-10 lg:py-40 rounded-3xl relative -top-5">
-                <div className="flex justify-center my-20">
-                    <div
-                        className="flex flex-col bg-center justify-center lg:px-28 h-96 md:w-1/2 mx-14 overflow-hidden p-10 rounded-2xl"
-                        style={{ backgroundImage: "url(/fabric-image.jpg)" }}
-                    >
-                        <p className="font-light md:text-4xl text-2xl">SHINING</p>
-                        <p className="font-light md:text-4xl text-2xl">
-                            A LIGHT ON EXCELLENCE
-                        </p>
-                        <p className="font-light md:text-4xl text-2xl">IN LAMP DESIGN</p>
-                        <p>
-                            Lorem ipsum dolor sit amet consectetur adipisicing
-                            elit. Libero quaerat optio, eum velit quibusdam quia
-                            laudantium ipsam assumenda labore amet quasi, ex
-                            sapiente, soluta pariatur fuga quae eligendi
-                            inventore at!
-                        </p>
-                    </div>
-                </div>
                 <div>
                     <div className="flex flex-col justify-center text-center items-center w-screen">
                         <div className="md:w-1/2 mx-14">
@@ -89,33 +90,41 @@ function Product() {
                                 return (
                                     <Dialog>
                                         <DialogTrigger asChild>
-                                            <button className="rounded-xl overflow-hidden bg-[#F5F5F5]">
-                                                <div
-                                                    className="m-2 lg:h-80 h-64 bg-cover bg-center rounded-xl"
-                                                    style={{
-                                                        backgroundImage:
-                                                            `url(/storage/${e.gambar})`,
-                                                    }}
-                                                ></div>
-                                                <div className="h-10 text-xl font-medium">
-                                                    <p>{e.nama}</p>
-                                                </div>
-                                            </button>
+                                        <button className="rounded-xl overflow-hidden bg-[#F5F5F5]">
+                                            <div
+                                                className="m-2 w-64 h-64 bg-cover bg-center rounded-xl"
+                                                style={{
+                                                    backgroundImage: `url(/storage/${e.gambar})`,
+                                                }}
+                                            ></div>
+                                            <div className="h-10 text-xl font-medium">
+                                                <p>{e.nama}</p>
+                                            </div>
+                                        </button>
                                         </DialogTrigger>
-                                        <DialogContent className="sm:max-w-[625px]">
+                                        <DialogContent className="sm:max-w-[625px] p-6">
                                             <DialogHeader>
-                                                <DialogTitle>Detail Produk</DialogTitle>
+                                                <DialogTitle className="text-center font-bold text-2xl">Detail Produk</DialogTitle>
                                             </DialogHeader>
-                                            <div className="flex">
-                                                <div style={{backgroundImage: `url(/storage/${e.gambar})`}} className="w-[200px] h-[200px] bg-center bg-cover border-solid border-2 rounded-md">
+                                            <div className="grid sm:grid-cols-2 gap-6">
+                                                {/* Product Image Section */}
+                                                <div
+                                                    className="relative bg-center bg-cover rounded-md overflow-hidden shadow-lg"
+                                                    style={{ backgroundImage: `url(/storage/${e.gambar})`, height: '300px' }}
+                                                >
+                                                    {/* Optional: Add a dark overlay to improve readability of text if needed */}
+                                                    {/* <div className="absolute inset-0 bg-black opacity-40"></div> */}
                                                 </div>
-                                                <div className="ml-4">
-                                                    <p className="font-semibold text-xl">{e.nama}</p>
-                                                    <ul>
-                                                        <li>Bahan : {e.bahan_nama}</li>
-                                                        <li>Deskripsi : {e.deskripsi}</li>
-                                                        <li>Harga : {formatPrice(e.harga)}</li>
-                                                        <li>
+
+                                                {/* Product Information Section */}
+                                                <div className="ml-4 flex flex-col justify-between">
+                                                    <p className="font-semibold text-2xl text-gray-800">{e.nama}</p>
+                                                    <ul className="text-gray-600 mt-4 space-y-2">
+                                                        <li className="text-sm"><strong>Bahan:</strong> {e.bahan_nama}</li>
+                                                        <li className="text-sm"><strong>Deskripsi:</strong> {e.deskripsi}</li>
+                                                        <li className="text-sm"><strong>Harga:</strong> {formatPrice(e.harga)}</li>
+                                                        <li className="flex items-center text-sm">
+                                                            {/* Display the stars dynamically */}
                                                             <div className="flex">
                                                                 {Array.from({ length: parseInt(e.count_star) }).map((_, index) => (
                                                                     <Star key={index} color="#F3C158" fill="#F3C158"/>
@@ -130,6 +139,11 @@ function Product() {
                                 );
                             })}
                         </div>
+                        {showSeeAll &&
+                            <div className="my-10 flex justify-center">
+                                <button className="px-4 py-2 rounded-2xl bg-black text-white" onClick={() => paginateDataProduct()}>See All</button>
+                            </div>
+                        }
                     </div>
                 </div>
             </div>

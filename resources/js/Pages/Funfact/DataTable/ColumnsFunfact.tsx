@@ -51,8 +51,8 @@ export const ColumnsFunfact = (
         enableHiding: false,
     },
     {
-        accessorKey: "text",
-        header: "text",
+        accessorKey: "title1",
+        header: "title1",
         cell: ({ row }) => {
             function capitalizeFirstLetter(text: string): string {
                 return (
@@ -61,26 +61,59 @@ export const ColumnsFunfact = (
             }
             return (
                 <h1 className="normal-case">
-                    {capitalizeFirstLetter(row.getValue("text"))}
+                    {capitalizeFirstLetter(row.getValue("title1"))}
                 </h1>
             );
         },
     },
-
     {
-        accessorKey: "image",
-        header: "image",
-        cell: ({ row }) =>{
+        accessorKey: "text1",
+        header: "text1",
+        cell: ({ row }) => {
+            function capitalizeFirstLetter(text: string): string {
+                return (
+                    text.charAt(0).toUpperCase() + text.slice(1).toLowerCase()
+                );
+            }
             return (
-                <img
-                    src={`/storage/${row.getValue("image")}`}
-                    alt="image"
-                    className="h-10 w-10 rounded-md"
-                />
-            )
+                <h1 className="normal-case">
+                    {capitalizeFirstLetter(row.getValue("text1"))}
+                </h1>
+            );
         },
     },
-
+    {
+        accessorKey: "title2",
+        header: "title2",
+        cell: ({ row }) => {
+            function capitalizeFirstLetter(text: string): string {
+                return (
+                    text.charAt(0).toUpperCase() + text.slice(1).toLowerCase()
+                );
+            }
+            return (
+                <h1 className="normal-case">
+                    {capitalizeFirstLetter(row.getValue("title2"))}
+                </h1>
+            );
+        },
+    },
+    {
+        accessorKey: "text2",
+        header: "text2",
+        cell: ({ row }) => {
+            function capitalizeFirstLetter(text: string): string {
+                return (
+                    text.charAt(0).toUpperCase() + text.slice(1).toLowerCase()
+                );
+            }
+            return (
+                <h1 className="normal-case">
+                    {capitalizeFirstLetter(row.getValue("text2"))}
+                </h1>
+            );
+        },
+    },
     {
         accessorKey: "created_at",
         header: ({ column }) => {

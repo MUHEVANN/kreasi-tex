@@ -10,6 +10,7 @@ import { Inertia } from "@inertiajs/inertia";
 import { Input } from "@/Components/ui/input";
 import { post, put } from "@/lib/api";
 import { router } from "@inertiajs/react";
+import AdminLayout from "@/Layouts/AdminLayout";
 
 const formSchema = z.object({
     nama: z.string().min(1, { message: "Nama wajib diisi!" }),
@@ -43,40 +44,43 @@ const BahanEdit = ({ bahan }: { bahan: BahanProps }) => {
     };
 
     return (
-        <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-                <FormField
-                    control={form.control}
-                    name="nama"
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>Nama</FormLabel>
-                            <FormControl>
-                                <Input placeholder="Katun" {...field} />
-                            </FormControl>
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                />
-                <FormField
-                    control={form.control}
-                    name="deskripsi"
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>Deskripsi</FormLabel>
-                            <FormControl>
-                                <Input
-                                    placeholder="Katun Jepang"
-                                    {...field}
-                                />
-                            </FormControl>
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                />
-                <Button type="submit">Submit</Button>
-            </form>
-        </Form>
+        <AdminLayout>
+            <h1 className="text-3xl font-bold mb-3">Edit Bahan Page</h1>
+            <Form {...form}>
+                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+                    <FormField
+                        control={form.control}
+                        name="nama"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Nama</FormLabel>
+                                <FormControl>
+                                    <Input placeholder="Katun" {...field} />
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                    <FormField
+                        control={form.control}
+                        name="deskripsi"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Deskripsi</FormLabel>
+                                <FormControl>
+                                    <Input
+                                        placeholder="Katun Jepang"
+                                        {...field}
+                                    />
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                    <Button type="submit">Submit</Button>
+                </form>
+            </Form>
+        </AdminLayout>
     );
 };
 

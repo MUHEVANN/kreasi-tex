@@ -86,12 +86,14 @@ class ProductController extends Controller
         return $this->res('Product fetched successfully', 200, $product);
     }
 
-    public function getProductByCategory(int $id)
+    public function getProductByCategory(int $id, Request $request)
     {
+        $page = $request->input('page', 1);
+        $size = $request->input('size', 6);
         $product = Product::join("bahans", "bahans.id", "=", "products.bahan_id")
             ->where("products.bahan_id", $id)
             ->select("products.*", "bahans.nama as bahan_nama")
-            ->get();
+            ->paginate($size, ["*"], 'page', $page);
 
         return $this->res("OK", 200, $product);
     }
