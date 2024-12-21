@@ -3,21 +3,23 @@
 import * as React from "react";
 import {
     AudioWaveform,
-    BookOpen,
-    Bot,
+    BadgeCheck,
+    BookCheck,
+    CaseSensitive,
+    CircleHelp,
     Command,
     Frame,
     GalleryVerticalEnd,
+    Images,
     Map,
+    MapPinHouse,
+    MessageCircleQuestion,
     PieChart,
-    Settings2,
     SquareTerminal,
+    Volleyball,
 } from "lucide-react";
 
 import { NavMain } from "@/Components/NavMain";
-import { NavProjects } from "@/Components/NavProjects";
-import { NavUser } from "@/Components/NavUser";
-import { TeamSwitcher } from "@/Components/TeamSwitcher";
 import {
     Sidebar,
     SidebarContent,
@@ -65,25 +67,25 @@ const data = {
         {
             title: "Value",
             url: "/dashboard/values",
-            icon: SquareTerminal,
+            icon: BookCheck,
             isActive: true,
         },
         {
             title: "Faq",
             url: "/dashboard/faq",
-            icon: SquareTerminal,
+            icon: MessageCircleQuestion,
             isActive: true,
         },
         {
             title: "Testimoni",
             url: "/dashboard/testimonial",
-            icon: SquareTerminal,
+            icon: BadgeCheck,
             isActive: true,
         },
         {
             title: "Google Map",
             url: "/dashboard/g-map",
-            icon: SquareTerminal,
+            icon: MapPinHouse,
             isActive: true,
         },
     ],
@@ -91,7 +93,7 @@ const data = {
         {
             title: "Bahan",
             url: "/dashboard/bahan",
-            icon: SquareTerminal,
+            icon: Volleyball,
             isActive: true,
         },
         {
@@ -105,13 +107,13 @@ const data = {
         {
             title: "Deskripsi",
             url: "/dashboard/about",
-            icon: SquareTerminal,
+            icon: CaseSensitive,
             isActive: true,
         },
         {
-            title: "gambar",
+            title: "Gambar",
             url: "/dashboard/gambar-about",
-            icon: SquareTerminal,
+            icon: Images,
             isActive: true,
         },
     ],
@@ -119,7 +121,7 @@ const data = {
         {
             title: "Fun Fact",
             url: "/dashboard/funfact",
-            icon: SquareTerminal,
+            icon: CircleHelp,
             isActive: true,
         },
     ],

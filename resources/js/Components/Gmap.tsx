@@ -81,11 +81,33 @@ function Gmap() {
                                 }
                             }}
                         >
-                            <h1 className="text-3xl font-bold capitalize flex items-center gap-x-4">
-                                <HousePlus />
-                                {item.title}
+                            <h1 className="text-xl font-semibold capitalize flex items-center gap-x-4">
+                                <div
+                                    className={`${
+                                        indexActive === index
+                                            ? " bg-yellow-400  text-white"
+                                            : "text-black/60"
+                                    } p-2 rounded-full transition-all duration-300 ease-in-out`}
+                                >
+                                    <HousePlus />
+                                </div>
+                                <span
+                                    className={`${
+                                        indexActive === index
+                                            ? "text-coklat"
+                                            : "text-black/60"
+                                    }`}
+                                >
+                                    {item.title}
+                                </span>
                             </h1>
-                            <p className="mt-4 text-gray-600 flex items-center gap-x-2">
+                            <p
+                                className={`${
+                                    indexActive === index
+                                        ? "text-coklat"
+                                        : "text-gray-400 "
+                                } mt-4 flex items-center gap-x-2`}
+                            >
                                 <MapPin size={14} />
                                 {item.desc}
                             </p>
