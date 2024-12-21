@@ -25,8 +25,8 @@ function CardPreview({ props }: { props: ProductColumn }) {
                     alt=""
                     className="w-full h-full rounded-[15px] "
                 />
-                <div className="absolute top-4 right-4 flex gap-2 items-center backdrop-blur-xl border-2 border-[#F3C158] rounded-full px-6 py-1">
-                    <span className="text-xl text-[#F3C158]">
+                <div className="bg-black absolute top-4 right-4 flex gap-2 items-center backdrop-blur-xl border-2 border-[#F3C158] rounded-full px-6 py-1">
+                    <span className=" text-xl text-[#F3C158]">
                         {props.count_star}
                     </span>
                     <Star color="#F3C158" fill="#F3C158" />
@@ -54,12 +54,12 @@ function CardPreview({ props }: { props: ProductColumn }) {
                         <DialogHeader>
                             <DialogTitle>Detail Produk</DialogTitle>
                         </DialogHeader>
-                        <div className="flex">
+                        <div className="grid grid-cols-2">
                             <div
                                 style={{
                                     backgroundImage: `url(/storage/${props.gambar})`,
                                 }}
-                                className="w-[200px] h-[200px] bg-center bg-cover border-solid border-2 rounded-md"
+                                className="bg-center bg-cover border-solid border-2 rounded-md"
                             ></div>
                             <div className="ml-4">
                                 <p className="font-semibold text-xl">
