@@ -47,7 +47,7 @@ type TestimonialProps = {
 };
 
 function TestimonialEdit({ testimonial }: { testimonial: TestimonialProps }) {
-    const [image, setImage] = useState<string | null>(null);
+    const [image, setImage] = useState<string>("");
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {

@@ -2,7 +2,7 @@ import React from "react";
 import DynamicIcon from "./DynamicIcon";
 
 type ValueCardProps = {
-    icon: string;
+    icon: any;
     title: string;
     desc: string;
 };

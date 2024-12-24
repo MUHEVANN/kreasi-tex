@@ -54,7 +54,7 @@ function GambarAboutCreate() {
             await post("/gambar-about", formData);
 
             router.visit("/dashboard/gambar-about");
-        } catch (err) {
+        } catch (err:any) {
             setErr(err.response.data.message);
         }
     };

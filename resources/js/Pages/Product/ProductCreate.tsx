@@ -132,7 +132,7 @@ const ProductCreate = () => {
                                         </SelectTrigger>
                                     </FormControl>
                                     <SelectContent>
-                                        {bahanList.map((bahan) => (
+                                        {bahanList.map((bahan:any) => (
                                             <SelectItem key={bahan.id} value={bahan.id.toString()}>
                                                 {bahan.nama}
                                             </SelectItem>
@@ -183,7 +183,7 @@ const ProductCreate = () => {
                             <FormItem>
                                 <FormLabel>Tampilkan</FormLabel>
                                 <FormControl>
-                                    <Checkbox {...field} />
+                                    <Checkbox {...field as any} />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>

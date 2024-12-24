@@ -7,7 +7,7 @@ import { Star } from "lucide-react";
 import React, { useEffect, useState } from "react";
 
 function Product() {
-    const [dataProduk, setDataProduk] = useState([]);
+    const [dataProduk, setDataProduk] = useState<any[]>([]);
     const [dataKategory, setDataKategory] = useState([]);
     const [isType, setIsType] = useState("");
     const [isTypeId, setIsTypeId] = useState(0);
@@ -37,7 +37,7 @@ function Product() {
         fetchData();
     }, []);
 
-    const changeData = async(type) => {
+    const changeData = async(type:any) => {
         const newDataProduk = await getData(`/product/category/${type.id}`)
         setIsType(type.nama);
         setIsTypeId(type.id);
@@ -74,7 +74,7 @@ function Product() {
                     </div>
                 </div>
                 <div className="flex gap-10 justify-center my-10 w-screen px-14 overflow-auto">
-                    {dataKategory.map(data =>
+                    {dataKategory.map((data:any) =>
                         <button
                             className={`${isType == data.nama && 'font-bold font-2xl'}`}
                             onClick={() => changeData(data)}
@@ -86,7 +86,7 @@ function Product() {
                 <div className="flex justify-center">
                     <div className="lg:w-1/2 w-screen mx-3">
                         <div className="grid xl:grid-cols-3 md:grid-cols-2 grid-cols-1 text-center gap-10 md:mx-10 mx-5">
-                            {dataProduk.map((e, index) => {
+                            {dataProduk.map((e:any, index) => {
                                 return (
                                     <Dialog>
                                         <DialogTrigger asChild>

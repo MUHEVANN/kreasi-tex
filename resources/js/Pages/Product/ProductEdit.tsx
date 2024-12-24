@@ -52,7 +52,7 @@ type ProductProps = {
 
 const ProductEdit = ({ product }: { product: ProductProps }) => {
     const [bahanList, setBahanList] = useState([]);
-    const [gambar, setGambar] = useState<string | null>(null);
+    const [gambar, setGambar] = useState<string>("");
 
     console.log(product.bahan_id);
     const form = useForm<z.infer<typeof formSchema>>({
@@ -154,7 +154,7 @@ const ProductEdit = ({ product }: { product: ProductProps }) => {
                                         </SelectTrigger>
                                     </FormControl>
                                     <SelectContent>
-                                        {bahanList.map((bahan) => (
+                                        {bahanList.map((bahan:any) => (
                                             <SelectItem  key={bahan.id} value={bahan.id.toString()} defaultValue={bahan.id.toString()}>
                                                 {bahan.nama}
                                             </SelectItem>

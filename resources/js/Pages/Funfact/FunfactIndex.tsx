@@ -1,5 +1,5 @@
 import AdminLayout from "@/Layouts/AdminLayout";
-import { DataTableFunfact, DataTableProduct } from "./DataTable/DataTableFunfact";
+import { DataTableFunfact } from "./DataTable/DataTableFunfact";
 import { useEffect, useState } from "react";
 import { del, get } from "@/lib/api";
 import { Skeleton } from "@/Components/ui/skeleton";

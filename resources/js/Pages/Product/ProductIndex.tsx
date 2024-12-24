@@ -19,7 +19,7 @@ const getData = async () => {
 
 function ProductIndex() {
     const [isLoading, setIsLoading] = useState<boolean>(true);
-    const [data, setData] = useState<BahanColumn[]>([]);
+    const [data, setData] = useState<any[]>([]);
     useEffect(() => {
         async function fetchData() {
             const res = await getData();

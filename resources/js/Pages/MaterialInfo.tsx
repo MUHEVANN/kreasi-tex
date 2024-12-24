@@ -10,11 +10,11 @@ const MaterialInfo = () => {
     const [desc, setDesc] = useState();
     const [activeButton, setActiveButton] = useState(0);
     const [data, setData] = useState([]);
-    const [dataFunfact, setDataFunfact] = useState([]);
+    const [dataFunfact, setDataFunfact] = useState<any[]>([]);
     const [showSeeAll, setShowSeeAll] = useState(true);
     const [pageFunfact, setPageFunfact] = useState(2);
 
-    const changeDesc = (data, index) => {
+    const changeDesc = (data:any, index:any) => {
         setTitleDesc(data.nama);
         setDesc(data.deskripsi);
         setActiveButton(index);
@@ -55,7 +55,7 @@ const MaterialInfo = () => {
                 </div>
                 <div className="flex justify-center">
                     <div className="grid grid-cols-3 items-center text-center gap-x-5 md:gap-x-10 gap-y-5">
-                        {data.map((e, index) => (
+                        {data.map((e:any, index) => (
                             <button
                                 key={index}
                                 onClick={() => changeDesc(e, index)}
@@ -87,12 +87,12 @@ const MaterialInfo = () => {
                 <div className="text-center my-10">
                     <p className="lg:text-5xl text-3xl font-thin">Apakah Kamu Tahu?</p>
                 </div>
-                {dataFunfact.map((data, index) => {
+                {dataFunfact.map((data:any, index) => {
                     return (
                         <div className="lg:mx-72 my-10 mx-24 text-white">
                             <div className="grid md:grid-cols-1 lg:grid-cols-3 gap-10">
                                 <div style={{ display: 'flex', justifyContent: 'center', zIndex: 99 }} className={index % 2 == 0 ? "order-first" : "order-last"}>
-                                    <InstagramEmbed url={data.link_instagram} width={328} hideCaption={true} />
+                                    <InstagramEmbed url={data.link_instagram} width={328} />
                                 </div>
                                 <div className="rounded-3xl bg-[#FDDC06] p-10 text-black">
                                     <p className="text-3xl font-thin mb-5">{data.title1}</p>
