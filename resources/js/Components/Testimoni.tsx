@@ -37,7 +37,6 @@ function Testimoni() {
         fetchData();
     }, []);
 
-    console.log(data);
     return (
         <div className=" main__container pt-[3rem]">
             <TitleSection className="text-center">Testimonial</TitleSection>
