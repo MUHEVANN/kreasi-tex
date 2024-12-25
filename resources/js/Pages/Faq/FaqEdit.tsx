@@ -1,7 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import z from "zod";
-import { Button } from "@/Components/ui/button";
 import {
     Form,
     FormControl,
@@ -12,8 +11,10 @@ import {
 } from "@/Components/ui/form";
 import { Input } from "@/Components/ui/input";
 import AdminLayout from "@/Layouts/AdminLayout";
-import { post, put } from "@/lib/api";
+import { put } from "@/lib/api";
 import { router } from "@inertiajs/react";
+import React from "react";
+import ButtonSubmit from "@/Components/ButtonSubmit";
 const formSchema = z.object({
     question: z.string().min(1, { message: "Title is required" }),
     answer: z.string().min(1, { message: "Description is required" }),
@@ -27,6 +28,7 @@ type FaqProps = {
 };
 
 function FaqEdit({ faq }: { faq: FaqProps }) {
+    const [loading, setLoading] = React.useState<boolean>(false);
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -36,11 +38,15 @@ function FaqEdit({ faq }: { faq: FaqProps }) {
     });
 
     const onSubmit = async (data: z.infer<typeof formSchema>) => {
+        setLoading(true);
         try {
             await put(`/faq/${faq.id}`, data);
+
             router.visit("/dashboard/faq");
         } catch (error) {
             console.log(error);
+        } finally {
+            setTimeout(() => setLoading(false), 500);
         }
     };
     return (
@@ -80,7 +86,7 @@ function FaqEdit({ faq }: { faq: FaqProps }) {
                             </FormItem>
                         )}
                     />
-                    <Button type="submit">Submit</Button>
+                    <ButtonSubmit loading={loading} />
                 </form>
             </Form>
         </AdminLayout>

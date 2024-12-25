@@ -1,9 +1,8 @@
 import React from "react";
-import { Send } from "lucide-react";
 import ValueCard from "@/Components/ValueCard";
 import { get } from "@/lib/api";
 
-type ValueProps = {
+export type ValueProps = {
     title: string;
     desc: string;
     icon: string;
@@ -11,7 +10,7 @@ type ValueProps = {
     created_at: string;
 };
 
-const getValues = async () => {
+export const getValues = async () => {
     const res = await get("/values/data");
     return res.data.data;
 };

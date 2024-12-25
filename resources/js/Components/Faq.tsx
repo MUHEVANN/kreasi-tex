@@ -31,19 +31,19 @@ function Faq() {
     }, []);
 
     return (
-        <div>
-            <TitleSection className="text-center ">FAQ</TitleSection>
+        <div className="pt-[3rem]">
+            <TitleSection className="text-center mb-8">FAQ</TitleSection>
             <div className="main__container">
                 {data.map((item, i) => (
                     <Accordion
                         key={i}
                         type="single"
                         collapsible
-                        className="2xl:px-[20rem]"
+                        className="2xl:px-[20rem] "
                     >
                         <AccordionItem
                             value="item-1"
-                            className="bg-gray-100 px-[1rem] mb-3"
+                            className="bg-gray-100 px-[1rem] mb-3 "
                         >
                             <AccordionTrigger className="text-lg">
                                 {item.question}

@@ -25,8 +25,8 @@ function Navbar() {
     const [isOpen, setIsOpen] = React.useState(false);
     return (
         <div className="w-full fixed top-0 z-[999]">
-            <div className="md:px-[5rem] lg:px-[15rem] 2xl:px-[30rem] hidden md:block">
-                <div className=" flex justify-between py-8 border-b border-black backdrop-blur-sm">
+            <div className="md:px-[5rem] backdrop-blur-sm lg:px-[15rem] 2xl:px-[30rem] hidden md:block">
+                <div className=" flex justify-between py-8 border-b border-black ">
                     {navLinks.map((link, index) => (
                         <Link
                             key={index}

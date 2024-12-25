@@ -1,7 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import z from "zod";
-import { Button } from "@/Components/ui/button";
 import {
     Form,
     FormControl,
@@ -14,7 +13,8 @@ import { Input } from "@/Components/ui/input";
 import AdminLayout from "@/Layouts/AdminLayout";
 import { post, put } from "@/lib/api";
 import { router } from "@inertiajs/react";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+import ButtonSubmit from "@/Components/ButtonSubmit";
 
 const formSchema = z.object({
     name: z.string().min(1, { message: "Title is required" }),
@@ -47,6 +47,7 @@ type TestimonialProps = {
 };
 
 function TestimonialEdit({ testimonial }: { testimonial: TestimonialProps }) {
+    const [loading, setLoading] = React.useState<boolean>(false);
     const [image, setImage] = useState<string>("");
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -58,6 +59,7 @@ function TestimonialEdit({ testimonial }: { testimonial: TestimonialProps }) {
     });
 
     const onSubmit = async (data: z.infer<typeof formSchema>) => {
+        setLoading(true);
         try {
             const formData = new FormData();
             formData.append("name", data.name);
@@ -72,6 +74,10 @@ function TestimonialEdit({ testimonial }: { testimonial: TestimonialProps }) {
             router.visit("/dashboard/testimonial");
         } catch (error) {
             console.log(error);
+        } finally {
+            setTimeout(() => {
+                setLoading(false);
+            }, 500);
         }
     };
 
@@ -138,7 +144,7 @@ function TestimonialEdit({ testimonial }: { testimonial: TestimonialProps }) {
                         )}
                     />
 
-                    <Button type="submit">Submit</Button>
+                    <ButtonSubmit loading={loading} />
                 </form>
             </Form>
         </AdminLayout>

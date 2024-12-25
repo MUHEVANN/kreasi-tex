@@ -1,7 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import z from "zod";
-import { Button } from "@/Components/ui/button";
 import {
     Form,
     FormControl,
@@ -14,6 +13,8 @@ import { Input } from "@/Components/ui/input";
 import AdminLayout from "@/Layouts/AdminLayout";
 import { post } from "@/lib/api";
 import { router } from "@inertiajs/react";
+import ButtonSubmit from "@/Components/ButtonSubmit";
+import React from "react";
 const formSchema = z.object({
     title: z.string().min(1, { message: "Title is required" }),
     desc: z.string().min(1, { message: "Title is required" }),
@@ -32,6 +33,7 @@ const formSchema = z.object({
 });
 
 function GmapCreate() {
+    const [loading, setLoading] = React.useState<boolean>(false);
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -41,14 +43,17 @@ function GmapCreate() {
         },
     });
 
-
     const onSubmit = async (data: z.infer<typeof formSchema>) => {
-        // const link = getUrlMap(data.link);
+        setLoading(true);
         try {
             await post("/g-map", data);
             router.visit("/dashboard/g-map");
         } catch (error) {
             console.log(error);
+        } finally {
+            setTimeout(() => {
+                setLoading(false);
+            }, 500);
         }
     };
 
@@ -103,7 +108,7 @@ function GmapCreate() {
                         )}
                     />
 
-                    <Button type="submit">Submit</Button>
+                    <ButtonSubmit loading={loading} />
                 </form>
             </Form>
         </AdminLayout>

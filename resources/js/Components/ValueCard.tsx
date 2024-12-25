@@ -10,14 +10,14 @@ type ValueCardProps = {
 function ValueCard({ icon, title, desc }: ValueCardProps) {
     return (
         <div className="max-w-[180px] lg:max-w-[25%] xl:max-w-[20%] flex justify-center flex-col items-center gap-4">
-            <div className="p-4 bg-gray-200 rounded-full ">
+            <div className="p-4 bg-gray-400 rounded-full text-black ">
                 <DynamicIcon iconId={icon} />
             </div>
             <div>
-                <h1 className="text-center text-xl font-semibold mb-2 capitalize">
+                <h1 className="text-center text-2xl font-semibold mb-2 capitalize text-coklat">
                     {title}
                 </h1>
-                <p className="text-center opacity-75 text-[14px] md:text-[16px] ">
+                <p className="text-center opacity-60 text-[14px] md:text-[15px] ">
                     {desc}
                 </p>
             </div>

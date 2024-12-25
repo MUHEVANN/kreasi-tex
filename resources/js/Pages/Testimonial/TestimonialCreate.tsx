@@ -1,7 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import z from "zod";
-import { Button } from "@/Components/ui/button";
 import {
     Form,
     FormControl,
@@ -14,6 +13,8 @@ import { Input } from "@/Components/ui/input";
 import AdminLayout from "@/Layouts/AdminLayout";
 import { post } from "@/lib/api";
 import { router } from "@inertiajs/react";
+import ButtonSubmit from "@/Components/ButtonSubmit";
+import React from "react";
 const formSchema = z.object({
     name: z.string().min(1, { message: "Title is required" }),
     comment: z.string().min(1, { message: "Description is required" }),
@@ -35,6 +36,7 @@ const formSchema = z.object({
 });
 
 function TestimonialCreate() {
+    const [loading, setLoading] = React.useState<boolean>(false);
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -45,6 +47,7 @@ function TestimonialCreate() {
     });
 
     const onSubmit = async (data: z.infer<typeof formSchema>) => {
+        setLoading(true);
         try {
             const formData = new FormData();
             formData.append("name", data.name);
@@ -60,6 +63,8 @@ function TestimonialCreate() {
             router.visit("/dashboard/testimonial");
         } catch (error) {
             console.log(error);
+        } finally {
+            setTimeout(() => setLoading(false), 500);
         }
     };
 
@@ -119,7 +124,7 @@ function TestimonialCreate() {
                         )}
                     />
 
-                    <Button type="submit">Submit</Button>
+                    <ButtonSubmit loading={loading} />
                 </form>
             </Form>
         </AdminLayout>

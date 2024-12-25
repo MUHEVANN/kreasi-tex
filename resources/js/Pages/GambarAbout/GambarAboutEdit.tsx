@@ -1,7 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import z from "zod";
-import { Button } from "@/Components/ui/button";
+
 import {
     Form,
     FormControl,
@@ -12,8 +12,10 @@ import {
 } from "@/Components/ui/form";
 import { Input } from "@/Components/ui/input";
 import AdminLayout from "@/Layouts/AdminLayout";
-import { post, put } from "@/lib/api";
+import { post } from "@/lib/api";
 import { router } from "@inertiajs/react";
+import React from "react";
+import ButtonSubmit from "@/Components/ButtonSubmit";
 const formSchema = z.object({
     gambar: z
         .instanceof(FileList)
@@ -39,6 +41,7 @@ type ValueProps = {
 };
 
 function ValueEdit({ gambar }: { gambar: ValueProps }) {
+    const [loading, setLoading] = React.useState<boolean>(false);
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -47,6 +50,7 @@ function ValueEdit({ gambar }: { gambar: ValueProps }) {
     });
 
     const onSubmit = async (data: z.infer<typeof formSchema>) => {
+        setLoading(true);
         try {
             const formData = new FormData();
             if (data.gambar) {
@@ -56,6 +60,8 @@ function ValueEdit({ gambar }: { gambar: ValueProps }) {
             router.visit("/dashboard/gambar-about");
         } catch (error) {
             console.log(error);
+        } finally {
+            setLoading(false);
         }
     };
     return (
@@ -85,7 +91,7 @@ function ValueEdit({ gambar }: { gambar: ValueProps }) {
                         )}
                     />
 
-                    <Button type="submit">Submit</Button>
+                    <ButtonSubmit loading={loading} />
                 </form>
             </Form>
         </AdminLayout>

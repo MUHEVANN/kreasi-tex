@@ -1,18 +1,30 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import z from "zod";
-import { Button } from "@/Components/ui/button";
 
 import React, { useEffect, useState } from "react";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/Components/ui/form";
-import { title } from "process";
-import { Inertia } from "@inertiajs/inertia";
+import {
+    Form,
+    FormControl,
+    FormField,
+    FormItem,
+    FormLabel,
+    FormMessage,
+} from "@/Components/ui/form";
+
 import { Input } from "@/Components/ui/input";
-import { get, post, put } from "@/lib/api";
+import { get, post } from "@/lib/api";
 import { router } from "@inertiajs/react";
 import { Checkbox } from "@/Components/ui/checkbox";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/Components/ui/select";
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from "@/Components/ui/select";
 import AdminLayout from "@/Layouts/AdminLayout";
+import ButtonSubmit from "@/Components/ButtonSubmit";
 
 const formSchema = z.object({
     nama: z.string().min(1, { message: "Nama wajib diisi!" }),
@@ -32,7 +44,8 @@ const formSchema = z.object({
             {
                 message: "File harus berupa gambar!",
             }
-        ).optional(),
+        )
+        .optional(),
     harga: z.string().min(1, { message: "Harga wajib diisi!" }),
     is_view: z.boolean().default(false),
     count_star: z.string().min(1, { message: "Bintang wajib diisi!" }),
@@ -53,8 +66,7 @@ type ProductProps = {
 const ProductEdit = ({ product }: { product: ProductProps }) => {
     const [bahanList, setBahanList] = useState([]);
     const [gambar, setGambar] = useState<string>("");
-
-    console.log(product.bahan_id);
+    const [loading, setLoading] = React.useState<boolean>(false);
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -62,12 +74,13 @@ const ProductEdit = ({ product }: { product: ProductProps }) => {
             deskripsi: product.deskripsi,
             bahan_id: product.bahan_id.toString(),
             harga: product.harga,
-            is_view: !!(product.is_view),
+            is_view: !!product.is_view,
             count_star: product.count_star,
         },
     });
 
     const onSubmit = async (data: z.infer<typeof formSchema>) => {
+        setLoading(true);
         try {
             const formData = new FormData();
             formData.append("nama", data.nama);
@@ -75,7 +88,7 @@ const ProductEdit = ({ product }: { product: ProductProps }) => {
             formData.append("count_star", data.count_star);
             formData.append("deskripsi", data.deskripsi);
             formData.append("harga", data.harga);
-            if(data.gambar) {
+            if (data.gambar) {
                 formData.append("gambar", data.gambar[0]);
             }
             formData.append("is_view", data.is_view.toString());
@@ -85,6 +98,10 @@ const ProductEdit = ({ product }: { product: ProductProps }) => {
             router.visit("/dashboard/product");
         } catch (error) {
             console.log(error);
+        } finally {
+            setTimeout(() => {
+                setLoading(false);
+            }, 500);
         }
     };
 
@@ -96,7 +113,7 @@ const ProductEdit = ({ product }: { product: ProductProps }) => {
             } catch (error) {
                 console.log("Error fetching bahan data: ", error);
             }
-        }
+        };
 
         fetchBahan();
         setGambar(`/storage/${product.gambar}`);
@@ -106,7 +123,10 @@ const ProductEdit = ({ product }: { product: ProductProps }) => {
         <AdminLayout>
             <h1 className="text-3xl font-bold mb-3">Edit Product Page</h1>
             <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+                <form
+                    onSubmit={form.handleSubmit(onSubmit)}
+                    className="space-y-2"
+                >
                     <FormField
                         control={form.control}
                         name="nama"
@@ -141,9 +161,7 @@ const ProductEdit = ({ product }: { product: ProductProps }) => {
                         name="bahan_id"
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel>
-                                    Bahan
-                                </FormLabel>
+                                <FormLabel>Bahan</FormLabel>
                                 <Select
                                     value={field.value}
                                     onValueChange={field.onChange}
@@ -154,8 +172,12 @@ const ProductEdit = ({ product }: { product: ProductProps }) => {
                                         </SelectTrigger>
                                     </FormControl>
                                     <SelectContent>
-                                        {bahanList.map((bahan:any) => (
-                                            <SelectItem  key={bahan.id} value={bahan.id.toString()} defaultValue={bahan.id.toString()}>
+                                        {bahanList.map((bahan: any) => (
+                                            <SelectItem
+                                                key={bahan.id}
+                                                value={bahan.id.toString()}
+                                                defaultValue={bahan.id.toString()}
+                                            >
                                                 {bahan.nama}
                                             </SelectItem>
                                         ))}
@@ -192,10 +214,7 @@ const ProductEdit = ({ product }: { product: ProductProps }) => {
                             <FormItem>
                                 <FormLabel>Harga</FormLabel>
                                 <FormControl>
-                                    <Input
-                                        placeholder="5"
-                                        {...field}
-                                    />
+                                    <Input placeholder="5" {...field} />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -206,9 +225,14 @@ const ProductEdit = ({ product }: { product: ProductProps }) => {
                         name="is_view"
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel className="mr-3">Tampilkan</FormLabel>
+                                <FormLabel className="mr-3">
+                                    Tampilkan
+                                </FormLabel>
                                 <FormControl>
-                                    <Checkbox checked={field.value} onCheckedChange={field.onChange}/>
+                                    <Checkbox
+                                        checked={field.value}
+                                        onCheckedChange={field.onChange}
+                                    />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -221,16 +245,13 @@ const ProductEdit = ({ product }: { product: ProductProps }) => {
                             <FormItem>
                                 <FormLabel>Bintang</FormLabel>
                                 <FormControl>
-                                    <Input
-                                        placeholder="10000"
-                                        {...field}
-                                    />
+                                    <Input placeholder="10000" {...field} />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
                         )}
                     />
-                    <Button type="submit">Submit</Button>
+                    <ButtonSubmit loading={loading} />
                 </form>
             </Form>
         </AdminLayout>

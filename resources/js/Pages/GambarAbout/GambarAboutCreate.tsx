@@ -1,7 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import z from "zod";
-import { Button } from "@/Components/ui/button";
+
 import {
     Form,
     FormControl,
@@ -14,7 +14,8 @@ import { Input } from "@/Components/ui/input";
 import AdminLayout from "@/Layouts/AdminLayout";
 import { post } from "@/lib/api";
 import { router } from "@inertiajs/react";
-import { useState } from "react";
+import React, { useState } from "react";
+import ButtonSubmit from "@/Components/ButtonSubmit";
 const formSchema = z.object({
     gambar: z
         .instanceof(FileList, {
@@ -33,12 +34,13 @@ const formSchema = z.object({
                 message: "File must be an image",
             }
         )
-        .refine((files) => files[0].size >= 2 * 1024 * 1024, {
-            message: "ukuran maximal 2 mb",
+        .refine((files) => files[0].size <= 4 * 1024 * 1024, {
+            message: "ukuran maximal 4 mb",
         }),
 });
 
 function GambarAboutCreate() {
+    const [loading, setLoading] = React.useState<boolean>(false);
     const [err, setErr] = useState("");
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -48,14 +50,19 @@ function GambarAboutCreate() {
     });
 
     const onSubmit = async (data: z.infer<typeof formSchema>) => {
+        setLoading(true);
         try {
             const formData = new FormData();
             formData.append("gambar", data.gambar[0]);
             await post("/gambar-about", formData);
 
             router.visit("/dashboard/gambar-about");
-        } catch (err:any) {
+        } catch (err: any) {
             setErr(err.response.data.message);
+        } finally {
+            setTimeout(() => {
+                setLoading(false);
+            }, 500);
         }
     };
 
@@ -93,7 +100,7 @@ function GambarAboutCreate() {
                         )}
                     />
 
-                    <Button type="submit">Submit</Button>
+                    <ButtonSubmit loading={loading} />
                 </form>
             </Form>
         </AdminLayout>

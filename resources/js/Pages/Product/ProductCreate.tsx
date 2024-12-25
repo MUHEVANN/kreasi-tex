@@ -1,16 +1,29 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import z from "zod";
-import { Button } from "@/Components/ui/button";
 
 import React, { useEffect, useState } from "react";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/Components/ui/form";
+import {
+    Form,
+    FormControl,
+    FormField,
+    FormItem,
+    FormLabel,
+    FormMessage,
+} from "@/Components/ui/form";
 import { Input } from "@/Components/ui/input";
 import { get, post } from "@/lib/api";
 import { router } from "@inertiajs/react";
 import Checkbox from "@/Components/Checkbox";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/Components/ui/select";
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from "@/Components/ui/select";
 import AdminLayout from "@/Layouts/AdminLayout";
+import ButtonSubmit from "@/Components/ButtonSubmit";
 
 const formSchema = z.object({
     nama: z.string().min(1, { message: "Nama wajib diisi!" }),
@@ -37,7 +50,7 @@ const formSchema = z.object({
 });
 const ProductCreate = () => {
     const [bahanList, setBahanList] = useState([]);
-
+    const [loading, setLoading] = React.useState<boolean>(false);
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -52,6 +65,7 @@ const ProductCreate = () => {
     });
 
     const onSubmit = async (data: z.infer<typeof formSchema>) => {
+        setLoading(true);
         try {
             const formData = new FormData();
             formData.append("nama", data.nama);
@@ -67,6 +81,10 @@ const ProductCreate = () => {
             router.visit("/dashboard/product");
         } catch (error) {
             console.log(error);
+        } finally {
+            setTimeout(() => {
+                setLoading(false);
+            }, 500);
         }
     };
 
@@ -78,7 +96,7 @@ const ProductCreate = () => {
             } catch (error) {
                 console.log("Error fetching bahan data: ", error);
             }
-        }
+        };
 
         fetchBahan();
     }, []);
@@ -87,7 +105,10 @@ const ProductCreate = () => {
         <AdminLayout>
             <h1 className="text-3xl font-bold mb-3">Create Product Page</h1>
             <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+                <form
+                    onSubmit={form.handleSubmit(onSubmit)}
+                    className="space-y-2"
+                >
                     <FormField
                         control={form.control}
                         name="nama"
@@ -122,18 +143,22 @@ const ProductCreate = () => {
                         name="bahan_id"
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel>
-                                    Bahan
-                                </FormLabel>
-                                <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                <FormLabel>Bahan</FormLabel>
+                                <Select
+                                    onValueChange={field.onChange}
+                                    defaultValue={field.value}
+                                >
                                     <FormControl>
                                         <SelectTrigger className="w-[180px]">
                                             <SelectValue placeholder="Pilih Bahan" />
                                         </SelectTrigger>
                                     </FormControl>
                                     <SelectContent>
-                                        {bahanList.map((bahan:any) => (
-                                            <SelectItem key={bahan.id} value={bahan.id.toString()}>
+                                        {bahanList.map((bahan: any) => (
+                                            <SelectItem
+                                                key={bahan.id}
+                                                value={bahan.id.toString()}
+                                            >
                                                 {bahan.nama}
                                             </SelectItem>
                                         ))}
@@ -167,10 +192,7 @@ const ProductCreate = () => {
                             <FormItem>
                                 <FormLabel>Harga</FormLabel>
                                 <FormControl>
-                                    <Input
-                                        placeholder="10000"
-                                        {...field}
-                                    />
+                                    <Input placeholder="10000" {...field} />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -183,7 +205,7 @@ const ProductCreate = () => {
                             <FormItem>
                                 <FormLabel>Tampilkan</FormLabel>
                                 <FormControl>
-                                    <Checkbox {...field as any} />
+                                    <Checkbox {...(field as any)} />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -196,16 +218,13 @@ const ProductCreate = () => {
                             <FormItem>
                                 <FormLabel>Bintang</FormLabel>
                                 <FormControl>
-                                    <Input
-                                        placeholder="5"
-                                        {...field}
-                                    />
+                                    <Input placeholder="5" {...field} />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
                         )}
                     />
-                    <Button type="submit">Submit</Button>
+                    <ButtonSubmit loading={loading} />
                 </form>
             </Form>
         </AdminLayout>

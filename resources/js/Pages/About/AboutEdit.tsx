@@ -14,6 +14,8 @@ import { Input } from "@/Components/ui/input";
 import AdminLayout from "@/Layouts/AdminLayout";
 import { put } from "@/lib/api";
 import { router } from "@inertiajs/react";
+import React from "react";
+import ButtonSubmit from "@/Components/ButtonSubmit";
 const formSchema = z.object({
     title: z.string().min(1, { message: "Title is required" }),
     desc: z.string().min(1, { message: "Description is required" }),
@@ -26,7 +28,8 @@ type FaqProps = {
     created_at: string;
 };
 
-function FaqEdit({ about }: { about: FaqProps }) {
+function AboutEdit({ about }: { about: FaqProps }) {
+    const [loading, setLoading] = React.useState<boolean>(false);
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -36,11 +39,16 @@ function FaqEdit({ about }: { about: FaqProps }) {
     });
 
     const onSubmit = async (data: z.infer<typeof formSchema>) => {
+        setLoading(true);
         try {
             await put(`/about/${about.id}`, data);
             router.visit("/dashboard/about");
         } catch (error) {
             console.log(error);
+        } finally {
+            setTimeout(() => {
+                setLoading(true);
+            }, 500);
         }
     };
     return (
@@ -80,11 +88,11 @@ function FaqEdit({ about }: { about: FaqProps }) {
                             </FormItem>
                         )}
                     />
-                    <Button type="submit">Submit</Button>
+                    <ButtonSubmit loading={loading} />
                 </form>
             </Form>
         </AdminLayout>
     );
 }
 
-export default FaqEdit;
+export default AboutEdit;

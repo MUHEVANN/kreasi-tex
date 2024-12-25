@@ -22,14 +22,14 @@ class GambarRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'gambar' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
+            'gambar' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:4048',
         ];
     }
 
     public function messages()
     {
         return [
-            'gambar.max' => "maximal gambar 2 mb"
+            'gambar.max' => "maximal gambar 4 mb"
         ];
     }
 }
