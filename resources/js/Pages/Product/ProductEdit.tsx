@@ -48,7 +48,6 @@ const formSchema = z.object({
         .optional(),
     harga: z.string().min(1, { message: "Harga wajib diisi!" }),
     is_view: z.boolean().default(false),
-    count_star: z.string().min(1, { message: "Bintang wajib diisi!" }),
 });
 
 type ProductProps = {
@@ -60,7 +59,6 @@ type ProductProps = {
     created_at: string;
     harga: string;
     is_view: boolean;
-    count_star: string;
 };
 
 const ProductEdit = ({ product }: { product: ProductProps }) => {
@@ -75,7 +73,6 @@ const ProductEdit = ({ product }: { product: ProductProps }) => {
             bahan_id: product.bahan_id.toString(),
             harga: product.harga,
             is_view: !!product.is_view,
-            count_star: product.count_star,
         },
     });
 
@@ -85,7 +82,6 @@ const ProductEdit = ({ product }: { product: ProductProps }) => {
             const formData = new FormData();
             formData.append("nama", data.nama);
             formData.append("bahan_id", data.bahan_id);
-            formData.append("count_star", data.count_star);
             formData.append("deskripsi", data.deskripsi);
             formData.append("harga", data.harga);
             if (data.gambar) {
@@ -233,19 +229,6 @@ const ProductEdit = ({ product }: { product: ProductProps }) => {
                                         checked={field.value}
                                         onCheckedChange={field.onChange}
                                     />
-                                </FormControl>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
-                    <FormField
-                        control={form.control}
-                        name="count_star"
-                        render={({ field }) => (
-                            <FormItem>
-                                <FormLabel>Bintang</FormLabel>
-                                <FormControl>
-                                    <Input placeholder="10000" {...field} />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>

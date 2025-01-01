@@ -1,5 +1,5 @@
 import React from "react";
-import { ArrowRight, Star } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { ProductColumn } from "./ProductPreview";
 import {
     Dialog,
@@ -25,12 +25,6 @@ function CardPreview({ props }: { props: ProductColumn }) {
                     alt=""
                     className="w-full h-full rounded-[15px] "
                 />
-                <div className="bg-black absolute top-4 right-4 flex gap-2 items-center backdrop-blur-xl border-2 border-[#F3C158] rounded-full px-6 py-1">
-                    <span className=" text-xl text-[#F3C158]">
-                        {props.count_star}
-                    </span>
-                    <Star color="#F3C158" fill="#F3C158" />
-                </div>
             </div>
             <div className="pt-2 md:pt-5 pb-3 px-4 flex justify-between md:items-center">
                 <div>
@@ -69,21 +63,6 @@ function CardPreview({ props }: { props: ProductColumn }) {
                                     <li>Bahan : {props.bahan_nama}</li>
                                     <li>Deskripsi : {props.deskripsi}</li>
                                     <li>Harga : {formatPrice(props.harga)}</li>
-                                    <li>
-                                        <div className="flex">
-                                            {Array.from({
-                                                length: parseInt(
-                                                    props.count_star
-                                                ),
-                                            }).map((_, index) => (
-                                                <Star
-                                                    key={index}
-                                                    color="#F3C158"
-                                                    fill="#F3C158"
-                                                />
-                                            ))}
-                                        </div>
-                                    </li>
                                 </ul>
                             </div>
                         </div>

@@ -1,6 +1,6 @@
 import Layout from "@/Layouts/Layout";
 import { getData } from "@/lib/api";
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 
 type AboutColumn = {
     id: number;
@@ -27,19 +27,25 @@ function About() {
         fetchData();
     }, []);
 
+    useLayoutEffect(() => {
+        window.scrollTo({
+            top: 950,
+            left: 100,
+            behavior: "smooth",
+        });
+    }, []);
+
     return (
         <Layout>
-            <div className="main__container">
+            <div className="main__container rounded-t-[25px] bg-white -translate-y-5">
                 <div className="grid md:grid-cols-3 xl:grid-cols-4 py-[3rem]">
-                    <h3 className="text-coklat text-[24px] font-bold">
-                        About us
-                    </h3>
+                    <h1 className="text-coklat text-4xl">About us</h1>
                     {data.map((item, i) => (
                         <div className="col-span-2 xl:col-span-3" key={i}>
-                            <h1 className="text-[35px] md:text-[50px]  leading-[50px] text-coklat font-bold font-secondary">
+                            <h1 className="text-[32px] md:text-[50px] leading-[32px] md:leading-[50px] text-coklat font-bold ">
                                 {item.title}
                             </h1>
-                            <p className="text-2xl mt-6">{item.desc}</p>
+                            <p className="text-xl mt-6">{item.desc}</p>
                         </div>
                     ))}
                 </div>

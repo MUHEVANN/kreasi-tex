@@ -9,7 +9,7 @@ function TitleSection({ children, className }: TitleSectionProps) {
     return (
         <h1
             className={cn(
-                "font-bold text-2xl lg:text-4xl text-[#332C29] mb-3 uppercase",
+                " md:text-6xl text-2xl text-[#332C29] mb-3 uppercase relative text-center",
                 className
             )}
         >

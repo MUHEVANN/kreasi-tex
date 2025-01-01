@@ -14,10 +14,10 @@ function ValueCard({ icon, title, desc }: ValueCardProps) {
                 <DynamicIcon iconId={icon} />
             </div>
             <div>
-                <h1 className="text-center text-2xl font-semibold mb-2 capitalize text-coklat">
+                <h1 className="text-center text-[25px] font-semibold mb-2 capitalize text-coklat">
                     {title}
                 </h1>
-                <p className="text-center opacity-60 text-[14px] md:text-[15px] ">
+                <p className="text-center opacity-60 text-[14px] md:text-[16px] ">
                     {desc}
                 </p>
             </div>

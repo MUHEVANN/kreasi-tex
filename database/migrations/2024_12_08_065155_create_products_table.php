@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string("gambar");
             $table->string("harga");
             $table->boolean("is_view");
-            $table->string("count_star");
+            $table->string("count_star")->nullable();
             $table->timestamps();
         });
     }
