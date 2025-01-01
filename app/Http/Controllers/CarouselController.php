@@ -20,9 +20,9 @@ class CarouselController extends Controller
         return Inertia::render('Carousel/CarouselCreate');
     }
 
-    public function edit(Bahan $value)
+    public function edit(Carousel $carousel)
     {
-        return Inertia::render('Carousel/CarouselEdit', ['carousel' => $value]);
+        return Inertia::render('Carousel/CarouselEdit', ['carousel' => $carousel]);
     }
 
     /*
@@ -51,7 +51,20 @@ class CarouselController extends Controller
 
     public function update(CarouselUpdateRequest $request, Carousel $carousel)
     {
-        $carousel->update($request->all());
+        if ($request['gambar']) {
+            unlink(public_path('storage/' . $carousel->gambar));
+            $path = $request['gambar']->store('gambar_about', 'public');
+            $carousel->update([
+                'title' => $request['title'],
+                'desc' => $request['desc'],
+                'gambar' => $path
+            ]);
+        }
+        $carousel->update([
+            'title' => $request['title'],
+            'desc' => $request['desc'],
+            'gambar' => $carousel['gambar']
+        ]);
 
         return $this->res("Success Updated!", 201, $carousel);
     }

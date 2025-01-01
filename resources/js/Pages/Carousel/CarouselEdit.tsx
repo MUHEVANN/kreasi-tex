@@ -16,7 +16,14 @@ import { post } from "@/lib/api";
 import { router } from "@inertiajs/react";
 import React from "react";
 import ButtonSubmit from "@/Components/ButtonSubmit";
+import { CarouselColumn } from "./DataTable/ColumnsCarousel";
 const formSchema = z.object({
+    title: z.string().min(1, {
+        message: "Title tidak boleh kosong",
+    }),
+    desc: z.string().min(1, {
+        message: "Deskripsi tidak boleh kosong",
+    }),
     gambar: z
         .instanceof(FileList)
         .refine(
@@ -31,20 +38,17 @@ const formSchema = z.object({
             {
                 message: "File must be an image",
             }
-        ),
+        )
+        .optional(),
 });
 
-type ValueProps = {
-    id: number;
-    gambar: string;
-    created_at: string;
-};
-
-function CarouselEdit({ gambar }: { gambar: ValueProps }) {
+function CarouselEdit({ carousel }: { carousel: CarouselColumn }) {
     const [loading, setLoading] = React.useState<boolean>(false);
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
+            title: carousel.title,
+            desc: carousel.desc,
             gambar: undefined,
         },
     });
@@ -56,8 +60,10 @@ function CarouselEdit({ gambar }: { gambar: ValueProps }) {
             if (data.gambar) {
                 formData.append("gambar", data.gambar[0]);
             }
-            await post(`/gambar-about/${gambar.id}`, formData);
-            router.visit("/dashboard/gambar-about");
+            formData.append("title", data.title);
+            formData.append("desc", data.desc);
+            await post(`/carousel/${carousel.id}`, formData);
+            router.visit("/dashboard/carousel");
         } catch (error) {
             console.log(error);
         } finally {
@@ -72,6 +78,38 @@ function CarouselEdit({ gambar }: { gambar: ValueProps }) {
                     onSubmit={form.handleSubmit(onSubmit)}
                     className="space-y-3"
                 >
+                    <FormField
+                        control={form.control}
+                        name="title"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Title</FormLabel>
+                                <FormControl>
+                                    <Input
+                                        placeholder="masukkan title"
+                                        {...field}
+                                    />
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                    <FormField
+                        control={form.control}
+                        name="desc"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Deskripsi</FormLabel>
+                                <FormControl>
+                                    <Input
+                                        placeholder="masukkan deskripsi"
+                                        {...field}
+                                    />
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
                     <FormField
                         control={form.control}
                         name="gambar"
