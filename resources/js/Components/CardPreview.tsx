@@ -23,7 +23,7 @@ function CardPreview({ props }: { props: ProductColumn }) {
                 <img
                     src={"/storage/" + props.gambar}
                     alt=""
-                    className="w-full h-full rounded-[15px] "
+                    className="w-full h-full rounded-[15px] bg-cover bg-center object-cover"
                 />
             </div>
             <div className="pt-2 md:pt-5 pb-3 px-4 flex justify-between md:items-center">
