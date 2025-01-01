@@ -9,6 +9,7 @@ use App\Http\Controllers\GmapController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TestimonialController;
+use App\Http\Controllers\CarouselController;
 use App\Http\Controllers\ValueController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -44,6 +45,12 @@ Route::middleware('auth')->group(function () {
     WEB
 */
 Route::prefix('dashboard')->middleware('auth')->group(function () {
+    /*
+        Carousel
+    */
+    Route::get('/carousel', [CarouselController::class, 'index']);
+    Route::get('/carousel/create', [CarouselController::class, 'create']);
+    Route::get('/carousel/{carousel}/edit', [CarouselController::class, 'edit']);
     /*
         Value
     */
@@ -105,6 +112,11 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
 
 Route::middleware('auth')->group(function () {
     /* value */
+    Route::post('/carousel', [CarouselController::class, 'store']);
+    Route::post('/carousel/{carousel}', [CarouselController::class, 'update']);
+    Route::delete('/carousel/{carousel}', [CarouselController::class, 'delete']);
+
+    /* value */
     Route::post('/values', [ValueController::class, 'store']);
     Route::put('/values/{value}', [ValueController::class, 'update']);
     Route::delete('/values/{value}', [ValueController::class, 'delete']);
@@ -159,6 +171,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/g-map/{gmap}', [GmapController::class, 'delete']);
 });
 
+Route::get('/carousel/data', [CarouselController::class, 'getCarousel']);
 Route::get('/product/data-view', [ProductController::class, 'getProductView']);
 Route::get('/product/category/{id}', [ProductController::class, 'getProductByCategory']);
 Route::get('/gambar-about/data', [GambarAboutController::class, 'getGambar']);

@@ -66,6 +66,12 @@ const data = {
     */
     navHome: [
         {
+            title: "Carousel",
+            url: "/dashboard/carousel",
+            icon: BookCheck,
+            isActive: true,
+        },
+        {
             title: "Value",
             url: "/dashboard/values",
             icon: BookCheck,
