@@ -1,23 +1,17 @@
 import Footer from "@/Components/Footer";
 import HeroLogo from "@/Components/HeroLogo";
 import Navbar from "@/Components/Navbar";
-import { getData } from "@/lib/api";
-import { CarouselColumn } from "@/Pages/Carousel/DataTable/ColumnsCarousel";
-import { Head } from "@inertiajs/react";
-import React, { useEffect, useState } from "react";
+import { Head, usePage } from "@inertiajs/react";
+import React from "react";
 import { Autoplay, EffectFade } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css/effect-fade";
+import { CarouselColumn } from "@/Pages/Carousel/DataTable/ColumnsCarousel";
 function Layout({ children }: { children: React.ReactNode }) {
-    const [data, setData] = useState<CarouselColumn[]>([]);
-    useEffect(() => {
-        const fetchData = async () => {
-            const res = await getData("carousel/data");
-            setData(res);
-        };
-        fetchData();
-    }, []);
-
+    const { carousel } = usePage<{
+        auth: any;
+        carousel: CarouselColumn[];
+    }>().props;
     return (
         <>
             <Head>
@@ -30,12 +24,6 @@ function Layout({ children }: { children: React.ReactNode }) {
             </Head>
             <div>
                 <Navbar />
-
-                {/* <div
-                    className="min-h-screen  bg-no-repeat bg-cover relative bg-fixed"
-                    style={{ backgroundImage: "url('hero.webp')" }}
-                >
-                </div> */}
                 <div className="w-full h-screen">
                     <Swiper
                         className="mySwiper w-full h-screen"
@@ -47,7 +35,7 @@ function Layout({ children }: { children: React.ReactNode }) {
                             disableOnInteraction: false,
                         }}
                     >
-                        {data.map((item) => (
+                        {carousel.map((item) => (
                             <SwiperSlide
                                 className=" h-full "
                                 style={{

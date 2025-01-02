@@ -19,7 +19,6 @@ import {
     DropdownMenuTrigger,
 } from "@/Components/ui/dropdown-menu";
 import { Link } from "@inertiajs/react";
-import { Checkbox } from "@/Components/ui/checkbox";
 import DynamicIcon from "@/Components/DynamicIcon";
 
 export type ProductColumn = {
@@ -36,30 +35,6 @@ export type ProductColumn = {
 export const ColumnsProduct = (
     handleDelete: (id: number) => void
 ): ColumnDef<ProductColumn>[] => [
-    {
-        id: "select",
-        header: ({ table }) => (
-            <Checkbox
-                checked={
-                    table.getIsAllPageRowsSelected() ||
-                    (table.getIsSomePageRowsSelected() && "indeterminate")
-                }
-                onCheckedChange={(value) =>
-                    table.toggleAllPageRowsSelected(!!value)
-                }
-                aria-label="Select all"
-            />
-        ),
-        cell: ({ row }) => (
-            <Checkbox
-                checked={row.getIsSelected()}
-                onCheckedChange={(value) => row.toggleSelected(!!value)}
-                aria-label="Select row"
-            />
-        ),
-        enableSorting: false,
-        enableHiding: false,
-    },
     {
         accessorKey: "nama",
         header: "nama",

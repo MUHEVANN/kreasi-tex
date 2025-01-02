@@ -1,26 +1,23 @@
 <?php
 
-use App\Http\Controllers\BahanController;
-use App\Http\Controllers\AboutController;
+use Inertia\Inertia;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FaqController;
-use App\Http\Controllers\FunfactController;
-use App\Http\Controllers\GambarAboutController;
 use App\Http\Controllers\GmapController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AboutController;
+use App\Http\Controllers\BahanController;
+use App\Http\Controllers\ValueController;
+use App\Http\Controllers\FunfactController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\TestimonialController;
 use App\Http\Controllers\CarouselController;
-use App\Http\Controllers\ValueController;
-use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
+use App\Http\Controllers\GambarAboutController;
+use App\Http\Controllers\TestimonialController;
 
-Route::get('/', function () {
-    return Inertia::render('Home');
-});
+Route::get('/', [HomeController::class,'index']);
 
-Route::get('/about', function () {
-    return Inertia::render('About');
-});
+Route::get('/about',[AboutController::class, 'web']);
 
 Route::get('/product', function () {
     return Inertia::render('Product');

@@ -25,7 +25,7 @@ class ValueController extends Controller
         return Inertia::render('Values/ValueEdit', ['value' => $value]);
     }
 
-    /* 
+    /*
         API
     */
 

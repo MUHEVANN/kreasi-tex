@@ -1,8 +1,6 @@
-import Footer from "@/Components/Footer";
-import HeroLogo from "@/Components/HeroLogo";
 import TitleSection from "@/Components/TitleSection";
 import Layout from "@/Layouts/Layout";
-import { get, getData } from "@/lib/api";
+import { getData } from "@/lib/api";
 import React, { useEffect, useLayoutEffect, useState } from "react";
 import { InstagramEmbed } from "react-social-media-embed";
 
@@ -48,7 +46,7 @@ const MaterialInfo = () => {
 
     useLayoutEffect(() => {
         window.scrollTo({
-            top: 950,
+            top: 900,
             left: 100,
             behavior: "smooth",
         });
@@ -56,7 +54,7 @@ const MaterialInfo = () => {
 
     return (
         <Layout>
-            <div className="bg-white py-10 lg:py-40 rounded-3xl relative -top-5">
+            <div className="bg-white py-10 lg:py-40 rounded-3xl relative -top-5 z-[99]">
                 <div className="mb-10 flex justify-center">
                     <TitleSection>Material Info</TitleSection>
                 </div>

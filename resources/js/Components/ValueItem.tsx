@@ -1,6 +1,7 @@
 import React from "react";
 import ValueCard from "@/Components/ValueCard";
 import { get } from "@/lib/api";
+import { useCarouselStore } from "@/hooks/useCarouselStore";
 
 export type ValueProps = {
     title: string;
@@ -16,18 +17,11 @@ export const getValues = async () => {
 };
 
 function ValueItem() {
-    const [data, setData] = React.useState<ValueProps[]>([]);
-    React.useEffect(() => {
-        async function fetchData() {
-            const res = await getValues();
-            setData(res);
-        }
-        fetchData();
-    }, []);
+    const { value } = useCarouselStore();
 
     return (
-        <div className="flex items-center justify-center lg:gap-10 gap-[2rem]  lg:gap-0 flex-wrap">
-            {data.map((item, index) => (
+        <div className="flex items-center justify-center lg:gap-10 gap-[2rem]  flex-wrap">
+            {value.map((item, index) => (
                 <ValueCard
                     key={index}
                     title={item.title}

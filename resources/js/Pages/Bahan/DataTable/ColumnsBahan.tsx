@@ -14,7 +14,6 @@ import {
     DropdownMenuTrigger,
 } from "@/Components/ui/dropdown-menu";
 import { Link } from "@inertiajs/react";
-import { Checkbox } from "@/Components/ui/checkbox";
 import DynamicIcon from "@/Components/DynamicIcon";
 
 export type BahanColumn = {
@@ -27,30 +26,6 @@ export type BahanColumn = {
 export const ColumnsBahan = (
     handleDelete: (id: number) => void
 ): ColumnDef<BahanColumn>[] => [
-    {
-        id: "select",
-        header: ({ table }) => (
-            <Checkbox
-                checked={
-                    table.getIsAllPageRowsSelected() ||
-                    (table.getIsSomePageRowsSelected() && "indeterminate")
-                }
-                onCheckedChange={(value) =>
-                    table.toggleAllPageRowsSelected(!!value)
-                }
-                aria-label="Select all"
-            />
-        ),
-        cell: ({ row }) => (
-            <Checkbox
-                checked={row.getIsSelected()}
-                onCheckedChange={(value) => row.toggleSelected(!!value)}
-                aria-label="Select row"
-            />
-        ),
-        enableSorting: false,
-        enableHiding: false,
-    },
     {
         accessorKey: "nama",
         header: "nama",

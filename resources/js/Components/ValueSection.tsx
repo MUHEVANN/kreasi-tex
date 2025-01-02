@@ -4,7 +4,7 @@ import TitleSection from "@/Components/TitleSection";
 
 function ValuesSection() {
     return (
-        <section className="main__container pt-[10rem] pb-[2rem] rounded-t-[25px] bg-white -translate-y-5">
+        <section className="main__container pt-[10rem] pb-[2rem] rounded-t-[25px] bg-white -translate-y-5 z-[99] relative">
             <div className="mb-12 ">
                 <TitleSection className={"text-center"}>
                     Top Values

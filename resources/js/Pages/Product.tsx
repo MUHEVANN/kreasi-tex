@@ -1,5 +1,3 @@
-import Footer from "@/Components/Footer";
-import HeroLogo from "@/Components/HeroLogo";
 import {
     Dialog,
     DialogContent,
@@ -76,7 +74,7 @@ function Product() {
 
     return (
         <Layout>
-            <div className="bg-white py-10 lg:py-40 rounded-3xl relative -top-5">
+            <div className="bg-white py-10 lg:py-40 rounded-3xl relative -top-5 z-[99]">
                 <div>
                     <div className="flex flex-col justify-center text-center items-center w-screen">
                         <div className="md:w-1/2 mx-14">

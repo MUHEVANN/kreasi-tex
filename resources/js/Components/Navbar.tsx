@@ -40,7 +40,7 @@ function Navbar() {
                     </div>
                 </div>
                 <div
-                    className="px-4 py-5 md:hidden flex justify-between items-center"
+                    className="px-4 py-5 md:hidden flex justify-between items-center backdrop-blur-sm"
                     onClick={() => setIsOpen(true)}
                 >
                     <AlignJustify className="hover:cursor-pointer" />

@@ -49,19 +49,20 @@ function Gmap() {
         <div className="main__container my-[3rem] pt-[3rem] md:pt-0">
             <div className="mx-[1rem] sm:mx-[5rem] md:mx-[10rem] xl:mx-[15rem] bg-slate-100 py-3 pt-3 px-3 sm:translate-y-[50%] relative z-[999]">
                 <Swiper
+                    key={data.length}
                     spaceBetween={20}
-                    slidesPerView={3}
                     breakpoints={{
                         0: {
                             slidesPerView: 1,
                             spaceBetween: 5,
                         },
                         768: {
-                            slidesPerView: 2,
+                            slidesPerView: data.length >= 2 ? 2 : 1,
                             spaceBetween: 10,
                         },
                         1024: {
-                            slidesPerView: 3,
+                            slidesPerView:
+                                data.length > 2 ? 3 : data.length === 2 ? 2 : 1,
                             spaceBetween: 20,
                         },
                     }}

@@ -8,7 +8,7 @@ use Inertia\Inertia;
 
 class AboutController extends Controller
 {
-    /* 
+    /*
         WEB
     */
     public function index()
@@ -27,8 +27,16 @@ class AboutController extends Controller
         ]);
     }
 
+    public function web()
+    {
+        $about = About::all();
+        return Inertia::render('About',[
+            'about' => $about
+        ]);
+    }
 
-    /* 
+
+    /*
         API
     */
 
