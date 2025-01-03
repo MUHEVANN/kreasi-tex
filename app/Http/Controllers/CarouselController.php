@@ -6,6 +6,7 @@ use Inertia\Inertia;
 use App\Models\Carousel;
 use Illuminate\Http\Request;
 use App\Http\Requests\CarouselRequest;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\CarouselUpdateRequest;
 
 class CarouselController extends Controller
@@ -52,7 +53,7 @@ class CarouselController extends Controller
     public function update(CarouselUpdateRequest $request, Carousel $carousel)
     {
         if ($request['gambar']) {
-            Storage::delete($carousel['gambar']);
+            Storage::disk('public')->delete($carousel['gambar']);
             $path = $request['gambar']->store('carousel', 'public');
             $carousel->update([
                 'title' => $request['title'],
@@ -71,7 +72,7 @@ class CarouselController extends Controller
 
     public function delete(Carousel $carousel)
     {
-        Storage::delete($carousel['gambar']);
+        Storage::disk('public')->delete($carousel['gambar']);
         $carousel->delete();
 
         return $this->res("Success Deleted!", 201, $carousel);

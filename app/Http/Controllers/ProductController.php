@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\BahanRequest;
-use App\Http\Requests\ProductRequest;
+use Inertia\Inertia;
 use App\Models\Bahan;
 use App\Models\Product;
 use Illuminate\Http\Request;
-use Inertia\Inertia;
+use App\Http\Requests\BahanRequest;
+use App\Http\Requests\ProductRequest;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -51,8 +52,8 @@ class ProductController extends Controller
         $isView = filter_var($req->input('is_view'), FILTER_VALIDATE_BOOLEAN);
 
         if ($req['gambar']) {
-            Storage::delete($path);
-            $path = $req['profile']->store('product', 'public');
+            Storage::disk('public')->delete($product['gambar']);
+            $path = $req['gambar']->store('product', 'public');
         }
 
 
@@ -71,7 +72,7 @@ class ProductController extends Controller
 
     public function delete(Product $product)
     {
-        Storage::delete($product['gambar']);
+        Storage::disk('public')->delete($product['gambar']);
         $product->delete();
 
         return $this->res('Product deleted successfully', 200, $product);

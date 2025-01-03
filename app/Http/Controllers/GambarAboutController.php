@@ -44,7 +44,7 @@ class GambarAboutController extends Controller
     public function update(GambarRequest $request, GambarAbout $gambar)
     {
         if ($request['gambar']) {
-            Storage::delete($gambar['gambar']);
+            Storage::disk('public')->delete($gambar['gambar']);
             $path = $request['gambar']->store('gambar_about', 'public');
             $gambar->update([
                 'gambar' => $path
@@ -56,7 +56,8 @@ class GambarAboutController extends Controller
 
     public function delete(GambarAbout $gambar)
     {
-        Storage::delete($gambar['gambar']);
+        Storage::disk('public')->delete($gambar['gambar']);
+
         $gambar->delete();
 
         return $this->res("Success Deleted!", 201);
