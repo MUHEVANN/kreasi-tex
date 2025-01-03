@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\GambarRequest;
-use App\Models\GambarAbout;
 use Inertia\Inertia;
+use App\Models\GambarAbout;
+use App\Http\Requests\GambarRequest;
+use Illuminate\Support\Facades\Storage;
 
 class GambarAboutController extends Controller
 {
@@ -43,7 +44,7 @@ class GambarAboutController extends Controller
     public function update(GambarRequest $request, GambarAbout $gambar)
     {
         if ($request['gambar']) {
-            unlink(public_path('storage/' . $gambar->gambar));
+            Storage::delete($gambar['gambar']);
             $path = $request['gambar']->store('gambar_about', 'public');
             $gambar->update([
                 'gambar' => $path
@@ -55,7 +56,7 @@ class GambarAboutController extends Controller
 
     public function delete(GambarAbout $gambar)
     {
-        unlink(public_path('storage/' . $gambar->gambar));
+        Storage::delete($gambar['gambar']);
         $gambar->delete();
 
         return $this->res("Success Deleted!", 201);

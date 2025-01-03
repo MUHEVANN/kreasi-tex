@@ -52,7 +52,7 @@ class CarouselController extends Controller
     public function update(CarouselUpdateRequest $request, Carousel $carousel)
     {
         if ($request['gambar']) {
-            unlink(public_path('storage/' . $carousel->gambar));
+            Storage::delete($carousel['gambar']);
             $path = $request['gambar']->store('carousel', 'public');
             $carousel->update([
                 'title' => $request['title'],
@@ -71,6 +71,7 @@ class CarouselController extends Controller
 
     public function delete(Carousel $carousel)
     {
+        Storage::delete($carousel['gambar']);
         $carousel->delete();
 
         return $this->res("Success Deleted!", 201, $carousel);

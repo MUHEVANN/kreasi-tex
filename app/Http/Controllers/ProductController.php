@@ -51,7 +51,7 @@ class ProductController extends Controller
         $isView = filter_var($req->input('is_view'), FILTER_VALIDATE_BOOLEAN);
 
         if ($req['gambar']) {
-            unlink(public_path('storage/' . $path));
+            Storage::delete($path);
             $path = $req['profile']->store('product', 'public');
         }
 
@@ -71,7 +71,7 @@ class ProductController extends Controller
 
     public function delete(Product $product)
     {
-        unlink(public_path('storage/' . $product->gambar));
+        Storage::delete($product['gambar']);
         $product->delete();
 
         return $this->res('Product deleted successfully', 200, $product);
