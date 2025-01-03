@@ -39,10 +39,7 @@ const formSchema = z.object({
             {
                 message: "File must be an image",
             }
-        )
-        .refine((files) => files[0].size <= 4 * 1024 * 1024, {
-            message: "ukuran maximal 4 mb",
-        }),
+        ),
 });
 
 function CarouselCreate() {

@@ -53,7 +53,7 @@ class CarouselController extends Controller
     {
         if ($request['gambar']) {
             unlink(public_path('storage/' . $carousel->gambar));
-            $path = $request['gambar']->store('gambar_about', 'public');
+            $path = $request['gambar']->store('carousel', 'public');
             $carousel->update([
                 'title' => $request['title'],
                 'desc' => $request['desc'],
