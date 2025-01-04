@@ -1,3 +1,4 @@
+import { Button } from "@/Components/ui/button";
 import {
     Dialog,
     DialogContent,
@@ -76,9 +77,9 @@ function Product() {
 
     return (
         <Layout>
-            <div className="bg-white py-10 lg:py-40 rounded-3xl relative -top-5 z-[99]">
+            <div className="bg-white  py-10 lg:py-40 rounded-3xl relative -top-5 z-[99]">
                 <div>
-                    <div className="flex flex-col justify-center text-center items-center w-screen">
+                    <div className="flex flex-col justify-center text-center items-center ">
                         <div className="md:w-1/2 mx-14">
                             <p className="font-light md:text-6xl text-2xl">
                                 OUR PRODUCT
@@ -93,9 +94,10 @@ function Product() {
                         </div>
                     </div>
                 </div>
-                <div className="flex gap-10 justify-center my-10 w-screen px-14 overflow-auto">
+                <div className="flex gap-10 justify-center my-10  px-14 overflow-auto">
                     {dataKategory.map((data: any) => (
-                        <button
+                        <Button
+                            variant={isType == data.nama ? "default" : "ghost"}
                             key={data.nama}
                             className={`${
                                 isType == data.nama && "font-bold font-2xl"
@@ -103,7 +105,7 @@ function Product() {
                             onClick={() => changeData(data)}
                         >
                             {data.nama}
-                        </button>
+                        </Button>
                     ))}
                 </div>
                 <div className="flex justify-center">
@@ -132,19 +134,14 @@ function Product() {
                                                 </DialogTitle>
                                             </DialogHeader>
                                             <div className="grid sm:grid-cols-2 gap-6">
-                                                {/* Product Image Section */}
                                                 <div
                                                     className="relative bg-center bg-cover rounded-md overflow-hidden shadow-lg"
                                                     style={{
                                                         backgroundImage: `url(/storage/${e.gambar})`,
                                                         height: "300px",
                                                     }}
-                                                >
-                                                    {/* Optional: Add a dark overlay to improve readability of text if needed */}
-                                                    {/* <div className="absolute inset-0 bg-black opacity-40"></div> */}
-                                                </div>
+                                                ></div>
 
-                                                {/* Product Information Section */}
                                                 <div className="ml-4 flex flex-col justify-between">
                                                     <p className="font-semibold text-2xl text-gray-800">
                                                         {e.nama}
@@ -171,7 +168,6 @@ function Product() {
                                                             )}
                                                         </li>
                                                         <li className="flex items-center text-sm">
-                                                            {/* Display the stars dynamically */}
                                                             <div className="flex">
                                                                 {Array.from({
                                                                     length: parseInt(
