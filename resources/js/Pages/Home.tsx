@@ -26,9 +26,11 @@ function Home({
         setAbout(abouts);
     }, [carousels, setCarousel]);
 
+    const userBrowser = navigator.userAgent;
+
     useLayoutEffect(() => {
         window.scrollTo({
-            top: 835,
+            top: userBrowser.includes("Edg") ? 812 : 835,
             left: 100,
             behavior: "smooth",
         });

@@ -44,9 +44,11 @@ const MaterialInfo = () => {
         fetchData();
     }, []);
 
+    const userBrowser = navigator.userAgent;
+
     useLayoutEffect(() => {
         window.scrollTo({
-            top: 835,
+            top: userBrowser.includes("Edg") ? 812 : 835,
             left: 100,
             behavior: "smooth",
         });
