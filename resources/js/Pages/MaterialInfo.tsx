@@ -46,7 +46,7 @@ const MaterialInfo = () => {
 
     useLayoutEffect(() => {
         window.scrollTo({
-            top: 900,
+            top: 835,
             left: 100,
             behavior: "smooth",
         });
@@ -94,7 +94,7 @@ const MaterialInfo = () => {
                 </div>
                 {dataFunfact.map((data: any, index) => {
                     return (
-                        <div className="lg:mx-72 my-10 mx-24 text-white">
+                        <div className="lg:mx-72 my-10 mx-auto px-4 md:px-0 md:mx-24 text-white">
                             <div className="grid md:grid-cols-1 lg:grid-cols-3 gap-10">
                                 <div
                                     style={{

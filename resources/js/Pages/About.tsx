@@ -35,7 +35,7 @@ function About({ about }: { about: AboutColumn[] }) {
 
     useLayoutEffect(() => {
         window.scrollTo({
-            top: 950,
+            top: 835,
             left: 100,
             behavior: "smooth",
         });
@@ -45,7 +45,7 @@ function About({ about }: { about: AboutColumn[] }) {
         <Layout>
             <div className="main__container rounded-t-[25px] bg-white -translate-y-5 relative z-[99]">
                 <div className="grid md:grid-cols-3 xl:grid-cols-4 py-[3rem]">
-                    <h1 className="text-coklat text-4xl">About us</h1>
+                    <h1 className="text-coklat text-4xl mb-10">About us</h1>
                     {about.map((item, i) => (
                         <div className="col-span-2 xl:col-span-3" key={i}>
                             <h1 className="text-[32px] md:text-[50px] leading-[32px] md:leading-[50px] text-coklat font-bold ">
@@ -56,7 +56,7 @@ function About({ about }: { about: AboutColumn[] }) {
                     ))}
                 </div>
 
-                <div className="grid grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                     {loading ? (
                         <>
                             <Skeleton className="w-full h-[400px]" />

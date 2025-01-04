@@ -28,7 +28,7 @@ function Home({
 
     useLayoutEffect(() => {
         window.scrollTo({
-            top: 950,
+            top: 835,
             left: 100,
             behavior: "smooth",
         });

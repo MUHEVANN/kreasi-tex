@@ -47,7 +47,7 @@ function Product() {
 
     useLayoutEffect(() => {
         window.scrollTo({
-            top: 950,
+            top: 835,
             left: 100,
             behavior: "smooth",
         });
@@ -123,7 +123,7 @@ function Product() {
                                                 </div>
                                             </button>
                                         </DialogTrigger>
-                                        <DialogContent className="sm:max-w-[625px] p-6">
+                                        <DialogContent className="sm:max-w-[625px] p-6 z-[999]">
                                             <DialogHeader>
                                                 <DialogTitle className="text-center font-bold text-2xl">
                                                     Detail Produk
