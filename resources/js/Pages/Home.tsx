@@ -5,7 +5,7 @@ import Testimoni from "@/Components/Testimoni";
 import ValuesSection from "@/Components/ValueSection";
 import { useCarouselStore } from "@/hooks/useCarouselStore";
 import Layout from "@/Layouts/Layout";
-import React, { useEffect, useLayoutEffect } from "react";
+import React, { useEffect } from "react";
 import { CarouselColumn } from "./Carousel/DataTable/ColumnsCarousel";
 import { ValueProps } from "@/Components/ValueItem";
 import { AboutColumn } from "./About";
@@ -26,15 +26,6 @@ function Home({
         setAbout(abouts);
     }, [carousels, setCarousel]);
 
-    const userBrowser = navigator.userAgent;
-
-    useLayoutEffect(() => {
-        window.scrollTo({
-            top: userBrowser.includes("Edg") ? 812 : 835,
-            left: 100,
-            behavior: "smooth",
-        });
-    }, []);
     return (
         <Layout>
             <ValuesSection />

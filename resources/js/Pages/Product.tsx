@@ -9,7 +9,7 @@ import {
 import Layout from "@/Layouts/Layout";
 import { getData } from "@/lib/api";
 import { Star } from "lucide-react";
-import React, { useEffect, useState, useLayoutEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 function Product() {
     const [dataProduk, setDataProduk] = useState<any[]>([]);
@@ -44,16 +44,6 @@ function Product() {
             }
         }
         fetchData();
-    }, []);
-
-    const userBrowser = navigator.userAgent;
-
-    useLayoutEffect(() => {
-        window.scrollTo({
-            top: userBrowser.includes("Edg") ? 812 : 835,
-            left: 100,
-            behavior: "smooth",
-        });
     }, []);
 
     const changeData = async (type: any) => {

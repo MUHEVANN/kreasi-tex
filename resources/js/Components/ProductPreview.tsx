@@ -30,7 +30,7 @@ function ProductPreview() {
             <TitleSection className={"mb-8 lg:mb-10"}>
                 Choose Your Product
             </TitleSection>
-            <div className="grid grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 sm:grid-cols-2 gap-4 ">
+            <div className="flex gap-4 justify-center flex-wrap">
                 {data.map((item, i) => (
                     <CardPreview key={i} props={item} />
                 ))}

@@ -1,7 +1,7 @@
 import { Skeleton } from "@/Components/ui/skeleton";
 import Layout from "@/Layouts/Layout";
 import { getData } from "@/lib/api";
-import { useEffect, useLayoutEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 export type AboutColumn = {
     id: number;
@@ -31,16 +31,6 @@ function About({ about }: { about: AboutColumn[] }) {
             }
         }
         fetchData();
-    }, []);
-
-    const userBrowser = navigator.userAgent;
-
-    useLayoutEffect(() => {
-        window.scrollTo({
-            top: userBrowser.includes("Edg") ? 812 : 835,
-            left: 100,
-            behavior: "smooth",
-        });
     }, []);
 
     return (

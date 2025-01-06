@@ -2,7 +2,7 @@ import Footer from "@/Components/Footer";
 import HeroLogo from "@/Components/HeroLogo";
 import Navbar from "@/Components/Navbar";
 import { Head, usePage } from "@inertiajs/react";
-import React from "react";
+import React, { useLayoutEffect } from "react";
 import { Autoplay, EffectFade } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css/effect-fade";
@@ -12,6 +12,16 @@ function Layout({ children }: { children: React.ReactNode }) {
         auth: any;
         carousel: CarouselColumn[];
     }>().props;
+
+    const userBrowser = navigator.userAgent;
+
+    useLayoutEffect(() => {
+        window.scrollTo({
+            top: userBrowser.includes("Edg") ? 812 : 835,
+            left: 100,
+            behavior: "smooth",
+        });
+    }, []);
     return (
         <>
             <Head>
@@ -45,12 +55,12 @@ function Layout({ children }: { children: React.ReactNode }) {
                                     backgroundRepeat: "no-repeat",
                                 }}
                             >
-                                <div className="w-full h-screen flex justify-center items-center z-50 text-white flex-col">
-                                    <div className="h-[100px] w-[500px] hidden md:block">
+                                <div className="w-full h-screen px-4 flex justify-center  z-50 text-white flex-col max-w-screen-lg mx-auto">
+                                    <div className="h-[100px] w-[700px] hidden md:block mb-5 ">
                                         <img
                                             src="/kreasitex_logo.png"
                                             alt=""
-                                            className="w-full h-full object-cover"
+                                            className="w-full h-full object-cover -translate-x-[100px]"
                                         />
                                     </div>
                                     <h1 className="text-white text-[52px] font-bold">

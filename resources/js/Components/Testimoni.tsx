@@ -63,7 +63,7 @@ function Testimoni() {
                     ))}
                 </div>
 
-                <div className="px-[4rem] block lg:hidden">
+                <div className="md:px-[4rem] block lg:hidden">
                     <Carousel>
                         <CarouselContent className="max-w-[350px] mx-auto md:max-w-[500px]">
                             {data.map((item, i) => (
@@ -94,8 +94,6 @@ function Testimoni() {
                                 </CarouselItem>
                             ))}
                         </CarouselContent>
-                        <CarouselPrevious />
-                        <CarouselNext />
                     </Carousel>
                 </div>
             </div>

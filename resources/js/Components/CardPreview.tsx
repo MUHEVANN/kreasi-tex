@@ -18,7 +18,7 @@ function CardPreview({ props }: { props: ProductColumn }) {
         }).format(parseInt(price));
     };
     return (
-        <div className="border border-black/15 rounded-[15px] shadow">
+        <div className="border border-black/15 rounded-[15px] shadow lg:w-1/4 w-[47%]">
             <div className="h-[150px] sm:h-[200px] md:h-[350px] w-full relative overflow-hidden">
                 <img
                     src={"/storage/" + props.gambar}

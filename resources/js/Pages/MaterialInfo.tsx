@@ -1,7 +1,7 @@
 import TitleSection from "@/Components/TitleSection";
 import Layout from "@/Layouts/Layout";
 import { getData } from "@/lib/api";
-import React, { useEffect, useLayoutEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { InstagramEmbed } from "react-social-media-embed";
 
 const MaterialInfo = () => {
@@ -42,16 +42,6 @@ const MaterialInfo = () => {
         };
 
         fetchData();
-    }, []);
-
-    const userBrowser = navigator.userAgent;
-
-    useLayoutEffect(() => {
-        window.scrollTo({
-            top: userBrowser.includes("Edg") ? 812 : 835,
-            left: 100,
-            behavior: "smooth",
-        });
     }, []);
 
     return (
