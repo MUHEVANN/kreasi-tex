@@ -76,7 +76,7 @@ const MaterialInfo = () => {
                     </div>
                 </div>
                 <div className="flex justify-center items-center">
-                    <div className="xl:w-1/2 bg-[#D9D9D9] w-screen p-10 m-20 rounded-xl">
+                    <div className="xl:w-1/2 bg-[#D9D9D9] w-screen p-10 md:m-20 m-10 rounded-xl">
                         <p className="font-medium text-lg my-5">{titleDesc}</p>
                         <p>{desc}</p>
                     </div>
@@ -127,7 +127,7 @@ const MaterialInfo = () => {
                             className="px-4 py-2 rounded-2xl bg-black text-white"
                             onClick={() => paginateDataFunfact()}
                         >
-                            See All
+                            See More
                         </button>
                     </div>
                 )}

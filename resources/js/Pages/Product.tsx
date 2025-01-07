@@ -75,16 +75,12 @@ function Product() {
                                 OUR PRODUCT
                             </p>
                             <p className="my-10 text-gray-400">
-                                Lorem ipsum dolor sit amet consectetur
-                                adipisicing elit. Quam temporibus veniam in
-                                voluptatibus blanditiis quod rerum, perspiciatis
-                                a aperiam esse ut eius nostrum recusandae
-                                dolorem quidem optio id alias ipsam.
+                                Kami menyediakan berbagai tekstil berkualitas tinggi dengan pilihan motif dan warna menarik, cocok untuk kebutuhan rumah tangga hingga bahan pakaian. Temukan koleksi terbaik kami sekarang!
                             </p>
                         </div>
                     </div>
                 </div>
-                <div className="flex gap-10 justify-center my-10  px-14 overflow-auto">
+                <div className="flex md:gap-10 gap-4 md:justify-center my-10  px-14 overflow-auto">
                     {dataKategory.map((data: any) => (
                         <Button
                             variant={isType == data.nama ? "default" : "ghost"}
@@ -186,7 +182,7 @@ function Product() {
                                     className="px-4 py-2 rounded-2xl bg-black text-white"
                                     onClick={() => paginateDataProduct()}
                                 >
-                                    See All
+                                    See More
                                 </button>
                             </div>
                         )}

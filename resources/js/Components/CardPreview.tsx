@@ -17,6 +17,8 @@ function CardPreview({ props }: { props: ProductColumn }) {
             minimumFractionDigits: 0,
         }).format(parseInt(price));
     };
+    console.log(props)
+
     return (
         <div className="border border-black/15 rounded-[15px] shadow lg:w-[23%] w-[47%]">
             <div className="h-[150px] sm:h-[200px] md:h-[350px] w-full relative overflow-hidden">

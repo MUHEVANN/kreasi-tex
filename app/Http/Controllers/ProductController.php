@@ -99,7 +99,7 @@ class ProductController extends Controller
 
     public function getProductView()
     {
-        $product = Product::where('is_view', true)->limit(4)->get();
+        $product = Product::where('is_view', true)->join("bahans", "bahans.id", "products.bahan_id")->select("products.*", "bahans.nama as bahan_nama")->limit(4)->get();
         return $this->res("OK", 200, $product);
     }
 }
