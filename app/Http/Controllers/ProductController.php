@@ -39,7 +39,6 @@ class ProductController extends Controller
             'is_view' => $isView,
             'count_star' => $req['count_star'],
             'deskripsi' => $req['deskripsi'],
-            'harga' => $req['harga'],
             'bahan_id' => $req['bahan_id'],
         ]);
 
@@ -63,7 +62,6 @@ class ProductController extends Controller
             'is_view' => $isView,
             'count_star' => $req['count_star'],
             'deskripsi' => $req['deskripsi'],
-            'harga' => $req['harga'],
             'bahan_id' => $req['bahan_id'],
         ]);
 

@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string("nama");
             $table->text("deskripsi");
             $table->string("gambar");
-            $table->string("harga");
             $table->boolean("is_view");
             $table->string("count_star")->nullable();
             $table->timestamps();

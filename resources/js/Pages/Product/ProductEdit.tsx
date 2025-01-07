@@ -46,7 +46,6 @@ const formSchema = z.object({
             }
         )
         .optional(),
-    harga: z.string().min(1, { message: "Harga wajib diisi!" }),
     is_view: z.boolean().default(false),
 });
 
@@ -57,7 +56,6 @@ type ProductProps = {
     bahan_id: string;
     gambar: string;
     created_at: string;
-    harga: string;
     is_view: boolean;
 };
 
@@ -71,7 +69,6 @@ const ProductEdit = ({ product }: { product: ProductProps }) => {
             nama: product.nama,
             deskripsi: product.deskripsi,
             bahan_id: product.bahan_id.toString(),
-            harga: product.harga,
             is_view: !!product.is_view,
         },
     });
@@ -83,7 +80,6 @@ const ProductEdit = ({ product }: { product: ProductProps }) => {
             formData.append("nama", data.nama);
             formData.append("bahan_id", data.bahan_id);
             formData.append("deskripsi", data.deskripsi);
-            formData.append("harga", data.harga);
             if (data.gambar) {
                 formData.append("gambar", data.gambar[0]);
             }
@@ -203,19 +199,7 @@ const ProductEdit = ({ product }: { product: ProductProps }) => {
                             </FormItem>
                         )}
                     />
-                    <FormField
-                        control={form.control}
-                        name="harga"
-                        render={({ field }) => (
-                            <FormItem>
-                                <FormLabel>Harga</FormLabel>
-                                <FormControl>
-                                    <Input placeholder="5" {...field} />
-                                </FormControl>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
+                   
                     <FormField
                         control={form.control}
                         name="is_view"

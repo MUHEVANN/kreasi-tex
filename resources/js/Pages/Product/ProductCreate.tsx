@@ -44,7 +44,6 @@ const formSchema = z.object({
                 message: "File harus berupa gambar!",
             }
         ),
-    harga: z.string().min(1, { message: "Harga wajib diisi!" }),
     is_view: z.boolean().default(false),
 });
 const ProductCreate = () => {
@@ -57,7 +56,6 @@ const ProductCreate = () => {
             deskripsi: "",
             bahan_id: "",
             gambar: undefined,
-            harga: "",
             is_view: false,
         },
     });
@@ -69,7 +67,6 @@ const ProductCreate = () => {
             formData.append("nama", data.nama);
             formData.append("bahan_id", data.bahan_id);
             formData.append("deskripsi", data.deskripsi);
-            formData.append("harga", data.harga);
             formData.append("gambar", data.gambar[0]);
             formData.append("is_view", data.is_view.toString());
 
@@ -177,19 +174,6 @@ const ProductCreate = () => {
                                             field.onChange(e.target.files);
                                         }}
                                     />
-                                </FormControl>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
-                    <FormField
-                        control={form.control}
-                        name="harga"
-                        render={({ field }) => (
-                            <FormItem>
-                                <FormLabel>Harga</FormLabel>
-                                <FormControl>
-                                    <Input placeholder="10000" {...field} />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>

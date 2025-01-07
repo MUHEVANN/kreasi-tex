@@ -18,7 +18,7 @@ function CardPreview({ props }: { props: ProductColumn }) {
         }).format(parseInt(price));
     };
     return (
-        <div className="border border-black/15 rounded-[15px] shadow lg:w-1/4 w-[47%]">
+        <div className="border border-black/15 rounded-[15px] shadow lg:w-[23%] w-[47%]">
             <div className="h-[150px] sm:h-[200px] md:h-[350px] w-full relative overflow-hidden">
                 <img
                     src={"/storage/" + props.gambar}
@@ -31,12 +31,6 @@ function CardPreview({ props }: { props: ProductColumn }) {
                     <h1 className="text-[16px] md:text-xl text-coklat font-semibold">
                         {props.nama}
                     </h1>
-                    <p>
-                        <span className="text-xl md:text-2xl text-coklat font-bold">
-                            {formatPrice(props.harga)}
-                        </span>
-                        <span className="textxl md:text-2xl"></span>
-                    </p>
                 </div>
                 <Dialog>
                     <DialogTrigger asChild>
@@ -62,7 +56,6 @@ function CardPreview({ props }: { props: ProductColumn }) {
                                 <ul>
                                     <li>Bahan : {props.bahan_nama}</li>
                                     <li>Deskripsi : {props.deskripsi}</li>
-                                    <li>Harga : {formatPrice(props.harga)}</li>
                                 </ul>
                             </div>
                         </div>

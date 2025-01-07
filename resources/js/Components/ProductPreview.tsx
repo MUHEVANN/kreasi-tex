@@ -9,7 +9,6 @@ export type ProductColumn = {
     nama: string;
     deskripsi: string;
     gambar: string;
-    harga: string;
     is_view: boolean;
     bahan_nama: string;
     created_at: string;

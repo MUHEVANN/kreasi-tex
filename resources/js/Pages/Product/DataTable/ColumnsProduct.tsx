@@ -25,7 +25,6 @@ export type ProductColumn = {
     id: number;
     nama: string;
     deskripsi: string;
-    harga: number;
     is_view: boolean;
     count_start: string;
     gambar: string;
@@ -55,11 +54,6 @@ export const ColumnsProduct = (
     {
         accessorKey: "deskripsi",
         header: "deskripsi",
-    },
-
-    {
-        accessorKey: "harga",
-        header: "harga",
     },
 
     {

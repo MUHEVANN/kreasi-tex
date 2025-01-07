@@ -26,17 +26,19 @@ function Navbar() {
     return (
         <>
             <div className="w-full fixed top-0 z-[999]">
-                <div className=" max-w-screen-lg mx-auto backdrop-blur-sm px-4 hidden md:block">
-                    <div className=" flex justify-between py-8 border-b border-black ">
-                        {navLinks.map((link, index) => (
-                            <Link
-                                key={index}
-                                href={link.href}
-                                className=" text-[18px] noto-sans"
-                            >
-                                {link.name}
-                            </Link>
-                        ))}
+                <div className="w-full backdrop-blur-sm">
+                    <div className=" max-w-screen-lg mx-auto  px-4 hidden md:block">
+                        <div className=" flex justify-between py-8 border-b border-black ">
+                            {navLinks.map((link, index) => (
+                                <Link
+                                    key={index}
+                                    href={link.href}
+                                    className=" text-[18px] noto-sans"
+                                >
+                                    {link.name}
+                                </Link>
+                            ))}
+                        </div>
                     </div>
                 </div>
                 <div

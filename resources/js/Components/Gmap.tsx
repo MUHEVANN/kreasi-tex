@@ -47,7 +47,7 @@ function Gmap() {
 
     return (
         <div className="main__container my-[3rem] pt-[3rem] md:pt-0">
-            <div className="mx-[1rem] sm:mx-[5rem] md:mx-[10rem] xl:mx-[15rem] bg-slate-100 py-3 pt-3 px-3 sm:translate-y-[50%] relative z-[999]">
+            <div className="mx-[1rem] sm:mx-[5rem] md:mx-[10rem] xl:mx-[15rem] bg-slate-100 py-3 pt-3 px-3 sm:translate-y-[50%] relative z-[990]">
                 <Swiper
                     key={data.length}
                     spaceBetween={20}

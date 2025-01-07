@@ -149,14 +149,7 @@ function Product() {
                                                             </strong>{" "}
                                                             {e.deskripsi}
                                                         </li>
-                                                        <li className="text-sm">
-                                                            <strong>
-                                                                Harga:
-                                                            </strong>{" "}
-                                                            {formatPrice(
-                                                                e.harga
-                                                            )}
-                                                        </li>
+
                                                         <li className="flex items-center text-sm">
                                                             <div className="flex">
                                                                 {Array.from({
