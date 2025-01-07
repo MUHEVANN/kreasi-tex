@@ -44,7 +44,7 @@ function CardPreview({ props }: { props: ProductColumn }) {
                             <ArrowRight className="text-white w-5 h-5" />
                         </button>
                     </DialogTrigger>
-                    <DialogContent className="sm:max-w-[625px]">
+                    <DialogContent className="sm:max-w-[625px] z-[999]">
                         <DialogHeader>
                             <DialogTitle>Detail Produk</DialogTitle>
                         </DialogHeader>
