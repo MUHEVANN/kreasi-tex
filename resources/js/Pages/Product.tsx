@@ -103,7 +103,7 @@ function Product() {
                                         <DialogTrigger asChild>
                                             <button className="rounded-xl overflow-hidden bg-[#F5F5F5]">
                                                 <div
-                                                    className="m-2 w-64 h-64 bg-cover bg-center rounded-xl"
+                                                    className="m-2 p-2 h-64 bg-cover bg-center rounded-xl"
                                                     style={{
                                                         backgroundImage: `url(/storage/${e.gambar})`,
                                                     }}
